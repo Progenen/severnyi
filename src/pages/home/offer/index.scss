@@ -1,0 +1,105 @@
+.offer {
+    position: relative;
+    color: cl(whte);
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__container {
+        padding-top: rem(295);
+        padding-bottom: rem(570);
+    }
+
+    &__text {
+        display: flex;
+        justify-content: center;
+        gap: rem(30);
+
+        span {
+            display: flex;
+            align-items: center;
+            gap: rem(30);
+            &::before {
+                content: "";
+                display: block;
+                width: rem(30);
+                height: rem(30);
+                background-image: url('../img/icons/icon-star.svg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            &:first-child {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @media (max-width:$pc){
+        &__container {
+            padding-top: rem(262);
+            padding-bottom: rem(438);
+        }
+
+        &__text {
+            gap: rem(20);
+
+            span {
+                gap: rem(20);
+            }
+
+            span:before {
+                width: rem(20);
+                height: rem(20);
+            }
+        }
+    }
+
+    @media (max-width:$tablet){
+        &__container {
+            padding-top: rem(266);
+            padding-bottom: rem(442);
+        }
+
+        &__text {
+            gap: rem(16);
+
+            span {
+                gap: rem(16);
+            }
+        }
+    }
+
+    @media (max-width:$mobile){
+        &__container {
+            padding-top: rem(204);
+            padding-bottom: rem(261);
+        }
+
+        &__text {
+            flex-direction: column;
+            gap: rem(9);
+
+            span {
+                flex-direction: column;
+                gap: rem(7);
+            }
+
+        }
+    }
+}

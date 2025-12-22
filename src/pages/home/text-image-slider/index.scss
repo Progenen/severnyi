@@ -1,0 +1,131 @@
+.text-img-slider {
+    overflow: hidden;
+    &__row {
+        display: flex;
+    }
+
+    &__left,
+    &__right {
+        width: 50%;
+    }
+
+    &__right {
+        position: relative;
+        width: 50vw; /* Половина ширины экрана */
+        max-height: rem(800);
+        margin-right: calc(-1 * (100vw - 100%) / 2 - var(--padding, 15px));
+    }
+
+    &__left {
+        padding: rem(100) rem(92) rem(100) 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__text {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &__text-title {
+        margin-bottom: rem(40);
+    }
+
+    &__photos {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        &-slide {
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+    }
+
+    @media (max-width: $pc) {
+        &__left {
+            padding-right: rem(48);
+            padding-top: rem(64);
+            padding-bottom: rem(64);
+        }
+
+        &__text-title {
+            margin-bottom: rem(32);
+        }
+
+        &__right {
+        }
+
+        &__photos-slide {
+            img {
+                height: rem(680);
+                object-fit: cover;
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        &__row {
+            flex-direction: column-reverse;
+        }
+
+        &__container {
+            padding: 0;
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+        }
+
+        &__left {
+            padding: rem(40) var(--pad);
+        }
+
+        &__text-title {
+            margin-bottom: rem(24);
+        }
+
+        &__right {
+            margin: 0;
+            max-height: none;
+        }
+
+        &__photos-slide {
+            img {
+                height: rem(400);
+                object-fit: cover;
+            }
+        }
+
+        &__controls {
+            margin-top: rem(96);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        &__left {
+            padding-top: rem(24);
+            padding-bottom: rem(24);
+        }
+        
+        &__photos-slide {
+            img {
+                height: rem(320);
+                object-fit: cover;
+            }
+        }
+
+        &__text-title {
+            margin-bottom: rem(20);
+        }
+
+        &__controls {
+            margin-top: rem(68);
+        }
+    }
+}

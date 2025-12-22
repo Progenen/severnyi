@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('html/_head.htm',{ "title":"Cеверный | Главная" })
+
+<body>
+  <div class="wrapper">
+    @@include('components/header/header.html',{})
+    <main class="page">
+      @@include('pages/home/offer/index.html',{})
+      @@include('pages/home/text-image-slider/index.html',{})
+      @@include('pages/home/text-map/index.html',{})
+    </main>
+    @@include('components/footer/footer.html',{})
+    @@include('html/_popup.htm',{})
+  </div>
+  @@include('html/_js.htm',{})
+</body>
+
+</html>

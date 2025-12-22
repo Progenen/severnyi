@@ -1,0 +1,133 @@
+// Заголовки, общие БЭМ блоки и прочее...
+
+.text-s {
+    font-size: rem(16);
+    line-height: 140%;
+}
+
+.text-m {
+    font-size: rem(18);
+    line-height: 150%;
+}
+
+.text-l {
+    font-size: rem(20);
+    line-height: 160%;
+
+    @media (max-width:$pc){
+        font-size: rem(16);
+        line-height: 150%;
+    }
+
+    @media (max-width:$mobile){
+        font-size: rem(14);
+        line-height: 142%;
+    }
+}
+
+.text-xl {
+    font-size: rem(22);
+    line-height: 145%;
+}
+
+.font-bold {
+    font-weight: 500;
+}
+
+.h2 {
+    font-family: Benzin;
+    font-size: rem(40);
+    line-height: 110%;
+    text-transform: lowercase;
+
+    &--xl {
+        font-size: rem(44);
+    }
+
+    @media (max-width: $pc) {
+        font-size: rem(32);
+    }
+
+    @media (max-width:$mobile){
+        font-size: rem(24);
+        line-height: 133.333%;
+    }
+}
+
+.h3 {
+    font-size: rem(28);
+    font-family: Benzin;
+    line-height: 128%;
+    text-transform: lowercase;
+}
+
+.h1 {
+    font-size: rem(60);
+    font-family: Benzin;
+    line-height: 100%;
+    text-transform: lowercase;
+
+    @media (max-width: $pc) {
+        font-size: rem(40);
+        line-height: 110%;
+    }
+
+    @media (max-width: $tablet) {
+        font-size: rem(32);
+        line-height: 112%;
+    }
+}
+
+.slider-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__arrows {
+        display: flex;
+        gap: rem(12);
+    }
+
+    &__arrow {
+        &-prev svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__pagination {
+        font-family: Benzin;
+        font-size: rem(20);
+        line-height: 100%;
+        color: cl(grn, .5);
+
+        .swiper-pagination-current {
+            color: cl(grn);
+            font-size: rem(32);
+        }
+    }
+
+
+    @media (max-width: $tablet) {
+        &__arrows {
+            gap: rem(8);
+        }
+
+        &__pagination {
+            font-size: rem(16);
+
+            .swiper-pagination-current {
+                font-size: rem(28);
+            }
+        }
+    }
+    
+}
+
+p + p {
+    margin-top: rem(20);
+
+    @media (max-width:$mobile){
+        margin-top: rem(12);
+    }
+}
