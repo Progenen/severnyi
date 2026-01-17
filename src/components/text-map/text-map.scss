@@ -122,12 +122,12 @@
             white-space: nowrap;
         }
 
-        &-l img {
+        &-l img, &-l picture {
             width: calc(32px * var(--map-scale)) !important; // Масштабируемая иконка L
             height: calc(32px * var(--map-scale)) !important;
         }
 
-        img {
+        img, picture {
             width: calc(24px * var(--map-scale)); // Масштабируемая иконка
             height: calc(24px * var(--map-scale));
             display: block;
