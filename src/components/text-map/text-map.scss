@@ -1,0 +1,453 @@
+.text-map {
+    background-color: cl(grn);
+    color: cl(whte);
+    &__row {
+        display: flex;
+    }
+
+    &__left {
+        padding-top: rem(100);
+        padding-bottom: rem(100);
+        padding-right: rem(24);
+        width: 42.5%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__right {
+        position: relative;
+        width: 56.4vw; /* Половина ширины экрана */
+        height: rem(800);
+        margin-right: calc(-1 * (100vw - 100%) / 2 - var(--padding, 15px));
+    }
+
+    &__map {
+        position: relative;
+        width: 100%;
+        max-width: rem(812);
+        aspect-ratio: 812 / 800;
+        --map-scale: 1; // Дефолтное значение
+
+        &-gradient-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 20%;
+                background: linear-gradient(0deg, rgba(93, 98, 91, 0) 0%, #5d625b 100%);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 20%;
+                height: 100%;
+                background: linear-gradient(90deg, #5d625b 0%, rgba(93, 98, 91, 0) 100%);
+            }
+        }
+
+        &-gradient-bottom-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 20%;
+                background: linear-gradient(0deg, #5d625b 0%, rgba(93, 98, 91, 0) 100%);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 20%;
+                height: 100%;
+                background: linear-gradient(90deg, rgba(93, 98, 91, 0) 0%, #5d625b 100%);
+            }
+        }
+
+        &-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        &-points {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+    }
+
+    &__map-point {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: calc(8px * var(--map-scale)); // Масштабируемый gap
+        width: fit-content;
+        height: fit-content;
+        text-align: right;
+
+        &-text {
+            font-size: calc(12px * var(--map-scale)); // Масштабируемый размер шрифта
+            font-family: Benzin;
+            line-height: 100%;
+            text-transform: lowercase;
+            white-space: nowrap;
+        }
+
+        &-l img {
+            width: calc(32px * var(--map-scale)) !important; // Масштабируемая иконка L
+            height: calc(32px * var(--map-scale)) !important;
+        }
+
+        img {
+            width: calc(24px * var(--map-scale)); // Масштабируемая иконка
+            height: calc(24px * var(--map-scale));
+            display: block;
+        }
+
+        &--reverse {
+            flex-direction: row-reverse;
+            text-align: left;
+        }
+
+        &:nth-child(1) {
+            top: percent(87, 800);
+            left: percent(260, 812);
+        }
+        &:nth-child(2) {
+            top: percent(99, 800);
+            left: percent(435, 812);
+        }
+        &:nth-child(3) {
+            top: percent(187, 800);
+            left: percent(487, 812);
+        }
+        &:nth-child(4) {
+            top: percent(252, 800);
+            left: percent(344, 812);
+        }
+        &:nth-child(5) {
+            top: percent(301, 800);
+            right: percent(166, 812);
+            left: initial;
+            text-align: right;
+        }
+        &:nth-child(6) {
+            top: percent(340, 800);
+            left: percent(146, 812);
+        }
+        &:nth-child(7) {
+            top: percent(434, 800);
+            left: percent(125, 812);
+        }
+        &:nth-child(8) {
+            top: percent(477, 800);
+            left: percent(381, 812);
+        }
+        &:nth-child(9) {
+            top: percent(539, 800);
+            left: percent(370, 812);
+        }
+        &:nth-child(10) {
+            top: percent(723, 800);
+            left: percent(361, 812);
+        }
+    }
+
+    &__map-point-logo {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: calc(6px * var(--map-scale)); // Масштабируемый gap
+        top: percent(159, 800);
+        left: percent(375, 812);
+
+        &__icon {
+            width: calc(52px * var(--map-scale)); // Масштабируемая ширина
+            height: calc(52px * var(--map-scale)); // Масштабируемая высота
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::after,
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            &::after {
+                width: percent(40, 52);
+                height: percent(40, 52);
+                background-color: cl(whte, 0.6);
+                animation: pulse-wave 4s ease-out infinite;
+            }
+
+            &::before {
+                width: percent(40, 52);
+                height: percent(40, 52);
+                background-color: cl(whte, 0.5);
+                animation: pulse-wave 4s ease-out infinite 2s;
+            }
+
+            &-inner {
+                width: percent(40, 52);
+                height: percent(40, 52);
+                background-color: cl(whte);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 2;
+            }
+
+            &-wave {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: percent(40, 52);
+                height: percent(40, 52);
+                border-radius: 50%;
+                background-color: cl(whte, 0.6);
+                animation: pulse-wave 4s ease-out infinite 1.33s;
+                z-index: 1;
+            }
+
+            svg {
+                width: percent(20, 40);
+                height: percent(20, 40);
+                color: cl(grn);
+            }
+        }
+
+        &__logo {
+            width: calc(94px * var(--map-scale)); // Масштабируемая ширина логотипа
+            height: auto;
+
+            svg {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+    }
+
+    &__title {
+        margin-bottom: rem(32);
+    }
+
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: rem(40) rem(20);
+        margin-top: auto;
+    }
+
+    &__item {
+        &-title {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: rem(8);
+            gap: rem(12);
+
+            svg {
+                display: block;
+                width: rem(30);
+                height: rem(30);
+                color: cl(ohra);
+            }
+        }
+    }
+
+    @media (max-width: $pc) {
+        &__left {
+            padding-top: rem(64);
+            padding-bottom: rem(64);
+            padding-right: rem(25);
+        }
+
+        &__right {
+            width: 56.94vw;
+            margin-right: calc(-1 * (156vw - 100%) - var(--padding, 15px));
+        }
+
+        &__map {
+            width: 109%;
+            &-img {
+                object-fit: cover;
+            }
+
+            &-gradient-top-left {
+                &::before {
+                    background: linear-gradient(90deg, #5d625b 0%, rgba(93, 98, 91, 0) 100%);
+                }
+            }
+
+            &-gradient-bottom-right {
+                right: 6.5%;
+            }
+        }
+
+        &__item {
+            &-title {
+                font-size: rem(20);
+                line-height: 140%;
+                margin-bottom: rem(8);
+
+                svg {
+                    width: rem(24);
+                    height: rem(24);
+                }
+            }
+
+            &-description {
+                font-size: rem(14);
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        &__row {
+            flex-direction: column;
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+        }
+
+        &__right {
+            width: 100vw;
+            margin-left: rem(-24);
+        }
+
+        &__left {
+            padding-right: rem(0);
+            padding-top: rem(40);
+            padding-bottom: rem(16);
+        }
+
+        &__title {
+            margin-bottom: rem(24);
+        }
+
+        p + p {
+            margin-top: rem(16);
+        }
+
+        &__items {
+            margin-top: rem(40);
+            gap: 0 rem(12);
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &__map {
+            width: 100%;
+            height: rem(600);
+            &-img {
+                width: 100%;
+            }
+
+            &-gradient-bottom-right {
+                right: 0;
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        &__title {
+            margin-bottom: rem(16);
+        }
+
+        p + p {
+            margin-top: rem(14);
+        }
+
+        &__items {
+            margin-top: rem(32);
+            gap: rem(24) rem(12);
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &__item-description {
+            font-size: rem(12);
+        }
+
+        &__left {
+            padding-top: rem(32);
+            padding-bottom: rem(32);
+        }
+
+        &__map {
+            width: rem(500);
+            height: rem(510);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+// Animations pulse
+@keyframes pulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0.3;
+    }
+}
+
+// Анимация для центрального круга (легкая пульсация)
+@keyframes pulse-wave {
+    0% {
+        transform: translate(-50%, -50%) scale(1); // 40px
+        opacity: 0.8;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1.5); // 54px (52 + 2)
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}

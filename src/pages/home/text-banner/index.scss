@@ -1,0 +1,65 @@
+.text-banner {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: cl(whte);
+    text-align: center;
+    height: rem(800);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: rem(310);
+
+    &__icon {
+        margin-top: rem(190);
+        svg {
+            width: rem(80);
+            height: rem(80);
+            color: #d0cec1;
+        }
+    }
+
+    &__title {
+        max-width: rem(1280);
+    }
+
+    @media (max-width: $pc) {
+        padding-top: rem(298);
+        height: rem(680);
+
+        &__icon {
+            margin-top: rem(180);
+
+            svg {
+                width: rem(56);
+                height: rem(56);
+            }
+        }
+
+        &__title {
+            max-width: rem(750);
+        }
+    }
+
+    @media (max-width: $tablet) {
+        padding-top: rem(312);
+
+        &__icon {
+            margin-top: rem(196);
+        }
+
+        &__title {
+            max-width: rem(558);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        height: rem(600);
+        padding: rem(48) 0 rem(56);
+        justify-content: space-between;
+        background-position: center top;
+        &__icon {
+            margin-top: 0;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 // Подключение списка активных модулей
+import { animatePlaneTabSwitch } from "./animationsGsap.js";
 import { flsModules } from "./modules.js";
 
 /* Проверка поддержки webp, добавление класса webp или no-webp для HTML */
@@ -1076,3 +1077,37 @@ export const throttle = (delay, fn) => {
     }
   };
 };
+
+// Инициализация табов для секции plane
+export function initPlaneTabs() {
+  const planeSection = document.querySelector('.plane');
+  if (!planeSection) return;
+
+  const switches = planeSection.querySelectorAll('.plane__switchs-item');
+  const slidersContainers = planeSection.querySelectorAll('.plane__slider');
+  const infoItems = planeSection.querySelectorAll('.plane__info-item');
+
+  switches.forEach((switchBtn, index) => {
+    switchBtn.addEventListener('click', () => {
+      // Получаем текущие активные элементы
+      const currentSlider = planeSection.querySelector('.plane__slider--active');
+      const currentInfo = planeSection.querySelector('.plane__info-item--active');
+      
+      // Целевые элементы
+      const targetSlider = slidersContainers[index];
+      const targetInfo = infoItems[index];
+
+      // Если кликнули на уже активный элемент, ничего не делаем
+      if (currentSlider === targetSlider) return;
+
+      // Убираем активный класс со всех элементов
+      switches.forEach(btn => btn.classList.remove('plane__switchs-item--active'));
+      
+      // Добавляем активный класс к кнопке
+      switchBtn.classList.add('plane__switchs-item--active');
+
+      // Вызываем анимацию переключения
+      animatePlaneTabSwitch(currentSlider, targetSlider, currentInfo, targetInfo);
+    });
+  });
+}

@@ -1,0 +1,206 @@
+// Блок: слайдер с текстом и изображениями (БЭМ)
+.text-image-slider {
+    overflow: hidden;
+
+    // Элемент: строка контейнера
+    &__row {
+        display: flex;
+    }
+
+    &__left,
+    &__right {
+        width: 50%;
+    }
+
+    &__right {
+        position: relative;
+        min-height: rem(800);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .slider-controls {
+            position: relative;
+            z-index: 1;
+        }
+
+        &:has(.text-image-slider__photos) {
+            padding: 0 0 rem(100) rem(80);
+        }
+    }
+
+    // Элемент: левая часть (текст)
+    &__left {
+        padding: rem(100) rem(92) rem(100) 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    // Элемент: текстовый контейнер
+    &__text {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    // Элементы текста
+    &__text-title {
+        margin-bottom: rem(40);
+    }
+
+    &__text-tagline {
+        margin-bottom: rem(16);
+    }
+
+    &__photos,
+    &__photo {
+        height: 100%;
+        width: 50vw; 
+        margin-right: calc(-1 * (100vw - 100%) / 2 - var(--padding, 15px));
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    &__photos {
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+
+        &-slide {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                opacity: 0.5;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.7) 60%, #000 100%);
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+        }
+    }
+
+    &__photo {
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+
+    // Адаптивные стили
+    @media (max-width: $pc) {
+        &__left {
+            padding-right: rem(48);
+            padding-top: rem(64);
+            padding-bottom: rem(64);
+        }
+
+        &__text-title {
+            margin-bottom: rem(32);
+        }
+
+        &__text-tagline {
+            margin-bottom: rem(12);
+        }
+
+        &__right {
+            height: rem(680);
+        }
+
+        &__photos-slide,
+        &__photo {
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        &__row {
+            flex-direction: column-reverse;
+        }
+
+        &__container {
+            padding: 0;
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+        }
+
+        &__right {
+            padding-left: 0;
+        }
+
+        &__photos,
+        &__photo {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        &__left {
+            padding: rem(40) var(--pad);
+        }
+
+        &__right,
+        &__right:has(.text-image-slider__photos) {
+            padding: rem(16) var(--pad);
+        }
+
+        &__text-title {
+            margin-bottom: rem(24);
+        }
+
+        &__text-tagline {
+            margin-bottom: rem(8);
+        }
+
+        &__right {
+            min-height: rem(400);
+            margin: 0;
+            max-height: none;
+        }
+
+        &__controls {
+            margin-top: rem(96);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        &__left {
+            padding-top: rem(24);
+            padding-bottom: rem(24);
+        }
+
+        &__right {
+            max-height: rem(280);
+        }
+
+        &__text-title {
+            margin-bottom: rem(20);
+        }
+
+        &__controls {
+            margin-top: rem(68);
+        }
+    }
+}

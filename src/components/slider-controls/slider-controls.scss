@@ -1,0 +1,53 @@
+.slider-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__arrows {
+        display: flex;
+        gap: rem(12);
+    }
+
+    &__arrow {
+        &-prev svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__pagination {
+        font-family: Benzin;
+        font-size: rem(20);
+        line-height: 100%;
+        color: cl(grn, 0.5);
+
+        .swiper-pagination-current {
+            color: cl(grn);
+            font-size: rem(32);
+        }
+
+        &--alt {
+            color: cl(whte, 0.5);
+
+            .swiper-pagination-current {
+                color: cl(whte);
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        &__arrows {
+            gap: rem(8);
+        }
+
+        &__pagination {
+            font-size: rem(16);
+
+            .swiper-pagination-current {
+                font-size: rem(28);
+            }
+        }
+    }
+}
+
+

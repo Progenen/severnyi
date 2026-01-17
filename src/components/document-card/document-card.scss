@@ -1,0 +1,39 @@
+.document-card {
+    padding: rem(30);
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: rem(200);
+
+    &--bordered {
+        border-color: #D7D6CE,
+    }
+
+    &--milk {
+        background-color: cl(milk2);
+    }
+
+    &--green {
+        background-color: cl(grn, .1);
+    }
+
+    @media (max-width:$tablet){
+        flex-direction: row;
+        align-items: center;
+        min-height: 0;
+        padding: rem(16);
+        gap: rem(12);
+
+        &__title br {
+            display: none;
+        }
+    }
+
+    @media (max-width:$mobile){
+        flex-direction: column;
+        gap: rem(24);
+        align-items: flex-start;
+    }
+}

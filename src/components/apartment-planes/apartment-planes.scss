@@ -1,0 +1,237 @@
+// Блок: планировки квартир (БЭМ)
+.apartment-planes {
+    padding-top: rem(100);
+    padding-bottom: rem(100);
+
+    // Элемент: строка контейнера
+    &__row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    // Элементы: левая и правая части
+    &__left {
+        width: percent(600, 1224);
+    }
+
+    &__right {
+        width: percent(496, 1224);
+    }
+
+    // Элемент: контент
+    &__content {
+        margin-top: rem(40);
+    }
+
+    // Элемент: слайдер планировок
+    &__slider {
+        width: 100%;
+        position: relative;
+        aspect-ratio: 1 / 1;
+        padding: rem(32);
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        display: none;
+
+        // Модификатор: активный слайдер
+        &--active {
+            display: flex;
+        }
+
+        &-inner {
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        &-slide {
+            background-color: #fffdf5;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        &-controls {
+            justify-content: flex-end;
+        }
+    }
+
+    // Элемент: переключатели табов
+    &__switchs {
+        display: flex;
+        justify-content: space-around;
+
+        &-item {
+            flex: 1 1;
+            font-family: Benzin;
+            font-size: rem(16);
+            color: cl(drkblu);
+            line-height: 137%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: rem(6) rem(12);
+            min-height: rem(59);
+            border: 1px solid cl(drkBlu);
+            border-left: none;
+            cursor: pointer;
+            transition:
+                color,
+                background-color 0.3s ease;
+
+            &:first-child {
+                border-left: 1px solid cl(drkBlu);
+            }
+
+            // Модификатор: активный таб
+            &--active,
+            &:hover {
+                color: cl(whte);
+                background-color: cl(drkBlu);
+            }
+        }
+    }
+
+    // Элемент: информация о квартире
+    &__info {
+        margin-top: rem(40);
+
+        &-item {
+            display: none;
+
+            // Модификатор: активный блок информации
+            &--active {
+                display: block;
+            }
+        }
+
+        &-list {
+            margin-top: rem(24);
+            padding: rem(20);
+            border: 1px solid cl(grn, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: rem(24);
+
+            li {
+                display: flex;
+            }
+
+            &-name {
+                flex: 1 0 auto;
+                display: flex;
+                align-items: flex-end;
+
+                &::after {
+                    content: "";
+                    width: 100%;
+                    height: rem(20);
+                    margin-top: auto;
+                    margin: 0 rem(10);
+                    background-image: url("../img/icons/dotted-line.svg");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+            }
+        }
+    }
+
+    // Адаптивные стили
+    @media (max-width: $pc) {
+        padding-top: rem(64);
+        padding-bottom: rem(64);
+
+        &__left,
+        &__right {
+            width: 50%;
+        }
+
+        &__row {
+            gap: rem(16);
+        }
+
+        &__content {
+            margin-top: rem(32);
+        }
+
+        &__switchs-item {
+            min-height: rem(40);
+            font-size: rem(14);
+            line-height: 142%;
+        }
+
+        &__info {
+            margin-top: rem(32);
+
+            &-description {
+                br {
+                    display: none;
+                }
+            }
+
+            &-list {
+                gap: rem(28);
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+
+        &__row {
+            gap: rem(12);
+        }
+
+        &__slider {
+            padding: rem(16);
+        }
+
+        &__info {
+            margin-top: rem(20);
+
+            &-list {
+                margin-top: rem(20);
+                padding: rem(16);
+                gap: rem(20);
+            }
+        }
+
+        &__switchs-item {
+            font-size: rem(14);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        padding: rem(32) 0;
+
+        &__row {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        &__description {
+            margin-top: rem(12);
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+        }
+
+        &__bottom {
+            margin-top: rem(24);
+        }
+
+        &__switchs {
+            margin-top: rem(20);
+        }
+    }
+}

@@ -1,0 +1,64 @@
+.promo-slider {
+    padding-top: rem(100);
+    padding-bottom: rem(100);
+
+    &__description {
+        max-width: rem(550);
+    }
+
+    &__slider-controls {
+        margin-top: rem(16);
+    }
+
+    &__slider-carousel {
+        margin-top: rem(40);
+    }
+
+    &__slider-slide {
+        max-width: rem(288);
+        width: 100%;
+    }
+
+    @media (max-width:$pc){
+        padding-top: rem(64);
+        padding-bottom: rem(64);
+
+        &__slider-controls {
+            margin-top: rem(20);
+        }
+
+        &__slider-carousel {
+            margin-top: rem(32);
+        }
+
+
+        &__description {
+            max-width: rem(480);
+        }
+    }
+
+    @media (max-width:$tablet){
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+
+        &__slider-controls {
+            margin-top: rem(12);
+        }
+
+        &__slider-carousel {
+            margin-top: rem(24);
+        }
+    }
+
+    @media (max-width:$mobile){
+        padding-top: rem(32);
+        padding-bottom: rem(32);
+
+        &__slider-controls {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;   
+            gap: rem(24);         
+        }
+    }
+}

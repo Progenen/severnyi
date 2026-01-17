@@ -1,0 +1,112 @@
+.gallery-card {
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: cl(whte);
+    height: rem(260);
+    padding: rem(20) rem(30);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover &__arrow {
+        transform: translateX(5px);
+    }
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__photos {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    &__arrow {
+        width: rem(50);
+        height: rem(50);
+        transition: .3s all ease;
+        padding: rem(9);
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__year {
+        font-family: Benzin;
+        font-size: rem(20);
+        line-height: 180%;
+    }
+
+    &__count {
+        width: rem(48);
+        height: rem(48);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(16);
+        font-family: Benzin;
+        line-height: 137%;
+        border-radius: 24px;
+        border: 2px solid cl(ohra);
+        background: rgba(93, 98, 91, 0.3);
+        backdrop-filter: blur(4.800000190734863px);
+        padding-top: rem(8);
+        padding-bottom: rem(4);
+    }
+
+    .gallery-data {
+        display: none;
+    }
+
+    @media (max-width:$mobile){
+        padding: rem(16);
+        height: rem(195);
+
+        &__month {
+            font-size: rem(20);
+        }
+
+        &__arrow {
+            width: rem(24);
+            height: rem(24);
+        }
+
+        &__bottom {
+            align-items: flex-end;
+        }
+        
+        &__year {
+            font-size: rem(14);
+            line-height: 142%;
+        }
+
+        &__count {
+            width: rem(36);
+            height: rem(36);
+            padding-top: rem(6);
+            padding-bottom: rem(3);
+            font-size: rem(12);
+            line-height: 112%;
+
+        }
+    }
+}

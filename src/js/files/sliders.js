@@ -10,14 +10,9 @@ import {
   Pagination,
   Controller,
 } from "swiper/modules";
-/*
-Navigation, Pagination, Autoplay, 
-EffectFade, Lazy, Manipulation
-*/
 
 import "../../scss/base/swiper.scss";
-// import "../../scss/libs/swiper.scss";
-// import 'swiper/css';
+
 export const createSlider = (el, options) => {
   let mergedOptions;
   const defaultOptions = {
@@ -39,10 +34,8 @@ export const createSlider = (el, options) => {
 };
 
 const sliders = [];
-// Инициализация слайдеров
+
 function initSliders() {
-  // Список слайдеров
-  // Проверяем, есть ли слайдер на странице
   console.log(sliders);
   sliders.forEach((element) => {
     new Swiper(element[0], element[1]);
@@ -53,44 +46,205 @@ const formatFractionCurrent = (number) => number.toString().padStart(2, "0");
 const formatFractionTotal = (number) => number.toString().padStart(2, "0");
 
 window.addEventListener("load", function (e) {
-  const textImgSliderText = new Swiper(".text-img-slider__text", {
-    slidesPerView: 1,
-    pagination: {
-      el: document.querySelector(
-        ".text-img-slider__left .slider-controls__pagination"
-      ),
-      clickable: true,
-      type: "fraction",
-      formatFractionCurrent: formatFractionCurrent,
-      formatFractionTotal: formatFractionTotal,
-    },
-    navigation: {
-      nextEl: document.querySelector(
-        ".text-img-slider__left .slider-controls__arrow-next"
-      ),
-      prevEl: document.querySelector(
-        ".text-img-slider__left .slider-controls__arrow-prev"
-      ),
-    },
-    effect: "fade",
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    modules: [EffectFade, Pagination, Navigation, Controller],
+  // Инициализация всех text-image-slider на странице
+  const textImageSliders = document.querySelectorAll(".text-image-slider");
+
+  textImageSliders.forEach((sliderSection) => {
+    const textSlider = new Swiper(
+      sliderSection.querySelector(".text-image-slider__text"),
+      {
+        slidesPerView: 1,
+        effect: "fade",
+        fadeEffect: { crossFade: true },
+        speed: 1000,
+        modules: [EffectFade, Pagination, Navigation, Controller],
+        pagination: {
+          el: sliderSection.querySelector(".slider-controls__pagination"),
+          clickable: true,
+          type: "fraction",
+          formatFractionCurrent: formatFractionCurrent,
+          formatFractionTotal: formatFractionTotal,
+        },
+        navigation: {
+          nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
+          prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
+        },
+      }
+    );
+
+    const imgSlider = new Swiper(
+      sliderSection.querySelector(".text-image-slider__photos"),
+      {
+        slidesPerView: 1,
+        effect: "fade",
+        fadeEffect: { crossFade: true },
+        speed: 1000,
+        modules: [EffectFade, Controller],
+      }
+    );
+
+    // Связываем слайдеры
+    textSlider.controller.control = imgSlider;
+    imgSlider.controller.control = textSlider;
   });
 
-  const textImgSliderImg = new Swiper(".text-img-slider__photos", {
-    slidesPerView: 1,
-    effect: "fade",
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    modules: [EffectFade, Navigation, Controller],
+  // Fullscreen slider
+  const fullscreenSliders = document.querySelectorAll(".fullscreen-slider");
+
+  if (fullscreenSliders) {
+    fullscreenSliders.forEach((slider) => {
+      const fullscreenSliderBg = new Swiper(
+        slider.querySelector(".fullscreen-slider__background"),
+        {
+          slidesPerView: 1,
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+          speed: 1000,
+          modules: [Controller, EffectFade],
+        }
+      );
+
+      const fullscreenSliderContent = new Swiper(
+        slider.querySelector(".fullscreen-slider__content"),
+        {
+          slidesPerView: 1,
+          effect: "fade",
+          fadeEffect: { crossFade: true },
+          speed: 1000,
+          modules: [EffectFade, Navigation, Pagination, Controller],
+          pagination: {
+            el: slider.querySelector(".slider-controls__pagination"),
+            clickable: true,
+            type: "fraction",
+            formatFractionCurrent: formatFractionCurrent,
+            formatFractionTotal: formatFractionTotal,
+          },
+          navigation: {
+            nextEl:
+              slider.querySelector(".slider-controls__arrow-next"),
+            prevEl:
+              slider.querySelector(".slider-controls__arrow-prev"),
+          },
+        }
+      );
+
+      fullscreenSliderContent.controller.control = fullscreenSliderBg;
+      fullscreenSliderBg.controller.control = fullscreenSliderContent;
+    });
+  }
+
+  // Apartment planes sliders
+  const apartmentPlaneSliders = document.querySelectorAll(
+    ".apartment-planes__slider"
+  );
+
+  apartmentPlaneSliders.forEach((sliderContainer) => {
+    const sliderInner = sliderContainer.querySelector(
+      ".apartment-planes__slider-inner"
+    );
+    const prevBtn = sliderContainer.querySelector(
+      ".slider-controls__arrow-prev"
+    );
+    const nextBtn = sliderContainer.querySelector(
+      ".slider-controls__arrow-next"
+    );
+
+    createSlider(sliderInner, {
+      modules: [Navigation],
+      slidesPerView: 1,
+      spaceBetween: 0,
+      speed: 600,
+      navigation: {
+        nextEl: nextBtn,
+        prevEl: prevBtn,
+      },
+    });
   });
 
-  textImgSliderText.controller.control = textImgSliderImg;
-  textImgSliderImg.controller.control = textImgSliderText;
+  // Image slider section (только изображения)
+  const imageSliderSections = document.querySelectorAll(
+    ".image-slider-section"
+  );
 
+  imageSliderSections.forEach((sliderSection) => {
+    new Swiper(
+      sliderSection.querySelector(".image-slider-section__slider-inner"),
+      {
+        slidesPerView: 1,
+        effect: "fade",
+        fadeEffect: { crossFade: true },
+        speed: 1000,
+        modules: [EffectFade, Pagination, Navigation],
+        pagination: {
+          el: sliderSection.querySelector(".slider-controls__pagination"),
+          clickable: true,
+          type: "fraction",
+          formatFractionCurrent: formatFractionCurrent,
+          formatFractionTotal: formatFractionTotal,
+        },
+        navigation: {
+          nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
+          prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
+        },
+      }
+    );
+  });
+
+  const promoSlider = document.querySelectorAll(".promo-slider__slider");
+
+  if (promoSlider[0]) {
+    promoSlider.forEach((slider) => {
+      new Swiper(slider.querySelector(".promo-slider__slider-carousel"), {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 16,
+        modules: [Navigation],
+        navigation: {
+          nextEl: slider.querySelector(".slider-controls__arrow-next"),
+          prevEl: slider.querySelector(".slider-controls__arrow-prev"),
+        },
+
+        breakpoints: {
+          1199: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+
+          939: {
+            slidesPerView: 3,
+          },
+
+          639: {
+            slidesPerView: 2,
+          },
+        },
+      });
+    });
+  }
+
+  const stepsGallery = document.querySelectorAll(".steps-gallery__slider");
+
+  if (stepsGallery[0]) {
+    stepsGallery.forEach((slider) => {
+      new Swiper(slider.querySelector(".steps-gallery__slider-carousel"), {
+        slidesPerView: "auto",
+        slidesPerGroup: 1,
+        spaceBetween: 12,
+        modules: [Navigation],
+        navigation: {
+          nextEl: slider.querySelector(".slider-controls__arrow-next"),
+          prevEl: slider.querySelector(".slider-controls__arrow-prev"),
+        },
+
+        breakpoints: {
+          639: {
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+  }
   initSliders();
 });
 
-// Бинд слайдеров на window для беков
 window.initSliders = initSliders;

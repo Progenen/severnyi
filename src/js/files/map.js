@@ -21,6 +21,7 @@ export default () => {
                   targetMap.dataset.zoom !== undefined
                     ? targetMap.dataset.zoom
                     : 13,
+                controls: [],
               });
             });
           }

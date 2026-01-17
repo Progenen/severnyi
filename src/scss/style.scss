@@ -116,7 +116,7 @@ body {
 
   @media (max-width: $pc) {
     max-width: calc(rem(928) + var(--pad) * 2);
-    --container-w: 988px;
+    --container-w: 928px;
   }
 
   @media (max-width: $tablet) {

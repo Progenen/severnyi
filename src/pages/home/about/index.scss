@@ -1,0 +1,214 @@
+.about {
+    color: cl(whte);
+    background-color: cl(blck2);
+    padding: rem(100) 0;
+    height: rem(800);
+
+    &__container {
+        height: 100%;
+    }
+
+    &__row {
+        display: flex;
+        height: 100%;
+    }
+
+    &__left,
+    &__right {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__left {
+        width: percent(520, 1224);
+        padding-right: rem(80);
+    }
+
+    &__right {
+        width: percent(704, 1224);
+        padding-left: rem(80);
+    }
+
+    &__logo {
+        max-width: rem(439);
+        width: 100%;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 2px;
+        }
+    }
+
+    &__left-tagline {
+        margin-top: auto;
+    }
+
+    &__right-tagline {
+        font-family: Benzin;
+        color: cl(gryLght);
+    }
+
+    &__title {
+        margin-top: rem(20);
+    }
+
+    &__description {
+        margin-top: rem(40);
+
+        p + p {
+            margin-top: rem(30);
+        }
+    }
+
+    &__logo-icon {
+        width: rem(60);
+        height: rem(60);
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__right-bottom {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (max-width: $pc) {
+        padding: rem(64) 0;
+        height: rem(680);
+        &__right {
+        }
+
+        &__left {
+            width: percent(377, 928);
+            padding-right: rem(48);
+        }
+
+        &__right {
+            width: percent(551, 928);
+            padding-left: rem(48);
+        }
+
+        &__logo {
+            max-width: rem(300);
+        }
+
+        &__title {
+            margin-top: rem(12);
+            max-width: rem(450);
+        }
+
+        &__description {
+            max-width: rem(422);
+            margin-top: rem(32);
+
+            p + p {
+                margin-top: rem(16);
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+        height: auto;
+        &__row {
+            flex-direction: column;
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__left {
+            padding-bottom: rem(41);
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                width: calc(100% + var(--pad) * 2);
+                height: 1px;
+                left: calc(-1 * var(--pad));
+                bottom: 0;
+                background-color: cl(gry);
+            }
+        }
+
+        &__left-tagline {
+            text-align: right;
+        }
+
+        &__right {
+            padding-top: rem(20);
+            height: rem(544);
+        }
+
+        &__right-tagline {
+            font-size: rem(16);
+            line-height: 150%;
+        }
+
+        &__title {
+            max-width: rem(526);
+        }
+
+        &__description {
+            max-width: rem(555);
+        }
+
+        &__logo-icon {
+            width: rem(40);
+            height: rem(40);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        padding-top: rem(32);
+        padding-bottom: rem(32);
+
+        &__left {
+            flex-direction: column;
+            gap: rem(24);
+            align-items: flex-start;
+            padding-bottom: rem(32);
+        }
+
+        &__left-tagline {
+            text-align: left;
+        }
+
+        &__right {
+            padding-top: rem(16);
+        }
+
+        &__right-tagline {
+            font-size: rem(14);
+            line-height: 142%;
+        }
+
+        &__title {
+            font-size: rem(22);
+            line-height: 127%;
+        }
+
+        &__description {
+            margin-top: rem(24);
+
+            p + p {
+                margin-top: rem(12);
+            }
+        }
+    }
+}

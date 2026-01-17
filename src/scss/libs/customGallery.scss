@@ -1,0 +1,408 @@
+/**
+ * СТИЛИ ГАЛЕРЕИ
+ * 
+ * Структура:
+ * 1. Overlay (полноэкранный контейнер)
+ * 2. Slider (область с изображениями)
+ * 3. Navigation (кнопки prev/next)
+ * 4. Thumbnails (миниатюры)
+ * 5. UI Elements (счётчик, закрытие)
+ */
+
+/* === OVERLAY === */
+/* Полноэкранный контейнер поверх всего */
+.gallery-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  
+  /* Скрыт по умолчанию */
+  opacity: 0;
+  visibility: hidden;
+  
+  /* Анимация появления */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Активное состояние */
+.gallery-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === BACKDROP === */
+/* Затемнённый фон */
+.gallery-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  cursor: pointer; /* Показываем что можно кликнуть для закрытия */
+}
+
+/* === CONTAINER === */
+/* Основной контейнер контента */
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px 140px; /* Отступы для UI элементов */
+  box-sizing: border-box;
+}
+
+/* === SLIDER === */
+/* Область просмотра изображений */
+.gallery-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  
+  /* Скрываем всё что выходит за границы */
+  overflow: hidden;
+  
+  /* Cursor меняется при свайпе */
+  cursor: grab;
+}
+
+.gallery-slider:active {
+  cursor: grabbing;
+}
+
+/* === TRACK === */
+/* Контейнер всех слайдов (двигается) */
+.gallery-track {
+  display: flex;
+  height: 100%;
+  
+  /* Плавная анимация (отключается во время свайпа) */
+  transition: transform 0.3s ease-out;
+  
+  /* 
+   * Почему will-change? 
+   * Подсказываем браузеру что transform будет меняться
+   * = GPU ускорение = плавнее анимация
+   */
+  will-change: transform;
+}
+
+/* === SLIDE === */
+/* Один слайд */
+.gallery-slide {
+  /* Каждый слайд занимает всю ширину */
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  
+  /* Запрещаем выделение (мешает свайпу) */
+  user-select: none;
+}
+
+/* Изображение внутри слайда */
+.gallery-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  
+  /* Сохраняем пропорции */
+  object-fit: contain;
+  
+  /* Запрещаем перетаскивание (мешает свайпу) */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* === CAPTION === */
+/* Подпись под изображением */
+.gallery-caption {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 600px;
+  padding: 0 20px;
+  
+  /* Полупрозрачный фон для читаемости */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+/* === NAVIGATION BUTTONS === */
+/* Общие стили для кнопок */
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  /* Сброс стилей button */
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  
+  /* Размеры и форма */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  
+  /* Центрируем иконку */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  cursor: pointer;
+  z-index: 10;
+  
+  /* Анимация при наведении */
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover эффект */
+.gallery-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Active эффект */
+.gallery-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Позиционирование кнопок */
+.gallery-prev {
+  left: 20px;
+}
+
+.gallery-next {
+  right: 20px;
+}
+
+/* === CLOSE BUTTON === */
+.gallery-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  
+  /* Сброс стилей */
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  cursor: pointer;
+  z-index: 10;
+  
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gallery-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* === COUNTER === */
+/* Счётчик слайдов */
+.gallery-counter {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 20px;
+  
+  z-index: 10;
+}
+
+/* === THUMBNAILS === */
+/* Контейнер миниатюр */
+.gallery-thumbnails {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  display: flex;
+  gap: 12px;
+  
+  /* Скроллбар если не помещаются */
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: calc(100% - 40px);
+  padding: 10px;
+  
+  /* Скрываем скроллбар */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gallery-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+/* === THUMBNAIL === */
+/* Одна миниатюра */
+.gallery-thumb {
+  /* Сброс стилей button */
+  background: none;
+  border: 3px solid transparent;
+  padding: 0;
+  
+  /* Размеры */
+  width: 80px;
+  height: 60px;
+  
+  /* Запрещаем сжатие */
+  flex-shrink: 0;
+  
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  
+  /* Анимация */
+  transition: border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.6;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* Запрещаем перетаскивание */
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hover эффект */
+.gallery-thumb:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Активная миниатюра */
+.gallery-thumb.active {
+  border-color: #fff;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* === RESPONSIVE === */
+/* Адаптив для планшетов */
+@media (max-width: 768px) {
+  .gallery-container {
+    padding: 80px 10px 120px;
+  }
+  
+  /* Уменьшаем кнопки */
+  .gallery-nav {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .gallery-prev {
+    left: 10px;
+  }
+  
+  .gallery-next {
+    right: 10px;
+  }
+  
+  /* Уменьшаем миниатюры */
+  .gallery-thumb {
+    width: 60px;
+    height: 45px;
+  }
+  
+  .gallery-caption {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 480px) {
+  /* Прячем кнопки навигации (свайп удобнее) */
+  .gallery-nav {
+    display: none;
+  }
+  
+  .gallery-counter {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+  
+  .gallery-thumb {
+    width: 50px;
+    height: 38px;
+  }
+}
+
+/* === ANIMATIONS === */
+/* Анимация загрузки изображения */
+@keyframes imageLoad {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-slide img {
+  animation: imageLoad 0.3s ease-out;
+}
+
+/* === ACCESSIBILITY === */
+/* Улучшаем фокус для клавиатурной навигации */
+.gallery-nav:focus,
+.gallery-close:focus,
+.gallery-thumb:focus {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+/* Темный режим (если нужен) */
+@media (prefers-color-scheme: dark) {
+  /* Стили уже dark, но можно добавить специфичные */
+}
+
+/* Уменьшение движения для accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-overlay,
+  .gallery-track,
+  .gallery-nav,
+  .gallery-thumb,
+  .gallery-slide img {
+    transition: none !important;
+    animation: none !important;
+  }
+}

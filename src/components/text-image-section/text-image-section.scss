@@ -1,0 +1,130 @@
+.text-image-section {
+    overflow: hidden;
+    background-color: cl(milk2);
+    &__row {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    &__left,
+    &__right {
+        width: 50%;
+    }
+
+    &__right {
+        position: relative;
+        min-height: rem(800);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 0 rem(100) rem(80);
+    }
+
+    &__left {
+        padding: rem(100) 0 rem(100) rem(92);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__text-title {
+        margin-bottom: rem(40);
+    }
+
+    &__photo {
+        height: 100%;
+        width: 50vw;
+        margin-left: calc(-1 * (100vw - 100%) / 2 - var(--padding, 15px));
+        margin-right: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+    }
+
+    @media (max-width: $pc) {
+        &__left {
+            padding-right: rem(48);
+            padding-top: rem(64);
+            padding-bottom: rem(64);
+        }
+
+        &__text-title {
+            margin-bottom: rem(32);
+        }
+
+        &__right {
+            height: rem(680);
+        }
+
+        &__photo {
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        &__row {
+            flex-direction: column-reverse;
+        }
+
+        &__container {
+            padding: 0;
+        }
+
+        &__left,
+        &__right {
+            width: 100%;
+        }
+
+        &__right {
+            padding-left: 0;
+        }
+
+        &__photo {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        &__left {
+            padding: rem(40) var(--pad);
+        }
+
+        &__right {
+            padding: rem(16) var(--pad);
+        }
+
+        &__text-title {
+            margin-bottom: rem(24);
+        }
+
+        &__right {
+            min-height: rem(400);
+            margin: 0;
+            max-height: none;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        &__left {
+            padding-top: rem(24);
+            padding-bottom: rem(24);
+        }
+
+        &__right {
+            max-height: rem(280);
+        }
+
+        &__text-title {
+            margin-bottom: rem(20);
+        }
+    }
+}

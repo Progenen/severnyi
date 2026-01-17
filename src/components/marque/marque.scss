@@ -1,0 +1,50 @@
+.marquee {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: cl(drkBlu);
+    color: cl(whte);
+    padding-top: rem(42);
+    padding-bottom: rem(42);
+
+    &__track {
+        display: flex;
+        width: 100%;
+        position: relative;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        animation: none; /* Анимация будет через GSAP */
+    }
+
+    &__item {
+        font-family: Benzin;
+        font-size: rem(40);
+        font-weight: 400;
+        padding: 0 40px;
+        text-transform: lowercase;
+    }
+
+    &__icon {
+        width: rem(30);
+        height: rem(30);
+        flex-shrink: 0;
+    }
+
+    @media (max-width:$tablet){
+        padding-top: rem(24);
+        padding-bottom: rem(24);
+    }
+
+    @media (max-width:$mobile){
+        &__item {
+            font-size: rem(20);
+            padding-left: rem(12);
+            padding-right: rem(12);
+        }
+    }
+}

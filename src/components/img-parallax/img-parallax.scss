@@ -1,0 +1,36 @@
+.img-parallax {
+    height: rem(800);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    &__img {
+        width: 100%;
+        height: 140%; /* Увеличиваем высоту для эффекта параллакса */
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    @media (max-width:$pc){
+        height: rem(680);
+    }
+
+    @media (max-width:$mobile){
+        height: rem(360);
+    }
+}

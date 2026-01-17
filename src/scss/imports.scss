@@ -1,3 +1,23 @@
+// Компоненты
 @import "../components/header/header";
-@import "../pages/index.scss";
 @import "../components/footer/footer";
+@import "../components/slider-controls/slider-controls";
+@import "../components/fullscreen-slider/fullscreen-slider";
+@import "../components/text-image-slider/text-image-slider";
+@import "../components/text-image-section/text-image-section";
+@import "../components/image-slider-section/image-slider-section";
+@import "../components/apartment-planes/apartment-planes";
+@import "../components/text-map/text-map";
+@import "../components/img-parallax/img-parallax";
+@import "../components/marque/marque";
+
+// Страницы
+@import "../pages/index.scss";
+@import "../components/promo-slider/promo-slider";
+@import "../components/promo-card/promo-card";
+@import "../components/dual-image-section/dual-image-section";
+@import "../components/steps-gallery/steps-gallery";
+@import "../components/gallery-card/gallery-card";
+@import "../components/documents-section/documents-section";
+@import "../components/document-card/document-card";
+@import "../components/form-map/form-map";

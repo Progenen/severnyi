@@ -1,0 +1,35 @@
+.documents-section {
+    padding-top: rem(100);
+    padding-bottom: rem(100);
+
+    &__items {
+        margin-top: rem(30);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: rem(24);
+    }
+
+    @media (max-width:$pc){
+        padding-top: rem(64);
+        padding-bottom: rem(64);
+
+        &__items {
+            margin-top: rem(32);
+        }
+    }
+
+    @media (max-width:$tablet){
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+        &__items {
+            margin-top: rem(24);
+            grid-template-columns: 1fr;
+            gap: rem(12);
+        }
+    }
+
+    @media (max-width:$mobile){
+        padding-top: rem(32);
+        padding-bottom: rem(32);
+    }
+}

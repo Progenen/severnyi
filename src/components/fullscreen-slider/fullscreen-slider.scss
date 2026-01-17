@@ -1,0 +1,112 @@
+// Блок: полноэкранный слайдер (БЭМ)
+.fullscreen-slider {
+    height: rem(800);
+    position: relative;
+    color: cl(whte);
+    padding: rem(80) 0;
+
+    &--alt &__content-slide {
+        justify-content: flex-start;
+    }
+
+    &--alt &__content-slide-title {
+        max-width: rem(380);
+    }
+
+    &--alt &__content-slide p{
+        max-width: rem(320);
+    }
+
+    &__background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        &-slide {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__content {
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        margin-bottom: rem(40);
+
+        .swiper-wrapper {
+            position: relative;
+        }
+
+        &-slide {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0 !important;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            &.swiper-slide-active {
+                opacity: 1 !important;
+                position: relative !important;
+            }
+
+            &-title {
+                margin-bottom: rem(24);
+            }
+
+            &-description {
+                font-weight: 500;
+            }
+        }
+    }
+
+    @media (max-width: $pc) {
+        padding: rem(64) 0;
+        height: rem(680);
+    }
+
+    @media (max-width: $tablet) {
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+
+        &__content {
+            margin-bottom: rem(32);
+        }
+    }
+
+    @media (max-width: $mobile) {
+        height: rem(500);
+        padding: rem(32) 0;
+
+        &__content {
+            margin-bottom: rem(24);
+            &-slide {
+                br {
+                    display: none;
+                }
+
+                &-title {
+                    margin-bottom: rem(16);
+                }
+            }
+        }
+    }
+}
