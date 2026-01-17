@@ -1129,7 +1129,8 @@ p+p {
      object-fit: contain;
 }
 
-.header__logo img:last-child picture:last-child {
+.header__logo img:last-child,
+.header__logo picture:last-child {
   display: none;
 }
 
