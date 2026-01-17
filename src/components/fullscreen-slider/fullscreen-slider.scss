@@ -81,6 +81,20 @@
     @media (max-width: $pc) {
         padding: rem(64) 0;
         height: rem(680);
+
+
+        &__content-slide-title {
+            margin-bottom: rem(16);
+        }
+
+        &--alt &__content-slide-description {
+            font-size: rem(16);
+            line-height: 150%;
+        }
+
+        &--alt &__content-slide-title {
+            margin-bottom: rem(24);
+        }
     }
 
     @media (max-width: $tablet) {
@@ -90,11 +104,27 @@
         &__content {
             margin-bottom: rem(32);
         }
+
+        &--alt &__content-slide-title {
+            max-width: rem(360);
+
+            br {
+                display: none;
+            }
+        }
     }
 
     @media (max-width: $mobile) {
         height: rem(500);
         padding: rem(32) 0;
+
+        &--alt &__content-slide-title {
+            margin-bottom: rem(12);
+        }
+
+        &--alt &__content-slide-description {
+            font-size: rem(14);
+        }
 
         &__content {
             margin-bottom: rem(24);

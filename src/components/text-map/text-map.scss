@@ -269,7 +269,10 @@
     }
 
     &__title {
-        margin-bottom: rem(32);
+    }
+
+    &__description {
+        margin-top: rem(32);
     }
 
     &__items {
@@ -303,13 +306,21 @@
         }
 
         &__right {
+            height: rem(680);
             width: 56.94vw;
             margin-right: calc(-1 * (156vw - 100%) - var(--padding, 15px));
+            overflow: hidden;
+        }
+
+        &__description {
+            margin-top: rem(24);
         }
 
         &__map {
-            width: 109%;
+            width: 118%;
+            margin-left: -8.5%;
             &-img {
+                z-index: -1;
                 object-fit: cover;
             }
 
@@ -345,6 +356,7 @@
     @media (max-width: $tablet) {
         &__row {
             flex-direction: column;
+            gap: rem(24);
         }
 
         &__left,
@@ -360,11 +372,13 @@
         &__left {
             padding-right: rem(0);
             padding-top: rem(40);
-            padding-bottom: rem(16);
+            padding-bottom: rem(40);
         }
 
-        &__title {
-            margin-bottom: rem(24);
+        &__description {
+            margin-top: rem(24);
+            font-size: rem(16);
+            line-height: 150%;
         }
 
         p + p {
@@ -379,7 +393,9 @@
 
         &__map {
             width: 100%;
-            height: rem(600);
+            height: rem(680);
+            max-width: 100%;
+            margin-left: 0;
             &-img {
                 width: 100%;
             }
@@ -391,8 +407,11 @@
     }
 
     @media (max-width: $mobile) {
-        &__title {
-            margin-bottom: rem(16);
+
+        &__description {
+            margin-top: rem(16);
+            font-size: rem(14);
+            line-height: 157%;
         }
 
         p + p {
@@ -400,7 +419,7 @@
         }
 
         &__items {
-            margin-top: rem(32);
+            margin-top: rem(40);
             gap: rem(24) rem(12);
             grid-template-columns: repeat(2, 1fr);
         }
@@ -414,11 +433,21 @@
             padding-bottom: rem(32);
         }
 
-        &__map {
-            width: rem(500);
-            height: rem(510);
+        &__right {
+            width: rem(540);
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-44.5%);
+            height: rem(510);
+
+        }
+
+        &__map {
+            height: rem(510);
+
+            &-img {
+                margin-top: rem(1);
+                width: 100%;
+            }
         }
     }
 }

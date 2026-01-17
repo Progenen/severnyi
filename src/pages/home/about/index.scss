@@ -153,6 +153,8 @@
         &__right {
             padding-top: rem(20);
             height: rem(544);
+            justify-content: flex-start;
+            height: auto;
         }
 
         &__right-tagline {
@@ -160,12 +162,21 @@
             line-height: 150%;
         }
 
+        &__right-bottom {
+            margin-top: rem(168);
+        }
+
         &__title {
-            max-width: rem(526);
+            max-width: rem(566);
+            font-size: rem(22);
+            line-height: 127%;
+            br {
+                display: none;
+            }
         }
 
         &__description {
-            max-width: rem(555);
+            max-width: rem(570);
         }
 
         &__logo-icon {
@@ -177,6 +188,10 @@
     @media (max-width: $mobile) {
         padding-top: rem(32);
         padding-bottom: rem(32);
+
+        &__logo {
+            max-width: rem(340);
+        }
 
         &__left {
             flex-direction: column;
@@ -209,6 +224,10 @@
             p + p {
                 margin-top: rem(12);
             }
+        }
+
+        &__right-bottom {
+            margin-top: rem(28);
         }
     }
 }

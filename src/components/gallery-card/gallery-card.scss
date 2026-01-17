@@ -77,6 +77,12 @@
         display: none;
     }
 
+    @media (max-width:$tablet){
+        &__month {
+            font-size: rem(28);
+        }
+    }
+
     @media (max-width:$mobile){
         padding: rem(16);
         height: rem(195);

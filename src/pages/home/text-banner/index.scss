@@ -43,13 +43,18 @@
 
     @media (max-width: $tablet) {
         padding-top: rem(312);
+        padding-bottom: rem(60); 
+        height: rem(696);
 
         &__icon {
             margin-top: rem(196);
         }
 
         &__title {
-            max-width: rem(558);
+            max-width: rem(658);
+            br {
+             display: none;
+            }
         }
     }
 

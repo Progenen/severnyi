@@ -12,7 +12,7 @@
 
     &__right {
         position: relative;
-        min-height: rem(800);
+        height: rem(800);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -41,7 +41,8 @@
         right: 0;
         overflow: hidden;
 
-        img, picture {
+        img,
+        picture {
             width: 100%;
             height: 100%;
             display: block;
@@ -51,7 +52,7 @@
 
     @media (max-width: $pc) {
         &__left {
-            padding-right: rem(48);
+            padding-left: rem(48);
             padding-top: rem(64);
             padding-bottom: rem(64);
         }
@@ -60,14 +61,15 @@
             margin-bottom: rem(32);
         }
 
-        &__right {
-            height: rem(680);
-        }
-
         &__photo {
-            img, picture {
+            img,
+            picture {
                 object-fit: cover;
             }
+        }
+
+        &__right {
+            height: rem(680);   
         }
     }
 
@@ -107,7 +109,7 @@
         }
 
         &__right {
-            min-height: rem(400);
+            height: rem(465);
             margin: 0;
             max-height: none;
         }
@@ -115,12 +117,12 @@
 
     @media (max-width: $mobile) {
         &__left {
-            padding-top: rem(24);
-            padding-bottom: rem(24);
+            padding-top: rem(48);
+            padding-bottom: rem(48);
         }
 
         &__right {
-            max-height: rem(280);
+            max-height: rem(396);
         }
 
         &__text-title {

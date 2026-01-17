@@ -44,6 +44,19 @@
     @media (max-width:$pc){
         padding-top: rem(64);
         padding-bottom: rem(64);
+
+        &__title {
+            max-width: rem(286);
+        }
+
+        &__description {
+            font-size: rem(16);
+            line-height: 150%;
+        }
+
+        &__slider-carousel {
+            margin-top: rem(32);
+        }
     }
 
     @media (max-width:$tablet){
@@ -83,6 +96,8 @@
 
         &__description {
             text-align: left;
+            font-size: rem(14);
+            line-height: 142%;
             margin-top: rem(12);
         }
 

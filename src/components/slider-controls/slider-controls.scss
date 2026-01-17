@@ -48,6 +48,13 @@
             }
         }
     }
+
+    @media (max-width:$mobile){
+        align-items: flex-end;
+        &__pagination {
+            align-items: flex-end;
+        }
+    }
 }
 
 

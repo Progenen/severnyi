@@ -52,15 +52,15 @@
 
     @media (max-width:$pc){
         &__container {
-            padding-top: rem(262);
+            padding-top: rem(245);
             padding-bottom: rem(438);
         }
 
         &__text {
-            gap: rem(20);
+            gap: rem(35);
 
             span {
-                gap: rem(20);
+                gap: rem(35);
             }
 
             span:before {
@@ -71,8 +71,9 @@
     }
 
     @media (max-width:$tablet){
+        background-position: top center;
         &__container {
-            padding-top: rem(266);
+            padding-top: rem(243);
             padding-bottom: rem(442);
         }
 
@@ -86,20 +87,29 @@
     }
 
     @media (max-width:$mobile){
+
+        &__bg img{
+            object-position: 17% top;
+        }
+
         &__container {
-            padding-top: rem(204);
+            padding-top: rem(180);
             padding-bottom: rem(261);
         }
 
         &__text {
             flex-direction: column;
-            gap: rem(9);
+            gap: 0;
 
             span {
                 flex-direction: column;
-                gap: rem(7);
+                gap: 0;
             }
 
+            span::before {
+                height: rem(36);
+                background-size: contain;
+            }
         }
     }
 }

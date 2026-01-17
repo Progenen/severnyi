@@ -161,9 +161,16 @@
             margin-top: rem(32);
         }
 
+        &__switchs {
+            justify-content: flex-start ;
+        }
+
         &__switchs-item {
+            flex: 0 1 auto;
             min-height: rem(40);
             font-size: rem(14);
+            padding-left: rem(23);
+            padding-right: rem(23);
             line-height: 142%;
         }
 
@@ -215,6 +222,10 @@
         &__row {
             flex-direction: column;
             gap: 0;
+        }
+
+        &__content {
+            margin-top: rem(24);
         }
 
         &__description {
