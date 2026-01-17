@@ -8,6 +8,31 @@
 
     padding: rem(24) 0;
 
+    &--alt {
+        position: static;
+        background-color: cl(milk2);
+        color: cl(grn);
+    }
+
+    &--alt &__logo {
+        img:first-child, picture:first-child {
+            display: none;
+        }
+
+        img:last-child, picture:last-child {
+            display: block;
+        }
+    }
+
+    &--alt &__button:first-child{
+        background-color: cl(grn);
+        color: cl(whte);
+    }
+
+    &--alt &__burger {
+        background-color: cl(grn);
+    }
+
     &__row {
         display: flex;
         align-items: center;
@@ -62,6 +87,7 @@
 
     &__burger {
         display: none;
+        z-index: 5;
     }
 
     @media (max-width: $pc) {

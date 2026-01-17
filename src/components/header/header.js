@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function moveUiButtons() {
-    if (window.innerWidth <= 639 && !isMobile) {
+    if (window.innerWidth <= 1199 && !isMobile) {
       menuUi.appendChild(uiBtns);
       isMobile = true;
       menuTl = createMenuAnimation();
-    } else if (window.innerWidth > 639 && isMobile) {
+    } else if (window.innerWidth > 1199 && isMobile) {
       uiBtnsParent.insertBefore(uiBtns, burger);
       isMobile = false;
       if (menuTl) menuTl.progress(0).pause();
@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updatePadding() {
-    if (firstSection) firstSection.style.paddingTop = `${header.clientHeight}px`;
-    if (headerMenu && window.innerWidth <= 639) headerMenu.style.paddingTop = `${header.clientHeight}px`;
+    if (firstSection && !document.querySelector(".header--alt")) firstSection.style.paddingTop = `${header.clientHeight}px`;
+    if (headerMenu && window.innerWidth <= 1199) headerMenu.style.paddingTop = `${header.clientHeight}px`;
   }
 
   function handleResize() {

@@ -69,7 +69,7 @@ window.addEventListener("load", function (e) {
           nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
           prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
         },
-      }
+      },
     );
 
     const imgSlider = new Swiper(
@@ -80,7 +80,7 @@ window.addEventListener("load", function (e) {
         fadeEffect: { crossFade: true },
         speed: 1000,
         modules: [EffectFade, Controller],
-      }
+      },
     );
 
     // Связываем слайдеры
@@ -101,7 +101,7 @@ window.addEventListener("load", function (e) {
           fadeEffect: { crossFade: true },
           speed: 1000,
           modules: [Controller, EffectFade],
-        }
+        },
       );
 
       const fullscreenSliderContent = new Swiper(
@@ -120,12 +120,10 @@ window.addEventListener("load", function (e) {
             formatFractionTotal: formatFractionTotal,
           },
           navigation: {
-            nextEl:
-              slider.querySelector(".slider-controls__arrow-next"),
-            prevEl:
-              slider.querySelector(".slider-controls__arrow-prev"),
+            nextEl: slider.querySelector(".slider-controls__arrow-next"),
+            prevEl: slider.querySelector(".slider-controls__arrow-prev"),
           },
-        }
+        },
       );
 
       fullscreenSliderContent.controller.control = fullscreenSliderBg;
@@ -135,18 +133,18 @@ window.addEventListener("load", function (e) {
 
   // Apartment planes sliders
   const apartmentPlaneSliders = document.querySelectorAll(
-    ".apartment-planes__slider"
+    ".apartment-planes__slider",
   );
 
   apartmentPlaneSliders.forEach((sliderContainer) => {
     const sliderInner = sliderContainer.querySelector(
-      ".apartment-planes__slider-inner"
+      ".apartment-planes__slider-inner",
     );
     const prevBtn = sliderContainer.querySelector(
-      ".slider-controls__arrow-prev"
+      ".slider-controls__arrow-prev",
     );
     const nextBtn = sliderContainer.querySelector(
-      ".slider-controls__arrow-next"
+      ".slider-controls__arrow-next",
     );
 
     createSlider(sliderInner, {
@@ -163,7 +161,7 @@ window.addEventListener("load", function (e) {
 
   // Image slider section (только изображения)
   const imageSliderSections = document.querySelectorAll(
-    ".image-slider-section"
+    ".image-slider-section",
   );
 
   imageSliderSections.forEach((sliderSection) => {
@@ -186,7 +184,7 @@ window.addEventListener("load", function (e) {
           nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
           prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
         },
-      }
+      },
     );
   });
 
@@ -242,6 +240,45 @@ window.addEventListener("load", function (e) {
           },
         },
       });
+    });
+  }
+
+  const gallerySectionSlider = document.querySelectorAll(
+    ".gallery-section__slider",
+  );
+
+  if (gallerySectionSlider[0]) {
+    gallerySectionSlider.forEach((slider) => {
+      let swiperInstance = null;
+
+      const initSwiper = () => {
+        if (window.innerWidth >= 639 && !swiperInstance) {
+          swiperInstance = new Swiper(
+            slider.querySelector(".gallery-section__slider-carousel"),
+            {
+              slidesPerView: "auto",
+              slidesPerGroup: 1,
+              spaceBetween: 12,
+              modules: [Navigation],
+              navigation: {
+                nextEl: slider.querySelector(".slider-controls__arrow-next"),
+                prevEl: slider.querySelector(".slider-controls__arrow-prev"),
+              },
+              breakpoints: {
+                939: {
+                  spaceBetween: 24,
+                },
+              },
+            },
+          );
+        } else if (window.innerWidth < 639 && swiperInstance) {
+          swiperInstance.destroy(true, true);
+          swiperInstance = null;
+        }
+      };
+
+      initSwiper();
+      window.addEventListener("resize", initSwiper);
     });
   }
   initSliders();

@@ -18,6 +18,10 @@
         transform: translateX(5px);
     }
 
+    &--lg {
+        height: rem(392);
+    }
+
     &__top {
         display: flex;
         justify-content: space-between;
@@ -56,6 +60,16 @@
         line-height: 180%;
     }
 
+    &__icon {
+        width: rem(48);
+        height: rem(48);
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
     &__count {
         width: rem(48);
         height: rem(48);
@@ -78,8 +92,17 @@
     }
 
     @media (max-width:$tablet){
-        &__month {
+        &__title {
             font-size: rem(28);
+        }
+
+        &--lg {
+            height: rem(328);
+        }
+
+        &__icon {
+            width: rem(36);
+            height: rem(36);
         }
     }
 
@@ -87,13 +110,18 @@
         padding: rem(16);
         height: rem(195);
 
-        &__month {
+        &--lg {
+            height: rem(328);
+        }
+
+        &__title {
             font-size: rem(20);
         }
 
         &__arrow {
-            width: rem(24);
-            height: rem(24);
+            width: rem(40);
+            height: rem(40);
+            padding: rem(7.2);
         }
 
         &__bottom {

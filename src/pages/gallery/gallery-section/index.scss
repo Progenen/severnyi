@@ -1,0 +1,31 @@
+.gallery-section {
+
+    &__slider-carousel {
+        margin-top: rem(32);
+    }
+
+    &__slider-slide .gallery-card {
+        width: rem(392);
+    }
+
+    @media (max-width:$tablet){
+        &__slider-slide .gallery-card {
+            width: rem(328);
+        }
+
+        &__slider-carousel {
+            margin-top: rem(24);
+        }
+    }
+
+    @media (max-width:$mobile){
+        &__slider-controls .slider-controls__arrows {
+            display: none;
+        }
+
+        &__slider-carousel .swiper-wrapper {
+            flex-direction: column;
+            gap: rem(12);
+        }
+    }
+}
