@@ -19,7 +19,12 @@
     }
 
     &--lg {
+        padding: rem(16);
         height: rem(392);
+    }
+
+    &--lg &__top {
+        align-items: flex-start;
     }
 
     &__top {
@@ -98,6 +103,22 @@
 
         &--lg {
             height: rem(328);
+        }
+
+        &--lg &__title {
+            font-size: rem(20);
+            line-height: 160%;
+        }
+
+        &--lg &__arrow {
+            width: rem(40);
+            height: rem(40);
+        }
+
+        &--lg &__count {
+            width: rem(36);
+            height: rem(36);
+            font-size: rem(12);
         }
 
         &__icon {

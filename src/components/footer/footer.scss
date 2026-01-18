@@ -181,8 +181,8 @@
             gap: rem(24);
 
             &-value {
-                font-size: rem(16);
-                line-height: 150%;
+                font-size: rem(16) !important;
+                line-height: 150% !important;
             }
         }
 
