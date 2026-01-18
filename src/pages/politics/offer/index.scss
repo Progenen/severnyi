@@ -1,0 +1,67 @@
+.offer-politic {
+    padding-top: rem(180);
+    padding-bottom: rem(100);
+    background-color: #5d625b;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    color: cl(whte);
+    text-align: center;
+
+    &__description {
+        margin-top: rem(16);
+    }
+
+    &__icon {
+        margin-top: rem(40);
+        margin-left: auto;
+        margin-right: auto;
+
+        width: rem(56);
+        height: rem(56);
+        color: #d0cec1;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    @media (max-width:$pc){
+        padding-top: rem(120);
+        padding-bottom: rem(80);
+
+        &__description {
+            margin-top: rem(12);
+        }
+
+        &__icon {
+            width: rem(46);
+            height: rem(46);
+        }
+    }
+
+    @media (max-width:$tablet){
+        padding-top: rem(80);
+        padding-bottom: rem(40);
+
+        &__icon {
+            margin-top: rem(30);
+
+            width: rem(36);
+            height: rem(36);
+        }
+    }
+
+    @media (max-width:$mobile){
+        &__description {
+            margin-top: rem(8);
+        }
+
+        &__icon {
+            width: rem(30);
+            height: rem(30);
+        }
+    }
+}

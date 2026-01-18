@@ -83,6 +83,7 @@
     font-family: Benzin;
     font-size: rem(36);
     line-height: 110%;
+    text-transform: lowercase;
 
     @media (max-width: $pc) {
         font-size: rem(28);
@@ -198,6 +199,16 @@ p + p {
     }
 }
 
-.page-other {
-    border-bottom: 1px solid cl(grn);
+.page-line {
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: cl(grn);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
 }

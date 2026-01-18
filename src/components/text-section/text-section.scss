@@ -1,0 +1,97 @@
+.text-section {
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+
+    border-bottom: 1px solid cl(grn);
+
+    &__text {
+        margin-top: rem(40);
+        line-height: 150%;
+
+        > * {
+            margin-bottom: rem(24);
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
+
+        .no-margin-b {
+            margin-bottom: 0 !important;
+        }
+
+        ul {
+            list-style: disc;
+            margin-left: rem(16);
+            li {
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 0.2em;
+                    height: 0.2em;
+                    background-color: cl(grn);
+                    border-radius: 50%;
+                    top: 0.6em;
+                    margin-left: rem(-9);
+                }
+            }
+        }
+
+        ol {
+
+            ul {
+                margin-left: rem(-4);
+            }
+        }
+
+        ol,
+        ul {
+            margin-left: rem(16);
+        }
+    }
+
+    @media (max-width: $pc) {
+        padding-top: rem(64);
+        padding-bottom: rem(64);
+
+        &__text {
+            margin-top: rem(36);
+
+            > * {
+                margin-bottom: rem(16);
+            }
+
+            ul {
+                margin-left: rem(12);
+
+                li::before {
+                    top: 0.7em;
+                    margin-left: rem(-8);
+                }
+            }
+        }
+    }
+
+    @media (max-width: $tablet) {
+        padding-top: rem(40);
+        padding-bottom: rem(40);
+
+        &__text {
+            margin-top: rem(28);
+
+            > * {
+                margin-bottom: rem(12);
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        padding-top: rem(32);
+        padding-bottom: rem(32);
+
+        &__text {
+            margin-top: rem(22);
+        }
+    }
+}
