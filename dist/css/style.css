@@ -150,20 +150,6 @@ body {
       overscroll-behavior: none;
 }
 
-body::-webkit-scrollbar {
-  height: 5px;
-  width: 6px;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--color-scroll-bg);
-}
-
-body::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: var(--color-alt);
-}
-
 .wrapper {
   min-height: 100%;
   display: -webkit-box;

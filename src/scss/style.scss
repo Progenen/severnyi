@@ -74,17 +74,17 @@ body {
 
   .loaded & {
   }
-  &::-webkit-scrollbar {
-    height: 5px;
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: cl(scroll-bg);
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: cl(alt);
-  }
+  // &::-webkit-scrollbar {
+  //   height: 5px;
+  //   width: 6px;
+  // }
+  // &::-webkit-scrollbar-track {
+  //   background: cl(scroll-bg);
+  // }
+  // &::-webkit-scrollbar-thumb {
+  //   border-radius: 10px;
+  //   background: cl(alt);
+  // }
 }
 // Оболочка wrapper ============================================================================================================================================================================================================================================================================================================================================================================================================================================
 .wrapper {
