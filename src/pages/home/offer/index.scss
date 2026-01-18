@@ -100,6 +100,8 @@
         &__text {
             flex-direction: column;
             gap: 0;
+            font-size: rem(32) !important;
+            line-height: 112%;
 
             span {
                 flex-direction: column;

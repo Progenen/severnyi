@@ -2598,7 +2598,7 @@ p+p {
 .text-banner {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center top;
   color: var(--color-whte);
   text-align: center;
   height: 50rem;
@@ -4759,6 +4759,8 @@ p+p {
         -ms-flex-direction: column;
             flex-direction: column;
     gap: 0;
+    font-size: 2rem !important;
+    line-height: 112%;
   }
 
   .offer__text span {
