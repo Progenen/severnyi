@@ -9366,24 +9366,19 @@
             }
         }
         function fadeOutTextBannerAnimation() {
-            if (document.querySelector(".text-banner")) gsapWithCSS.timeline({
+            if (document.querySelector(".text-banner")) gsapWithCSS.fromTo(".text-banner__icon", {
+                opacity: 0,
+                rotation: 0
+            }, {
+                opacity: 1,
+                rotation: 360,
                 scrollTrigger: {
                     trigger: ".text-banner",
-                    start: "top center",
-                    toggleActions: "play none none none",
-                    once: true
+                    start: "top bottom",
+                    end: "center center",
+                    scrub: 1
                 }
-            }).from(".text-banner__title", {
-                y: 100,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power4.out"
-            }).from(".text-banner__icon", {
-                scale: 0,
-                opacity: 0,
-                duration: 1,
-                ease: "power4.out"
-            }, "-=0.6");
+            });
         }
         function animatePlaneTabSwitch(currentSlider, targetSlider, currentInfo, targetInfo) {
             const timeline = gsapWithCSS.timeline({
@@ -15298,10 +15293,15 @@
                     stagger: .08
                 }, "-=0.3");
                 const menuButtons = menuUi.querySelectorAll(".header__button");
-                if (menuButtons.length) tl.from(menuButtons, {
+                console.log(menuButtons);
+                if (menuButtons.length) if (menuButtons.length) tl.fromTo(menuButtons, {
                     y: 16,
                     scale: .95,
-                    autoAlpha: 0,
+                    autoAlpha: 0
+                }, {
+                    y: 0,
+                    scale: 1,
+                    autoAlpha: 1,
                     duration: .35,
                     stagger: .1
                 }, "-=0.2");

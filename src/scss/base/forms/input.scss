@@ -39,6 +39,17 @@ input[type="number"] {
         border-bottom: 1px solid cl(whte);
     }
 
+    &--sm {
+        label {
+            font-size: rem(14);
+        }
+
+        input {
+            font-size: rem(16);
+            line-height: 150%;
+        }
+    }
+
     @media (max-width:$tablet){
         label {
             font-size: rem(14);

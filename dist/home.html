@@ -30,7 +30,7 @@
 	<meta name="msapplication-TileColor" content="#272727">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#C2AB81">
-	<link rel="stylesheet" href="css/style.min.css?_v=20260119004821">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260121051513">
 	<script>
 		var baseUrl = "./js/";
 	</script>
@@ -82,22 +82,20 @@
 					<div class="header__col header__col--right">
 						<div class="header__ui">
 							<div class="header__ui-btns">
-								<a href="tel:+79876543210" class="header__button button button--s button--blue">
-									<div class="button__text">
+								<a href="tel:+79876543210" class="header__button header__button--phone button button--s button--blue">
+									<span class="button__text">
 										+7 (987) 654-32-10
-									</div>
-								</a>
-								<a href="#" class="header__button button button--s">
-									<div class="button__text">
-										Оставить заявку
-									</div>
-								</a>
-							</div>
-							<button class="header__burger button button--s">
-								<span class="button__icon">
-									<span class="icon-menu">
-										<span></span><span></span><span></span>
 									</span>
+								</a>
+								<button data-popup="#callback-modal" class="header__button header__button--call button button--ohra button--s">
+									<span class="button__text">
+										Оставить заявку
+									</span>
+								</button>
+							</div>
+							<button class="header__burger button-icon button-icon--ohra button-icon--s">
+								<span class="icon-menu">
+									<span></span><span></span><span></span>
 								</span>
 							</button>
 						</div>
@@ -218,19 +216,15 @@
 								<div class="text-image-slider__count slider-controls__pagination">
 								</div>
 								<div class="text-image-slider__arrows slider-controls__arrows">
-									<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-										<span class="button__icon">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</span>
+									<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
 									</button>
-									<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-										<span class="button__icon">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</span>
+									<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
 									</button>
 								</div>
 							</div>
@@ -501,10 +495,12 @@
 												По следам путешествий
 											</h2>
 											<p class="text-l">
-												Детская площадка включает образовательные и интерактивные элементы — самолеты, тропу препятствий, маяк, компас и северные звезды — ориентиры всех приключений.
+												Детская площадка включает образовательные и интерактивные элементы — самолеты, тропу
+												препятствий, маяк, компас и северные звезды — ориентиры всех приключений.
 											</p>
 											<p class="text-l">
-												Информационные стенды закольцовывают концепцию и рассказывают о полетах героев. Все это дает возможность детям развить воображение и представить себя на месте летчиков.
+												Информационные стенды закольцовывают концепцию и рассказывают о полетах героев. Все
+												это дает возможность детям развить воображение и представить себя на месте летчиков.
 											</p>
 										</div>
 									</div>
@@ -517,7 +513,9 @@
 												Пространство уединения
 											</h2>
 											<p class="text-l">
-												Продуманы комфортные места для активного и спокойного отдыха. На территории расположили скамьи, перголы — повсеместно окруженные растениями и вечнозелеными деревьями. На территории доступен Wi-Fi, чтобы всегда оставаться на связи.
+												Продуманы комфортные места для активного и спокойного отдыха. На территории
+												расположили скамьи, перголы — повсеместно окруженные растениями и вечнозелеными
+												деревьями. На территории доступен Wi-Fi, чтобы всегда оставаться на связи.
 											</p>
 										</div>
 									</div>
@@ -542,19 +540,15 @@
 								<div class="text-image-slider__count slider-controls__pagination slider-controls__pagination--alt">
 								</div>
 								<div class="text-image-slider__arrows slider-controls__arrows">
-									<button class="slider-controls__arrow slider-controls__arrow-prev button button--ohra button--l">
-										<span class="button__icon">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</span>
+									<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--ohra button-icon--l">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
 									</button>
-									<button class="slider-controls__arrow slider-controls__arrow-next button button--ohra button--l">
-										<span class="button__icon">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</span>
+									<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--ohra button-icon--l">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
 									</button>
 								</div>
 							</div>
@@ -562,8 +556,13 @@
 					</div>
 				</div>
 			</section>
-
-			<section class="text-banner" style="background-image: url(img/pages/home/text-banner/bg.jpg);">
+			<section class="text-banner">
+				<div class="text-banner__bg">
+					<picture>
+						<source media="(max-width: 639px)" srcset="img/pages/home/text-banner/bg-mob.jpg">
+						<img src="img/pages/home/text-banner/bg.jpg" alt="Описание">
+					</picture>
+				</div>
 				<div class="text-banner__title h1">
 					 «Северный» — место ваших важных и теплых моментов
 				</div>
@@ -628,7 +627,7 @@
 												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
 												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
@@ -637,19 +636,15 @@
 									</div>
 									<div class="apartment-planes__slider-controls slider-controls">
 										<div class="slider-controls__arrows">
-											<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
-											<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
 										</div>
 									</div>
@@ -660,10 +655,10 @@
 									<div class="apartment-planes__slider-inner">
 										<div class="swiper-wrapper">
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
 												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
@@ -672,19 +667,15 @@
 									</div>
 									<div class="apartment-planes__slider-controls slider-controls">
 										<div class="slider-controls__arrows">
-											<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
-											<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
 										</div>
 									</div>
@@ -695,31 +686,28 @@
 									<div class="apartment-planes__slider-inner">
 										<div class="swiper-wrapper">
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
 												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 										</div>
 									</div>
 									<div class="apartment-planes__slider-controls slider-controls">
 										<div class="slider-controls__arrows">
-											<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
-											<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+
+											<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
 										</div>
 									</div>
@@ -733,28 +721,25 @@
 												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 											<div class="apartment-planes__slider-slide swiper-slide">
-												<picture><source srcset="img/pages/home/plane/img.webp" type="image/webp"><img src="img/pages/home/plane/img.png" alt=""></picture>
+												<picture><source srcset="img/pages/home/plane/img2.webp" type="image/webp"><img src="img/pages/home/plane/img2.png" alt=""></picture>
 											</div>
 										</div>
 									</div>
 									<div class="apartment-planes__slider-controls slider-controls">
 										<div class="slider-controls__arrows">
-											<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+											<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
-											<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-												<span class="button__icon">
-													<svg>
-														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-													</svg>
-												</span>
+
+											<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+												<svg>
+													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+												</svg>
 											</button>
 										</div>
 									</div>
@@ -785,7 +770,8 @@
 								<!-- Информация: Студия -->
 								<div class="apartment-planes__info-item apartment-planes__info-item--active" data-tab-plane="0">
 									<p class="apartment-planes__info-description text-l">
-										Надежный дом для первого шага в <br> самостоятельную жизнь. Небольшое, <br> но «свое» пространство
+										Надежный дом для первого шага в <br> самостоятельную жизнь. Небольшое, <br> но «свое»
+										пространство
 										уединения.
 									</p>
 									<ul class="apartment-planes__info-list text-l">
@@ -952,7 +938,6 @@
 					</div>
 				</div>
 			</section>
-
 			<section class="image-slider-section">
 				<div class="image-slider-section__container">
 					<div class="image-slider-section__row">
@@ -974,19 +959,15 @@
 								<div class="image-slider-section__slider-controls slider-controls">
 									<div class="slider-controls__pagination"></div>
 									<div class="slider-controls__arrows">
-										<button class="slider-controls__arrow slider-controls__arrow-prev button button--drkBlu button--l">
-											<span class="button__icon">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
-											</span>
+										<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--blue button-icon--l">
+											<svg>
+												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+											</svg>
 										</button>
-										<button class="slider-controls__arrow slider-controls__arrow-next button button--drkBlu button--l">
-											<span class="button__icon">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
-											</span>
+										<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--blue button-icon--l">
+											<svg>
+												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+											</svg>
 										</button>
 									</div>
 								</div>
@@ -1018,16 +999,16 @@
 								<div class="image-slider-section__i text-s">
 									В проекте предусмотрены квартиры в черновой отделке. 
 								</div>
-								<a href="#" class="image-slider-section__btn button button--vlt button--xl">
-									<div class="button__text">
+								<button data-popup="#callback-modal" class="image-slider-section__btn button button--vlt button--xl">
+									<span class="button__text">
 										Оставить заявку
-									</div>
-									<div class="button__icon">
+									</span>
+									<span class="button__icon">
 										<svg>
 											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 										</svg>
-									</div>
-								</a>
+									</span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -1061,7 +1042,8 @@
 								<div class="fullscreen-slider__content-slide-description text-s">
 									<p>
 										Мягкий свет, текстура материалов, выполненных под <br> дерево, живые растения, интерактивные
-										панели — все <br> это задает пространству жизнь и с первых шагов <br> погружает во внутренний мир
+										панели — все <br> это задает пространству жизнь и с первых шагов <br> погружает во
+										внутренний мир
 										дома. 
 									</p>
 								</div>
@@ -1076,19 +1058,15 @@
 						<div class="fullscreen-slider__count slider-controls__pagination slider-controls__pagination--alt">
 						</div>
 						<div class="fullscreen-slider__arrows slider-controls__arrows">
-							<button class="slider-controls__arrow slider-controls__arrow-prev button button--white button--l">
-								<span class="button__icon">
-									<svg>
-										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-									</svg>
-								</span>
+							<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--white button-icon--l">
+								<svg>
+									<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+								</svg>
 							</button>
-							<button class="slider-controls__arrow slider-controls__arrow-next button button--white button--l">
-								<span class="button__icon">
-									<svg>
-										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-									</svg>
-								</span>
+							<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--white button-icon--l">
+								<svg>
+									<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+								</svg>
 							</button>
 						</div>
 					</div>
@@ -1106,26 +1084,22 @@
 								оптимальные условия.
 							</div>
 							<div class="slider-controls__arrows">
-								<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-									<span class="button__icon">
-										<svg>
-											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-										</svg>
-									</span>
+								<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+									</svg>
 								</button>
-								<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-									<span class="button__icon">
-										<svg>
-											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-										</svg>
-									</span>
+								<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+									</svg>
 								</button>
 							</div>
 						</div>
 						<div class="promo-slider__slider-carousel">
 							<div class="swiper-wrapper">
 								<div class="promo-slider__slider-slide swiper-slide">
-									<div class="promo-card promo-card--brown promo-card--snow">
+									<div class="promo-card card promo-card--brown promo-card--snow">
 										<div class="promo-card__title h3">
 											новогодние
 											скидки
@@ -1134,17 +1108,22 @@
 											<div class="promo-card__discount h3">
 												до 12%
 											</div>
-											<div class="promo-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+											<div class="promo-card__arrow card-arrow">
+												<div class="card-arrow__wrapper">
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+												</div>
 											</div>
 										</div>
 										<a href="#" class="promo-card__link"></a>
 									</div>
 								</div>
 								<div class="promo-slider__slider-slide swiper-slide">
-									<div class="promo-card promo-card--border-ohra">
+									<div class="promo-card card promo-card--border-ohra">
 										<div class="promo-card__title h3">
 											рассрочка
 											со скидкой
@@ -1153,17 +1132,22 @@
 											<div class="promo-card__discount h3">
 												-20%
 											</div>
-											<div class="promo-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+											<div class="promo-card__arrow card-arrow">
+												<div class="card-arrow__wrapper">
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+												</div>
 											</div>
 										</div>
 										<a href="#" class="promo-card__link"></a>
 									</div>
 								</div>
 								<div class="promo-slider__slider-slide swiper-slide">
-									<div class="promo-card promo-card--milk">
+									<div class="promo-card card promo-card--milk">
 										<div class="promo-card__title h3">
 											ипотека
 										</div>
@@ -1171,17 +1155,22 @@
 											<div class="promo-card__discount h3">
 												5%
 											</div>
-											<div class="promo-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+											<div class="promo-card__arrow card-arrow">
+												<div class="card-arrow__wrapper">
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+												</div>
 											</div>
 										</div>
 										<a href="#" class="promo-card__link"></a>
 									</div>
 								</div>
 								<div class="promo-slider__slider-slide swiper-slide">
-									<div class="promo-card promo-card--drkBlu">
+									<div class="promo-card card promo-card--drkBlu">
 										<div class="promo-card__title h3">
 											семейная
 											ипотека
@@ -1190,17 +1179,22 @@
 											<div class="promo-card__discount h3">
 												от 3,5%
 											</div>
-											<div class="promo-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+											<div class="promo-card__arrow card-arrow">
+												<div class="card-arrow__wrapper">
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+												</div>
 											</div>
 										</div>
 										<a href="#" class="promo-card__link"></a>
 									</div>
 								</div>
 								<div class="promo-slider__slider-slide swiper-slide">
-									<div class="promo-card promo-card--brown promo-card--snow">
+									<div class="promo-card card promo-card--brown promo-card--snow">
 										<div class="promo-card__title h3">
 											новогодние
 											скидки
@@ -1209,10 +1203,15 @@
 											<div class="promo-card__discount h3">
 												до 12%
 											</div>
-											<div class="promo-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+											<div class="promo-card__arrow card-arrow">
+												<div class="card-arrow__wrapper">
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+													<svg>
+														<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+													</svg>
+												</div>
 											</div>
 										</div>
 										<a href="#" class="promo-card__link"></a>
@@ -1234,14 +1233,14 @@
 								кладовые
 							</div>
 							<a href="" class="dual-image-section__btn button button--xl button--ohra">
-								<div class="button__text">
+								<span class="button__text">
 									Посмотреть схему
-								</div>
-								<div class="button__icon button__icon--white">
+								</span>
+								<span class="button__icon button__icon--white">
 									<svg>
 										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 									</svg>
-								</div>
+								</span>
 							</a>
 						</div>
 						<div class="dual-image-section__right">
@@ -1252,14 +1251,14 @@
 								теплый паркинг
 							</div>
 							<a href="" class="dual-image-section__btn button button--xl button--ohra">
-								<div class="button__text">
+								<span class="button__text">
 									Посмотреть схему
-								</div>
-								<div class="button__icon button__icon--white">
+								</span>
+								<span class="button__icon button__icon--white">
 									<svg>
 										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 									</svg>
-								</div>
+								</span>
 							</a>
 						</div>
 					</div>
@@ -1285,34 +1284,37 @@
 								</svg>
 							</div>
 							<div class="slider-controls__arrows">
-								<button class="slider-controls__arrow slider-controls__arrow-prev button button--green button--l">
-									<span class="button__icon">
-										<svg>
-											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-										</svg>
-									</span>
+								<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--green button-icon--l">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+									</svg>
 								</button>
-								<button class="slider-controls__arrow slider-controls__arrow-next button button--green button--l">
-									<span class="button__icon">
-										<svg>
-											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-										</svg>
-									</span>
+								<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--green button-icon--l">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+									</svg>
 								</button>
 							</div>
 						</div>
 						<div class="steps-gallery__slider-carousel">
 							<div class="swiper-wrapper">
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery1" style="background-image: url('img/pages/home/steps-gallery//img1.jpg');">
+									<div class="gallery-card card" data-gallery="gallery1" style="background-image: url('img/pages/home/steps-gallery//img1.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Октябрь
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1333,15 +1335,22 @@
 									</div>
 								</div>
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery2" style="background-image: url('img/pages/home/steps-gallery//img2.jpg');">
+									<div class="gallery-card card" data-gallery="gallery2" style="background-image: url('img/pages/home/steps-gallery//img2.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Сентябрь
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1362,15 +1371,22 @@
 									</div>
 								</div>
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery3" style="background-image: url('img/pages/home/steps-gallery//img3.jpg');">
+									<div class="gallery-card card" data-gallery="gallery3" style="background-image: url('img/pages/home/steps-gallery//img3.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Август
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1391,15 +1407,22 @@
 									</div>
 								</div>
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery1" style="background-image: url('img/pages/home/steps-gallery//img1.jpg');">
+									<div class="gallery-card card" data-gallery="gallery1" style="background-image: url('img/pages/home/steps-gallery//img1.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Октябрь
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1420,15 +1443,22 @@
 									</div>
 								</div>
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery2" style="background-image: url('img/pages/home/steps-gallery//img2.jpg');">
+									<div class="gallery-card card" data-gallery="gallery2" style="background-image: url('img/pages/home/steps-gallery//img2.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Сентябрь
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1449,15 +1479,22 @@
 									</div>
 								</div>
 								<div class="steps-gallery__slider-slide swiper-slide">
-									<div class="gallery-card" data-gallery="gallery3" style="background-image: url('img/pages/home/steps-gallery//img3.jpg');">
+									<div class="gallery-card card" data-gallery="gallery3" style="background-image: url('img/pages/home/steps-gallery//img3.jpg');">
 										<div class="gallery-card__top">
 											<div class="gallery-card__title h2">
 												Август
 											</div>
 											<div class="gallery-card__arrow">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-												</svg>
+												<div class="card-arrow">
+													<div class="card-arrow__wrapper">
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+														<svg>
+															<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+														</svg>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="gallery-card__bottom">
@@ -1515,14 +1552,14 @@
 							</div>
 							<div class="about__right-bottom">
 								<a href="#" class="about__btn button button--xl button--gray">
-									<div class="button__text">
+									<span class="button__text">
 										Узнать подробнее
-									</div>
-									<div class="button__icon button__icon-white">
+									</span>
+									<span class="button__icon button__icon-white">
 										<svg>
 											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 										</svg>
-									</div>
+									</span>
 								</a>
 								<div class="about__logo-icon">
 									<img src="img/icons/logo-sys-icon.svg" alt="">
@@ -1543,14 +1580,14 @@
 								разрешение на строительство
 							</div>
 							<a href="#" class="document-card__btn button button--m button--green">
-								<div class="button__text">
+								<span class="button__text">
 									Ознакомиться
-								</div>
-								<div class="button__icon">
+								</span>
+								<span class="button__icon">
 									<svg>
 										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 									</svg>
-								</div>
+								</span>
 							</a>
 						</div>
 						<div class="document-card document-card--milk">
@@ -1558,14 +1595,14 @@
 								проектная декларация
 							</div>
 							<a href="#" class="document-card__btn button button--m button--green">
-								<div class="button__text">
+								<span class="button__text">
 									Ознакомиться
-								</div>
-								<div class="button__icon">
+								</span>
+								<span class="button__icon">
 									<svg>
 										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 									</svg>
-								</div>
+								</span>
 							</a>
 						</div>
 						<div class="document-card document-card--green">
@@ -1574,14 +1611,14 @@
 								участия
 							</div>
 							<a href="#" class="document-card__btn button button--m button--green">
-								<div class="button__text">
+								<span class="button__text">
 									Ознакомиться
-								</div>
-								<div class="button__icon">
+								</span>
+								<span class="button__icon">
 									<svg>
 										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 									</svg>
-								</div>
+								</span>
 							</a>
 						</div>
 					</div>
@@ -1675,7 +1712,7 @@
 										Я согласен с <a href="./politics.html">политикой конфиденциальности</a>
 									</div>
 								</div>
-								<button class="button button--xl">
+								<button class="button button--ohra button--xl">
 									<span class="button__text">
 										Отправить заявку
 									</span>
@@ -1774,8 +1811,85 @@
 				</div>
 			</div>
 		</div>
+		<div id="callback-modal" aria-hidden="true" class="popup">
+			<div class="popup__wrapper">
+				<div class="popup__content">
+					<div class="modal-call">
+						<div class="modal-call__left">
+							<div class="modal-call__img">
+								<picture>
+									<source media="(max-width: 639px)" srcset="img/modals/img-mob.jpg">
+									<source media="(max-width: 1199px)" srcset="img/modals/img-tablet.jpg">
+									<img src="img/modals/img.jpg" alt="Описание">
+								</picture>
+								<div class="modal-call__img-icon">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-star'></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="modal-call__right">
+							<div class="modal-call__top">
+								<div class="modal-call__title h2-s">
+									Остались вопросы?
+								</div>
+								<div class="modal-call__description text-s">
+									Оставьте заявку и наши специалисты свяжутся с вами и предоставят всю необходимую информацию
+								</div>
+							</div>
+							<form action="#" class="modal-call__form">
+								<div class="input input--sm">
+									<label>Как к вам обращаться?</label>
+									<input type="text" name="name" placeholder="Иванов Иван" required>
+								</div>
+								<div class="input input--sm">
+									<label>Телефон</label>
+									<input type="tel" name="phone" placeholder="+7 (" data-inputmask="'mask': '+7 (999) 999 99-99'" required>
+								</div>
+								<div class="input input--sm">
+									<label>Ваш email</label>
+									<input type="email" name="phone" placeholder="example@mail.ru" required>
+								</div>
+								<div class="modal-call__form-checkboxes">
+									<div class="checkbox">
+										<input type="checkbox" id="politicsCallback" class="checkbox__input">
+										<label class="checkbox__label" for="politicsCallback"></label>
+										<div class="checkbox__text">
+											Я согласен с <a href="./politics.html">политикой конфиденциальности</a>
+										</div>
+									</div>
+									<div class="checkbox">
+										<input type="checkbox" id="personal" class="checkbox__input">
+										<label class="checkbox__label" for="personal"></label>
+										<div class="checkbox__text">
+											Я согласен на обработку персональных данных
+										</div>
+									</div>
+								</div>
+								<button class="button button--ohra button--m">
+									<span class="button__text">
+										Отправить заявку
+									</span>
+									<span class="button__icon">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
+									</span>
+								</button>
+							</form>
+						</div>
+					</div>
+					<button data-close type="button" class="popup__close button-icon button-icon--ohra button-icon--m button-icon--rounded">
+						<svg>
+							<use xlink:href='img/icons/icons.svg#icon-close'></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<script src="js/app.min.js?_v=20260119004821"></script>
+	<script src="js/app.min.js?_v=20260121051513"></script>
 </body>
 
 </html>

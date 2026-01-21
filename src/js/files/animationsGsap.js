@@ -19,7 +19,7 @@ export function headerMnuAnimation() {
       stagger: 0.08,
       ease: "power3.out",
     },
-    "-=0.3"
+    "-=0.3",
   );
 
   return tl;
@@ -80,7 +80,7 @@ export function animateMapPoints() {
             ease: "power2.out",
             stagger: 0.1,
           },
-          index * 0.2
+          index * 0.2,
         );
       });
 
@@ -94,7 +94,7 @@ export function animateMapPoints() {
           duration: 0.8,
           ease: "power2.out",
         },
-        "-=0.3"
+        "-=0.3",
       );
     }
   });
@@ -149,40 +149,37 @@ export function marque() {
 
 export function fadeOutTextBannerAnimation() {
   if (document.querySelector(".text-banner")) {
-    gsap
-      .timeline({
+    gsap.fromTo(
+      ".text-banner__icon",
+      {
+        opacity: 0,
+        rotation: 0,
+      },
+      {
+        opacity: 1,
+        rotation: 360,
         scrollTrigger: {
           trigger: ".text-banner",
-          start: "top center", // Начинаем когда верх блока достигнет центра экрана
-          toggleActions: "play none none none",
-          once: true, // Анимация воспроизводится только один раз
+          start: "top bottom",
+          end: "center center",
+          scrub: 1,
         },
-      })
-      .from(".text-banner__title", {
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power4.out",
-      })
-      .from(
-        ".text-banner__icon",
-        {
-          scale: 0,
-          opacity: 0,
-          duration: 1,
-          ease: "power4.out",
-        },
-        "-=0.6"
-      );
+      },
+    );
   }
 }
 
-export function animatePlaneTabSwitch(currentSlider, targetSlider, currentInfo, targetInfo) {
+export function animatePlaneTabSwitch(
+  currentSlider,
+  targetSlider,
+  currentInfo,
+  targetInfo,
+) {
   const timeline = gsap.timeline({
     defaults: {
       duration: 0.6,
-      ease: "power2.inOut"
-    }
+      ease: "power2.inOut",
+    },
   });
 
   timeline
@@ -191,24 +188,25 @@ export function animatePlaneTabSwitch(currentSlider, targetSlider, currentInfo, 
       y: 5,
       duration: 0.5,
       onComplete: () => {
-        currentSlider?.classList.remove('plane__slider--active');
-        currentInfo?.classList.remove('plane__info-item--active');
-        
-        targetSlider?.classList.add('plane__slider--active');
-        targetInfo?.classList.add('plane__info-item--active');
-      }
+        currentSlider?.classList.remove("plane__slider--active");
+        currentInfo?.classList.remove("plane__info-item--active");
+
+        targetSlider?.classList.add("plane__slider--active");
+        targetInfo?.classList.add("plane__info-item--active");
+      },
     })
     // Анимация появления новых элементов
-    .fromTo([targetSlider, targetInfo], 
+    .fromTo(
+      [targetSlider, targetInfo],
       {
         opacity: 0,
-        y: -5
+        y: -5,
       },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7
+        duration: 0.7,
       },
-      "-=0.2" // Небольшое перекрытие анимаций
+      "-=0.2", // Небольшое перекрытие анимаций
     );
 }

@@ -1,7 +1,7 @@
 // Заголовки, общие БЭМ блоки и прочее...
 .text-s {
     font-size: rem(16);
-    line-height: 140%;
+    line-height: 150%;
 
     @media (max-width:$pc){
         font-size: rem(14);
@@ -210,5 +210,36 @@ p + p {
         position: absolute;
         left: 0;
         bottom: 0;
+    }
+}
+
+.card {
+    &:hover {
+        .card-arrow__wrapper {
+            transform: translateX(calc(-50% - rem(14)));
+        }
+    }
+}
+
+.card-arrow {
+    overflow: hidden;
+    position: relative;
+    width: rem(32);
+    height: rem(32);
+
+    &__wrapper {
+        display: flex;
+        gap: rem(18);
+        width: min-content;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: transform 0.4s ease;
+
+        svg {
+            width: rem(32);
+            height: rem(32);
+            flex-shrink: 0;
+        }
     }
 }

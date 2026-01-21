@@ -23,17 +23,37 @@ document.addEventListener("DOMContentLoaded", () => {
   let menuTl = null;
 
   function createMenuAnimation() {
-    const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: { ease: "power3.out" },
+    });
 
-    tl.to(headerMenu, { y: 0, autoAlpha: 1, duration: 0.5, pointerEvents: "auto" });
+    tl.to(headerMenu, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.5,
+      pointerEvents: "auto",
+    });
 
     if (menuListItems.length) {
-      tl.from(menuListItems, { y: 24, autoAlpha: 0, duration: 0.4, stagger: 0.08 }, "-=0.3");
+      tl.from(
+        menuListItems,
+        { y: 24, autoAlpha: 0, duration: 0.4, stagger: 0.08 },
+        "-=0.3",
+      );
     }
 
     const menuButtons = menuUi.querySelectorAll(".header__button");
+    console.log(menuButtons);
     if (menuButtons.length) {
-      tl.from(menuButtons, { y: 16, scale: 0.95, autoAlpha: 0, duration: 0.35, stagger: 0.1 }, "-=0.2");
+      if (menuButtons.length) {
+        tl.fromTo(
+          menuButtons,
+          { y: 16, scale: 0.95, autoAlpha: 0 },
+          { y: 0, scale: 1, autoAlpha: 1, duration: 0.35, stagger: 0.1 },
+          "-=0.2",
+        );
+      }
     }
 
     return tl;
@@ -67,8 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updatePadding() {
-    if (firstSection && !document.querySelector(".header--alt")) firstSection.style.paddingTop = `${header.clientHeight}px`;
-    if (headerMenu && window.innerWidth <= 1199) headerMenu.style.paddingTop = `${header.clientHeight}px`;
+    if (firstSection && !document.querySelector(".header--alt"))
+      firstSection.style.paddingTop = `${header.clientHeight}px`;
+    if (headerMenu && window.innerWidth <= 1199)
+      headerMenu.style.paddingTop = `${header.clientHeight}px`;
   }
 
   function handleResize() {

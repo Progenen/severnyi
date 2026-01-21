@@ -5,39 +5,49 @@
 	display: flex;
 	text-decoration: none;
 	font-family: Benzin;
-	--primary-color: #d6a177;
-	--text-color: #fff;
+	max-width: fit-content;
+	transition: 0.3s all ease;
 
 	&__icon {
-		backdrop-filter: blur(6px);
-		border: 1px solid var(--primary-color);
-		background: rgba(93, 98, 91, 0.1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		backdrop-filter: blur(6px);
+		border: 1px solid transparent;
+		background-color: transparent;
+		transition: 0.3s all ease;
+		color: #f5f3eb;
 
 		svg {
 			width: rem(28);
 			height: rem(28);
-			color: #f5f3eb;
-		}
-
-		&--white {
-			background: rgba(245, 243, 235, 0.1);
 		}
 	}
 
 	&__text {
 		display: block;
-		background-color: var(--primary-color);
-		color: var(--text-color);
+		background-color: transparent;
+		color: transparent;
+		transition: 0.3s all ease;
+	}
+
+	&:hover {
+		border-color: cl(whte);
+		.button__text {
+			color: cl(drkBlu);
+			background-color: cl(whte);
+		}
+
+		.button__icon {
+			border-color: cl(whte);
+		}
 	}
 
 	&--xl {
 		.button__text {
 			padding: rem(19) rem(24);
-			line-height: 137%;
 			font-size: rem(16);
+			line-height: 137%;
 		}
 
 		.button__icon {
@@ -88,10 +98,7 @@
 		}
 
 		.button__text {
-			padding-top: rem(9);
-			padding-bottom: rem(9);
-			padding-left: rem(16);
-			padding-right: rem(16);
+			padding: rem(9) rem(16);
 			font-size: rem(14);
 			line-height: 157%;
 		}
@@ -99,9 +106,9 @@
 
 	&--s {
 		.button__text {
+			padding: rem(7) rem(12);
 			font-size: rem(12);
 			line-height: 150%;
-			padding: rem(7) rem(12);
 		}
 
 		.button__icon {
@@ -109,11 +116,25 @@
 		}
 	}
 
-	// colors
-	&--gray {
-		--text-color: #fff;
+	&--ohra {
+		color: cl(whte);
+
+		.button__icon {
+			border-color: cl(ohra);
+			color: cl(milk);
+			background-color: cl(milk, 0.1);
+			color: cl(whte);
+		}
 
 		.button__text {
+			background-color: cl(ohra);
+			color: cl(whte);
+		}
+	}
+
+	&--gray {
+		.button__text {
+			color: cl(whte);
 			background-color: cl(gry);
 		}
 
@@ -122,67 +143,137 @@
 		}
 	}
 
-	&--white {
-		.button__icon {
-			border: 1px solid transparent;
-		}
-	}
-
-	&--blue {
-		--text-color: #fff;
+	&--vlt {
 		.button__text {
-			background: rgba(60, 68, 91, 0.2);
-		}
-	}
-
-	&--drkBlu {
-		--text-color: cl(whte);
-		.button__icon {
 			color: cl(whte);
-			background: rgba(60, 68, 91, 0.2);
-			border-color: transparent;
+			background-color: cl(vlt);
+		}
+
+		.button__icon {
+			background-color: cl(vlt, 0.1);
 		}
 	}
 
 	&--green {
-		width: fit-content;
-
-		&:has(.button__text) {
-			border: 1px solid cl(grn);
-		}
-
 		.button__text {
+			color: cl(whte);
 			background-color: cl(grn);
 		}
 
 		.button__icon {
 			border-color: transparent;
-			background: rgba(93, 98, 91, 0.1);
+			background-color: cl(grn, 0.1);
+			color: cl(grn);
+		}
 
-			svg {
-				color: cl(grn);
+		&:hover {
+			.button__text {
+				background-color: cl(vlt);
+				border-color: cl(vlt);
+				color: cl(whte);
+			}
+
+			.button__icon {
+				border-color: cl(vlt);
+				color: cl(vlt);
 			}
 		}
 	}
 
-	&--ohra {
-		--text-color: #fff;
-		.button__icon {
-			border-color: cl(ohra);
-			background: rgba(93, 98, 91, 0.1);
+	&--blue {
+		.button__text {
+			color: cl(whte);
+			background-color: cl(drkBlu, .2);
+		}
+
+		&:hover {
+			.button__text {
+				color: cl(whte);
+				background-color: cl(drkBlu, .5);
+			}
+		}
+	}
+}
+
+.button-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(6px);
+	background-color: rgba(93, 98, 91, 0.1);
+	transition: 0.3s all ease;
+	border: 1px solid transparent;
+
+	svg {
+		transition: 0.3s all ease;
+		width: 100%;
+		height: 100%;
+	}
+
+	&--rounded {
+		border-radius: 50%;
+	}
+
+	&--l {
+		padding: rem(10);
+		width: rem(48);
+		height: rem(48);
+
+		@media (max-width: $tablet) {
+			width: rem(40);
+			height: rem(40);
 		}
 	}
 
-	&--vlt {
-		--text-color: #fff;
+	&--m {
+		padding: rem(10);
+		width: rem(40);
+		height: rem(40);
+	}
 
-		.button__text {
-			background-color: cl(vlt);
+	&--s {
+		width: rem(32);
+		height: rem(32);
+		padding: rem(7);
+	}
+
+	&--green {
+		border-color: transparent;
+		background-color: cl(grn, 0.1);
+		color: cl(grn);
+
+		&:hover {
+			background-color: cl(grn, 0.3);
 		}
+	}
 
-		.button__icon {
-			border-color: cl(vlt);
-			background-color: cl(vlt, 0.1);
+	&--ohra {
+		border-color: cl(ohra);
+		background-color: cl(grn, 0.1);
+		color: cl(whte);
+
+		&:hover {
+			background-color: cl(ohra, 0.3);
+		}
+	}
+
+	&--blue {
+		border-color: transparent;
+		background-color: cl(drkBlu, 0.2);
+		color: cl(whte);
+
+		&:hover {
+			background-color: cl(drkBlu, 0.5);
+		}
+	}
+
+	&--white {
+		background-color: cl(milk, 0.1);
+		color: cl(whte);
+
+		&:hover {
+			background-color: cl(milk);
+			color: cl(drkBlu);
 		}
 	}
 }

@@ -30,7 +30,7 @@
 	<meta name="msapplication-TileColor" content="#272727">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#C2AB81">
-	<link rel="stylesheet" href="css/style.min.css?_v=20260119004821">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260121051513">
 	<script>
 		var baseUrl = "./js/";
 	</script>
@@ -82,22 +82,20 @@
 					<div class="header__col header__col--right">
 						<div class="header__ui">
 							<div class="header__ui-btns">
-								<a href="tel:+79876543210" class="header__button button button--s button--blue">
-									<div class="button__text">
+								<a href="tel:+79876543210" class="header__button header__button--phone button button--s button--blue">
+									<span class="button__text">
 										+7 (987) 654-32-10
-									</div>
-								</a>
-								<a href="#" class="header__button button button--s">
-									<div class="button__text">
-										Оставить заявку
-									</div>
-								</a>
-							</div>
-							<button class="header__burger button button--s">
-								<span class="button__icon">
-									<span class="icon-menu">
-										<span></span><span></span><span></span>
 									</span>
+								</a>
+								<button data-popup="#callback-modal" class="header__button header__button--call button button--ohra button--s">
+									<span class="button__text">
+										Оставить заявку
+									</span>
+								</button>
+							</div>
+							<button class="header__burger button-icon button-icon--ohra button-icon--s">
+								<span class="icon-menu">
+									<span></span><span></span><span></span>
 								</span>
 							</button>
 						</div>
@@ -120,13 +118,16 @@
 						<li style="margin-bottom: 10px">
 							<a href="politics.html">Политика конфиденциальности</a>
 						</li>
+						<li style="margin-bottom: 10px">
+							<a href="ui.html">UI</a>
+						</li>
 					</ol>
-					<!-- <h2 class="index-page__title _title">Модальные окна</h2>
-          <ol style="list-style-position: inside">
-            <li style="margin-bottom: 10px">
-              <a href="popup-callback.html" data-popup="#callback-modal">Оставить заявку</a>
-            </li>
-          </ol> -->
+					<h2 class="index-page__title _title">Модальные окна</h2>
+					<ol style="list-style-position: inside">
+						<li style="margin-bottom: 10px">
+							<a data-popup="#callback-modal">Оставить заявку</a>
+						</li>
+					</ol>
 				</div>
 			</section>
 		</main>
@@ -213,8 +214,85 @@
 				</div>
 			</div>
 		</div>
+		<div id="callback-modal" aria-hidden="true" class="popup">
+			<div class="popup__wrapper">
+				<div class="popup__content">
+					<div class="modal-call">
+						<div class="modal-call__left">
+							<div class="modal-call__img">
+								<picture>
+									<source media="(max-width: 639px)" srcset="img/modals/img-mob.jpg">
+									<source media="(max-width: 1199px)" srcset="img/modals/img-tablet.jpg">
+									<img src="img/modals/img.jpg" alt="Описание">
+								</picture>
+								<div class="modal-call__img-icon">
+									<svg>
+										<use xlink:href='img/icons/icons.svg#icon-star'></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="modal-call__right">
+							<div class="modal-call__top">
+								<div class="modal-call__title h2-s">
+									Остались вопросы?
+								</div>
+								<div class="modal-call__description text-s">
+									Оставьте заявку и наши специалисты свяжутся с вами и предоставят всю необходимую информацию
+								</div>
+							</div>
+							<form action="#" class="modal-call__form">
+								<div class="input input--sm">
+									<label>Как к вам обращаться?</label>
+									<input type="text" name="name" placeholder="Иванов Иван" required>
+								</div>
+								<div class="input input--sm">
+									<label>Телефон</label>
+									<input type="tel" name="phone" placeholder="+7 (" data-inputmask="'mask': '+7 (999) 999 99-99'" required>
+								</div>
+								<div class="input input--sm">
+									<label>Ваш email</label>
+									<input type="email" name="phone" placeholder="example@mail.ru" required>
+								</div>
+								<div class="modal-call__form-checkboxes">
+									<div class="checkbox">
+										<input type="checkbox" id="politicsCallback" class="checkbox__input">
+										<label class="checkbox__label" for="politicsCallback"></label>
+										<div class="checkbox__text">
+											Я согласен с <a href="./politics.html">политикой конфиденциальности</a>
+										</div>
+									</div>
+									<div class="checkbox">
+										<input type="checkbox" id="personal" class="checkbox__input">
+										<label class="checkbox__label" for="personal"></label>
+										<div class="checkbox__text">
+											Я согласен на обработку персональных данных
+										</div>
+									</div>
+								</div>
+								<button class="button button--ohra button--m">
+									<span class="button__text">
+										Отправить заявку
+									</span>
+									<span class="button__icon">
+										<svg>
+											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+										</svg>
+									</span>
+								</button>
+							</form>
+						</div>
+					</div>
+					<button data-close type="button" class="popup__close button-icon button-icon--ohra button-icon--m button-icon--rounded">
+						<svg>
+							<use xlink:href='img/icons/icons.svg#icon-close'></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<script src="js/app.min.js?_v=20260119004821"></script>
+	<script src="js/app.min.js?_v=20260121051513"></script>
 </body>
 
 </html>

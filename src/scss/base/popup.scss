@@ -30,6 +30,8 @@ body::after {
 	visibility: visible;
 	overflow: auto;
 	pointer-events: auto;
+	backdrop-filter: blur(8px);
+	background-color: cl(drkBlu, .5);
 }
 .popup_show .popup__content {
 	visibility: visible;
@@ -50,12 +52,53 @@ body::after {
 	visibility: hidden;
 	transform: scale(0);
 	transition: transform 0.3s ease 0s;
-	background-color: #eee;
-	padding: 20px;
-	width: 100%;
-	max-width: 900px;
-	border-radius: 20px;
+	position: relative;
 	.lock & {
 		visibility: visible;
+	}
+}
+
+.popup__close {
+	position: absolute;
+	top: 0;
+	right: rem(-60);
+}
+
+@media (max-width:$pc){
+
+	.popup {
+		padding-top: rem(24);
+		padding-bottom: rem(24);
+	}
+
+	.popup__content {
+		padding-top: rem(64);
+	}
+
+	.popup__close {
+		top: rem(0);
+		right: 0;
+	}
+}
+
+@media (max-width:$tablet){
+	.popup {
+		padding: 0;
+	}
+
+	.popup__content {
+		padding: 0;
+	}
+
+	.popup__close {
+		top: rem(24);
+		right: rem(24);
+	}
+}
+
+@media (max-width:$mobile){
+	.popup__close {
+		top: rem(16);
+		right: rem(16);
 	}
 }
