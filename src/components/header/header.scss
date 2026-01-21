@@ -142,9 +142,7 @@
         }
 
         &__button {
-            transition: none !important;
-            opacity: 0;
-            visibility: hidden;
+     
         }
 
         &__burger {
@@ -172,10 +170,13 @@
             margin-top: rem(20);
         }
 
-        &__button {
+        &__button {       
+            transition: none !important;
+            opacity: 0;
+            visibility: hidden;
             width: 100%;
             max-width: rem(240);
-            text-align: center;
+            text-align: center;       
             .button__text {
                 width: 100%;
                 font-size: rem(16);

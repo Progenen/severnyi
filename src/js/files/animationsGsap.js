@@ -152,16 +152,15 @@ export function fadeOutTextBannerAnimation() {
     gsap.fromTo(
       ".text-banner__icon",
       {
-        opacity: 0,
         rotation: 0,
       },
       {
-        opacity: 1,
         rotation: 360,
+        ease: "none",
         scrollTrigger: {
           trigger: ".text-banner",
           start: "top bottom",
-          end: "center center",
+          end: "bottom top", // Крутится пока блок в области видимости
           scrub: 1,
         },
       },

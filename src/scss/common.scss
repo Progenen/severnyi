@@ -216,7 +216,7 @@ p + p {
 .card {
     &:hover {
         .card-arrow__wrapper {
-            transform: translateX(calc(-50% - rem(14)));
+            transform: translateX(calc(50% + rem(14)));
         }
     }
 }
@@ -232,7 +232,7 @@ p + p {
         gap: rem(18);
         width: min-content;
         position: absolute;
-        left: 0;
+        right: 0;
         top: 0;
         transition: transform 0.4s ease;
 

@@ -49,6 +49,9 @@ class Popup {
     };
     this.youTubeCode;
     this.isOpen = false;
+    // ✅ Добавляем Set для отслеживания динамических модалок
+    this.dynamicModals = new Set();
+    
     // Поточне вікно
     this.targetOpen = {
       selector: false,
@@ -72,7 +75,7 @@ class Popup {
 
     this.lastFocusEl = false;
     this._focusEl = ["a[href]", 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', "button:not([disabled]):not([aria-hidden])", "select:not([disabled]):not([aria-hidden])", "textarea:not([disabled]):not([aria-hidden])", "area[href]", "iframe", "object", "embed", "[contenteditable]", '[tabindex]:not([tabindex^="-"])'];
-    //this.options = Object.assign(config, options);
+    
     this.options = {
       ...config,
       ...options,
@@ -92,12 +95,14 @@ class Popup {
     this.bodyLock = false;
     this.options.init ? this.initPopups() : null;
   }
+  
   initPopups() {
     this.popupLogging(`Проснулся`);
     this.eventsPopup();
   }
+  
   async getModal(link, selector) {
-    console.log(link);
+    console.log('Загружаю модалку:', link);
     api.load({
       url: link,
       format: "text",
@@ -107,14 +112,17 @@ class Popup {
         const el = response.querySelector(selector);
         document.body.appendChild(el);
 
+        // ✅ Помечаем как динамическую
+        this.dynamicModals.add(selector);
+
         flsForms.formFieldsInit({
           viewPass: false,
           autoHeight: false,
         });
-        this.open();
       },
     });
   }
+  
   eventsPopup() {
     document.addEventListener(
       "click",
@@ -122,20 +130,34 @@ class Popup {
         const buttonOpen = e.target.closest(`[${this.options.attributeOpenButton}]`);
         if (buttonOpen) {
           e.preventDefault();
-          this._dataValue = buttonOpen.getAttribute(this.options.attributeOpenButton) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
+          this._dataValue = buttonOpen.getAttribute(this.options.attributeOpenButton) 
+            ? buttonOpen.getAttribute(this.options.attributeOpenButton) 
+            : "error";
 
-          await this.getModal(buttonOpen.href, this._dataValue);
           if (this._dataValue !== "error") {
             if (!this.isOpen) this.lastFocusEl = buttonOpen;
             this.targetOpen.selector = `${this._dataValue}`;
             this._selectorOpen = true;
-            this.open();
+            
+            // ✅ Проверяем наличие модалки в DOM
+            const existingModal = document.querySelector(this._dataValue);
+            
+            if (existingModal) {
+              // Модалка уже существует
+              this.open();
+            } else {
+              // Загружаем динамическую модалку
+              await this.getModal(buttonOpen.href, this._dataValue);
+              this.open();
+            }
 
             return;
-          } else this.popupLogging(`Йой, не заповнено атрибут у ${buttonOpen.classList}`);
-
+          } else {
+            this.popupLogging(`Йой, не заповнено атрибут у ${buttonOpen.classList}`);
+          }
           return;
         }
+        
         // Закриття на порожньому місці (popup__wrapper) та кнопки закриття (popup__close) для закриття
         const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
         if (buttonClose || (!e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen)) {
@@ -145,6 +167,7 @@ class Popup {
         }
       }.bind(this)
     );
+    
     // Закриття ESC
     document.addEventListener(
       "keydown",
@@ -184,6 +207,7 @@ class Popup {
       );
     }
   }
+  
   open(selectorValue) {
     if (bodyLockStatus) {
       this.bodyLock = document.documentElement.classList.contains("lock") && !this.isOpen ? true : false;
@@ -249,6 +273,7 @@ class Popup {
       } else this.popupLogging(`Ей, такого попа нет. Проверьте правильность ввода.`);
     }
   }
+  
   close(selectorValue, timer = 800) {
     if (selectorValue && typeof selectorValue === "string" && selectorValue.trim() !== "") {
       this.previousOpen.selector = selectorValue;
@@ -256,6 +281,7 @@ class Popup {
     if (!this.isOpen || !bodyLockStatus) {
       return;
     }
+    
     // До закриття
     this.options.on.beforeClose(this);
     // Створюємо свою подію перед закриттям попапа
@@ -280,6 +306,7 @@ class Popup {
       this.lastClosed.selector = this.previousOpen.selector;
       this.lastClosed.element = this.previousOpen.element;
     }
+    
     this.options.on.afterClose(this);
     document.dispatchEvent(
       new CustomEvent("afterPopupClose", {
@@ -294,44 +321,52 @@ class Popup {
     }, 50);
 
     console.log(this.previousOpen);
-    setTimeout(() => {
-      this.previousOpen.element.remove();
-    }, timer);
+    
+    // ✅ Удаляем только динамические модалки
+    if (this.dynamicModals.has(this.previousOpen.selector)) {
+      setTimeout(() => {
+        this.previousOpen.element.remove();
+        this.dynamicModals.delete(this.previousOpen.selector);
+        this.popupLogging(`Удалил динамическую модалку: ${this.previousOpen.selector}`);
+      }, timer);
+    }
 
     this.popupLogging(`Закрыл попап`);
   }
+  
   // Отримання хешу
   _getHash() {
     if (this.options.hashSettings.location) {
       this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
     }
   }
+  
   async _openToHash() {
     const button = document.querySelector(`[${this.options.attributeOpenButton}="${window.location.hash}"]`);
 
     if (button) {
-      await this.getModal(button.href, button.getAttribute(this.options.attributeOpenButton)).then(() => {
+      const existingModal = document.querySelector(window.location.hash);
+      
+      if (existingModal) {
+        // Статическая модалка
+        this.open(window.location.hash);
+      } else {
+        // Динамическая модалка
+        await this.getModal(button.href, button.getAttribute(this.options.attributeOpenButton));
         this.open(button.getAttribute(this.options.attributeOpenButton));
-      });
+      }
     }
-
-    // let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
-
-    // const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
-
-    // this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ? buttons.getAttribute(this.options.youtubeAttribute) : null;
-
-    // if (buttons && classInHash) {
-    //   this.open(classInHash);
-    // }
   }
+  
   // Встановлення хеша
   _setHash() {
     history.pushState("", "", this.hash);
   }
+  
   _removeHash() {
     history.pushState("", "", window.location.href.split("#")[0]);
   }
+  
   _focusCatch(e) {
     const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
     const focusArray = Array.prototype.slice.call(focusable);
@@ -346,6 +381,7 @@ class Popup {
       e.preventDefault();
     }
   }
+  
   _focusTrap() {
     const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
     if (!this.isOpen && this.lastFocusEl) {
@@ -354,10 +390,12 @@ class Popup {
       focusable[0].focus();
     }
   }
+  
   // Функція виведення в консоль
   popupLogging(message) {
     this.options.logging ? FLS(`[Попапос]: ${message}`) : null;
   }
 }
+
 // Запускаємо та додаємо в об'єкт модулів
 flsModules.popup = new Popup({});
