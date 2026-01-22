@@ -1,6 +1,8 @@
 .promo-slider {
     padding-top: rem(100);
     padding-bottom: rem(100);
+    overflow: hidden;
+    position: relative;
 
     &__description {
         max-width: rem(550);

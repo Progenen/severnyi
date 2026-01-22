@@ -1,6 +1,8 @@
 .steps-gallery {
     padding-top: rem(100);
     padding-bottom: rem(100);
+    overflow: hidden;
+    position: relative;
 
     &__top {
         display: flex;
@@ -41,7 +43,7 @@
         width: rem(392);
     }
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         padding-top: rem(64);
         padding-bottom: rem(64);
 
@@ -59,7 +61,7 @@
         }
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
         padding-top: rem(40);
         padding-bottom: rem(40);
 
@@ -81,7 +83,7 @@
         }
     }
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
         padding-top: rem(32);
         padding-bottom: rem(32);
 
@@ -90,7 +92,8 @@
             align-items: flex-start;
         }
 
-        &__title, &__description {
+        &__title,
+        &__description {
             max-width: 100%;
         }
 
@@ -105,5 +108,4 @@
             width: rem(294);
         }
     }
-
 }

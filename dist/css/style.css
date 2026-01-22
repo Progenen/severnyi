@@ -2931,6 +2931,8 @@ p+p {
 .promo-slider {
   padding-top: 6.25rem;
   padding-bottom: 6.25rem;
+  overflow: hidden;
+  position: relative;
 }
 
 .promo-slider__description {
@@ -3091,6 +3093,8 @@ p+p {
 .steps-gallery {
   padding-top: 6.25rem;
   padding-bottom: 6.25rem;
+  overflow: hidden;
+  position: relative;
 }
 
 .steps-gallery__top {
@@ -3423,6 +3427,19 @@ p+p {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 50%;
           flex: 0 1 50%;
+}
+
+.modal-call__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .modal-call__img {

@@ -30,7 +30,7 @@
 	<meta name="msapplication-TileColor" content="#272727">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#C2AB81">
-	<link rel="stylesheet" href="css/style.min.css?_v=20260121220935">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260122140957">
 	<script>
 		var baseUrl = "./js/";
 	</script>
@@ -1232,7 +1232,7 @@
 							<div class="dual-image-section__title h2">
 								кладовые
 							</div>
-							<button data-popup="#callback-modal" data-popup-static class="dual-image-section__btn button button--xl button--ohra">
+							<button data-gallery="gallery-schema" class="dual-image-section__btn button button--xl button--ohra">
 								<span class="button__text">
 									Посмотреть схему
 								</span>
@@ -1250,7 +1250,7 @@
 							<div class="dual-image-section__title h2">
 								теплый паркинг
 							</div>
-							<button data-popup="#callback-modal" data-popup-static class="dual-image-section__btn button button--xl button--ohra">
+							<button data-gallery="gallery-schema" class="dual-image-section__btn button button--xl button--ohra">
 								<span class="button__text">
 									Посмотреть схему
 								</span>
@@ -1262,6 +1262,13 @@
 							</button>
 						</div>
 					</div>
+				</div>
+				<div class="gallery-data" data-gallery-id="gallery-schema">
+					<div data-gallery-item data-src="img/pages/home/dual-image-section/img1.jpg" data-thumb="img/pages/home/dual-image-section/img1.jpg"></div>
+					<div data-gallery-item data-src="img/pages/home/dual-image-section/img1.jpg" data-thumb="img/pages/home/dual-image-section/img1.jpg"></div>
+					<div data-gallery-item data-src="img/pages/home/dual-image-section/img1.jpg" data-thumb="img/pages/home/dual-image-section/img1.jpg"></div>
+					<div data-gallery-item data-src="img/pages/home/dual-image-section/img1.jpg" data-thumb="img/pages/home/dual-image-section/img1.jpg"></div>
+					<div data-gallery-item data-src="img/pages/home/dual-image-section/img1.jpg" data-thumb="img/pages/home/dual-image-section/img1.jpg"></div>
 				</div>
 			</div>
 			<section class="steps-gallery">
@@ -1551,7 +1558,7 @@
 								</p>
 							</div>
 							<div class="about__right-bottom">
-								<a href="#" class="about__btn button button--xl button--gray">
+								<button data-popup="#callback-modal" data-popup-static class="about__btn button button--xl button--gray">
 									<span class="button__text">
 										Узнать подробнее
 									</span>
@@ -1560,7 +1567,7 @@
 											<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
 										</svg>
 									</span>
-								</a>
+								</button>
 								<div class="about__logo-icon">
 									<img src="img/icons/logo-sys-icon.svg" alt="">
 								</div>
@@ -1889,7 +1896,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20260121220935"></script>
+	<script src="js/app.min.js?_v=20260122140957"></script>
 </body>
 
 </html>
