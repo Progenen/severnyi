@@ -8,6 +8,14 @@
         margin-top: rem(40);
         line-height: 150%;
 
+        a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
         > * {
             margin-bottom: rem(24);
         }
