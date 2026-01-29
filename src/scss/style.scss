@@ -66,7 +66,7 @@ $tr: ease-out; // Тип на анимации на transition
 body {
   background-color: cl(milk);
   color: cl(grn);
-  .lock & {
+  &.lock {
     overflow: hidden;
     touch-action: none;
     overscroll-behavior: none;

@@ -120,6 +120,8 @@
             background: rgba(93, 98, 91, 0.1);
             backdrop-filter: blur(6px);
             color: cl(whte);
+            overflow: auto;
+            padding-bottom: rem(20);
 
             transform: translateY(-100%);
             pointer-events: none;

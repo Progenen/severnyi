@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         menuTl = null;
       }
       if (isOpen) {
-        document.body.classList.remove("no-scroll", "menu-open");
+        document.body.classList.remove("lock", "menu-open");
         isOpen = false;
       }
       setDesktopStyles();
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function openMenu() {
     if (menuTl) {
       menuTl.play();
-      document.body.classList.add("no-scroll", "menu-open");
+      document.body.classList.add("lock", "menu-open");
       isOpen = true;
     }
   }
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuTl) {
       menuTl.reverse();
     }
-    document.body.classList.remove("no-scroll", "menu-open");
+    document.body.classList.remove("lock", "menu-open");
     isOpen = false;
   }
 
