@@ -1,0 +1,75 @@
+.cookies-banner {
+    position: fixed;
+    padding: rem(20);
+    border-radius: 12px;
+    background: cl(whte);
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+
+    right: rem(24);
+    bottom: rem(24);
+
+    max-width: rem(268);
+    width: 100%;
+
+    visibility: hidden;
+    transform: translateX(150%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+
+    &.show {
+        visibility: visible;
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    &__text {
+        font-size: rem(12);
+        font-weight: 500;
+        line-height: 160%;
+    }
+
+    &__btn {
+        margin-top: rem(24);
+        max-width: 100%;
+        width: 100%;
+
+        .button__text {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: $pc) {
+        padding: rem(20);
+
+        bottom: rem(20);
+        right: rem(20);
+    }
+
+    @media (max-width: $tablet) {
+        &__text {
+            line-height: 150%;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        right: 0;
+        bottom: 0;
+        max-width: 100%;
+        transform: translateY(-200%);
+        transform: translateX(0);
+        border-radius: 0;
+
+        &.show {
+            transform: translateY(0);
+        }
+
+        &__btn {
+            margin-top: rem(20);
+            .button__text {
+                padding-top: rem(8);
+                padding-bottom: rem(8);
+                font-size: rem(16);
+            }
+        }
+    }
+}

@@ -243,3 +243,13 @@ p + p {
         }
     }
 }
+
+.link {
+    display: inline;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+        text-decoration: none;
+    }
+}

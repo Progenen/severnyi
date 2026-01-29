@@ -15324,6 +15324,8 @@
             let isMobile = false;
             let isOpen = false;
             let menuTl = null;
+            let lastScroll = 0;
+            let headerShow = false;
             const MOBILE_BREAKPOINT = 1199;
             const UI_BUTTONS_BREAKPOINT = 639;
             function createMenuAnimation() {
@@ -15436,6 +15438,29 @@
                 if (firstSection && !document.querySelector(".header--alt")) firstSection.style.paddingTop = `${headerHeight}px`;
                 if (window.innerWidth <= MOBILE_BREAKPOINT) headerMenu.style.paddingTop = `${headerHeight}px`; else headerMenu.style.paddingTop = "";
             }
+            function headerFloat() {
+                window.addEventListener("scroll", event => {
+                    let scrollY = window.scrollY;
+                    if (scrollY < header.clientHeight) {
+                        header.classList.remove("header--fixed");
+                        header.classList.remove("header--fixed-show");
+                        header.classList.remove("header--alt");
+                        headerShow = false;
+                        return;
+                    } else {
+                        header.classList.add("header--fixed");
+                        header.classList.add("header--alt");
+                    }
+                    if (!headerShow && lastScroll < scrollY) {
+                        headerShow = true;
+                        header.classList.add("header--fixed-show");
+                    } else if (headerShow && lastScroll > scrollY) {
+                        headerShow = false;
+                        header.classList.remove("header--fixed-show");
+                    }
+                    lastScroll = scrollY;
+                });
+            }
             function handleResize() {
                 moveUiButtons();
                 handleMenuAnimation();
@@ -15446,6 +15471,7 @@
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(handleResize, 100);
             }
+            headerFloat();
             burger.addEventListener("click", toggleMenu);
             window.addEventListener("resize", debouncedResize);
             handleResize();
@@ -15480,6 +15506,56 @@
                         if (block.getAttribute("data-tab-plane") === tabIndex) block.classList.add("apartment-planes__info-item--active"); else block.classList.remove("apartment-planes__info-item--active");
                     });
                 });
+            });
+        });
+        class CookieBanner {
+            constructor(selector, storageKey = "cookies-accepted") {
+                this.banner = document.querySelector(selector);
+                this.storageKey = storageKey;
+                if (!this.banner) return;
+                this.init();
+            }
+            init() {
+                if (this.isAccepted()) return;
+                this.show();
+                this.banner.querySelectorAll("[data-accept-cookies]").forEach(btn => {
+                    console.log("btn");
+                    btn.addEventListener("click", () => this.accept());
+                });
+                this.banner.querySelectorAll("[data-decline-cookies]")?.forEach(btn => {
+                    btn.addEventListener("click", () => this.decline());
+                });
+            }
+            show() {
+                setTimeout(() => {
+                    this.banner.classList.add("show");
+                }, 1e3);
+            }
+            hide() {
+                this.banner.classList.remove("show");
+            }
+            accept() {
+                console.log("click");
+                localStorage.setItem(this.storageKey, "true");
+                this.hide();
+            }
+            decline() {
+                localStorage.setItem(this.storageKey, "false");
+                this.hide();
+            }
+            isAccepted() {
+                return localStorage.getItem(this.storageKey) !== null;
+            }
+            reset() {
+                localStorage.removeItem(this.storageKey);
+                this.show();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const cookieBanner = new CookieBanner(".cookies-banner");
+            console.log(cookieBanner);
+            document.querySelector("[data-reset-cookies]")?.addEventListener("click", () => {
+                cookieBanner.reset();
             });
         });
         window["FLS"] = true;

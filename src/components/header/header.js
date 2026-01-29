@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let isMobile = false;
   let isOpen = false;
   let menuTl = null;
+  let lastScroll = 0;
+  let headerShow = false;
 
   const MOBILE_BREAKPOINT = 1199;
   const UI_BUTTONS_BREAKPOINT = 639;
@@ -44,18 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
       tl.from(
         menuListItems,
         { y: 24, autoAlpha: 0, duration: 0.4, stagger: 0.08 },
-        "-=0.3"
+        "-=0.3",
       );
     }
 
     const menuButtons = menuUi.querySelectorAll(".header__button");
-    
+
     if (menuButtons.length) {
       tl.fromTo(
         menuButtons,
         { y: 16, scale: 0.95, autoAlpha: 0 },
         { y: 0, scale: 1, autoAlpha: 1, duration: 0.35, stagger: 0.1 },
-        "-=0.2"
+        "-=0.2",
       );
     }
 
@@ -65,21 +67,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function resetButtonStyles() {
     const allButtons = document.querySelectorAll(".header__button");
     if (allButtons.length) {
-      gsap.set(allButtons, { 
-        clearProps: "all"
+      gsap.set(allButtons, {
+        clearProps: "all",
       });
     }
   }
 
   function setDesktopStyles() {
-    gsap.set(headerMenu, { 
-      clearProps: "all"
+    gsap.set(headerMenu, {
+      clearProps: "all",
     });
-    
-    gsap.set(menuListItems, { 
-      clearProps: "all"
+
+    gsap.set(menuListItems, {
+      clearProps: "all",
     });
-    
+
     resetButtonStyles();
   }
 
@@ -110,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isMobile) {
         menuUi.appendChild(uiBtns);
         isMobile = true;
-        
+
         if (needsRecreate && currentWidth <= MOBILE_BREAKPOINT) {
           menuTl.kill();
           menuTl = createMenuAnimation();
@@ -120,9 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isMobile) {
         uiBtnsParent.insertBefore(uiBtns, burger);
         isMobile = false;
-        
+
         resetButtonStyles();
-        
+
         if (needsRecreate && currentWidth <= MOBILE_BREAKPOINT) {
           menuTl.kill();
           menuTl = createMenuAnimation();
@@ -155,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeMenu() {
     if (!isOpen) return;
-    
+
     if (menuTl) {
       menuTl.reverse();
     }
@@ -173,8 +175,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
       headerMenu.style.paddingTop = `${headerHeight}px`;
     } else {
-      headerMenu.style.paddingTop = '';
+      headerMenu.style.paddingTop = "";
     }
+  }
+
+  function headerFloat() {
+    window.addEventListener("scroll", (event) => {
+      let scrollY = window.scrollY;
+
+      if (scrollY < header.clientHeight) {
+        header.classList.remove("header--fixed");
+        header.classList.remove("header--fixed-show");
+        header.classList.remove("header--alt");
+        headerShow = false;
+        return;
+      } else {
+        header.classList.add("header--fixed");
+        header.classList.add("header--alt");
+      }
+
+      if (!headerShow && lastScroll < scrollY) {
+        headerShow = true;
+        header.classList.add("header--fixed-show");
+      } else if (headerShow && lastScroll > scrollY) {
+        headerShow = false;
+        header.classList.remove("header--fixed-show");
+      }
+
+      lastScroll = scrollY;
+    });
   }
 
   function handleResize() {
@@ -189,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimer = setTimeout(handleResize, 100);
   }
 
+  headerFloat();
   burger.addEventListener("click", toggleMenu);
   window.addEventListener("resize", debouncedResize);
 
