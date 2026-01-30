@@ -3,7 +3,7 @@
     font-size: rem(16);
     line-height: 150%;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(14);
         line-height: 157%;
     }
@@ -13,7 +13,7 @@
     font-size: rem(18);
     line-height: 150%;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(14);
         line-height: 142%;
     }
@@ -48,12 +48,12 @@
     font-weight: 600;
     line-height: 160%;
 
-    @media (max-width:$pc){
-        font-size: rem(16); 
+    @media (max-width: $pc) {
+        font-size: rem(16);
         line-height: 150%;
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
         font-size: rem(12);
         line-height: 166%;
     }
@@ -65,15 +65,15 @@
     line-height: 100%;
     text-transform: lowercase;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(40);
     }
-    
-    @media (max-width:$tablet){
+
+    @media (max-width: $tablet) {
         font-size: rem(32);
     }
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
         font-size: rem(24);
         line-height: 133.333%;
     }
@@ -101,17 +101,17 @@
     font-size: rem(32);
     line-height: 125%;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(24);
         line-height: 133.333%;
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
         font-size: rem(22);
         line-height: 127%;
     }
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
         font-size: rem(20);
         line-height: 140%;
     }
@@ -122,7 +122,7 @@
     font-size: rem(44);
     line-height: 110%;
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
         font-size: rem(24);
         line-height: 133.333%;
     }
@@ -133,7 +133,7 @@
     font-family: Benzin;
     line-height: 128%;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(24);
         line-height: 133.333%;
     }
@@ -144,12 +144,12 @@
     line-height: 133.333%;
     font-family: Benzin;
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         font-size: rem(20);
         line-height: 140%;
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
         font-size: rem(16);
         line-height: 150%;
     }
@@ -183,17 +183,17 @@ p + p {
     padding-top: rem(100);
     padding-bottom: rem(100);
 
-    @media (max-width:$pc){
+    @media (max-width: $pc) {
         padding-top: rem(64);
         padding-bottom: rem(64);
     }
 
-    @media (max-width:$tablet){
+    @media (max-width: $tablet) {
         padding-top: rem(40);
         padding-bottom: rem(40);
     }
 
-    @media (max-width:$mobile){
+    @media (max-width: $mobile) {
         padding-top: rem(32);
         padding-bottom: rem(32);
     }
@@ -251,5 +251,16 @@ p + p {
 
     &:hover {
         text-decoration: none;
+    }
+}
+
+.slider-fade {
+    &.swiper-slide {
+        background-color: cl(milk);
+        opacity: 0 !important;
+
+        &-active {
+            opacity: 1 !important;
+        }
     }
 }

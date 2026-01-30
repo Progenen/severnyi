@@ -56,7 +56,7 @@ window.addEventListener("load", function (e) {
         slidesPerView: 1,
         effect: "fade",
         fadeEffect: { crossFade: true },
-        speed: 700,
+        speed: 300, // Уменьши скорость
         modules: [EffectFade, Pagination, Navigation, Controller],
         pagination: {
           el: sliderSection.querySelector(".slider-controls__pagination"),
@@ -98,7 +98,7 @@ window.addEventListener("load", function (e) {
         {
           slidesPerView: 1,
           effect: "fade",
-          fadeEffect: { crossFade: true },
+          fadeEffect: { crossFade: false },
           speed: 300,
           modules: [Controller, EffectFade],
         },
@@ -109,7 +109,7 @@ window.addEventListener("load", function (e) {
         {
           slidesPerView: 1,
           effect: "fade",
-          fadeEffect: { crossFade: true },
+          fadeEffect: { crossFade: false },
           speed: 300,
           modules: [EffectFade, Navigation, Pagination, Controller],
           pagination: {
@@ -170,7 +170,7 @@ window.addEventListener("load", function (e) {
       {
         slidesPerView: 1,
         effect: "fade",
-        fadeEffect: { crossFade: true },
+        fadeEffect: { crossFade: false },
         speed: 300,
         modules: [EffectFade, Pagination, Navigation],
         pagination: {

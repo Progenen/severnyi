@@ -14,17 +14,12 @@
         cursor: pointer;
     }
 
-    &:hover &__arrow {
-        transform: translateX(5px);
-    }
-
     &--lg {
-        padding: rem(16);
+        padding: rem(20) rem(30);
         height: rem(392);
     }
 
     &--lg &__top {
-        align-items: flex-start;
     }
 
     &__top {
@@ -126,6 +121,7 @@
         height: rem(195);
 
         &--lg {
+            padding: rem(16);
             height: rem(328);
         }
 

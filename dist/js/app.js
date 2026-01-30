@@ -14084,7 +14084,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 700,
+                    speed: 300,
                     modules: [ EffectFade, Pagination, Navigation, Controller ],
                     pagination: {
                         el: sliderSection.querySelector(".slider-controls__pagination"),
@@ -14116,7 +14116,7 @@
                     slidesPerView: 1,
                     effect: "fade",
                     fadeEffect: {
-                        crossFade: true
+                        crossFade: false
                     },
                     speed: 300,
                     modules: [ Controller, EffectFade ]
@@ -14125,7 +14125,7 @@
                     slidesPerView: 1,
                     effect: "fade",
                     fadeEffect: {
-                        crossFade: true
+                        crossFade: false
                     },
                     speed: 300,
                     modules: [ EffectFade, Navigation, Pagination, Controller ],
@@ -14166,7 +14166,7 @@
                     slidesPerView: 1,
                     effect: "fade",
                     fadeEffect: {
-                        crossFade: true
+                        crossFade: false
                     },
                     speed: 300,
                     modules: [ EffectFade, Pagination, Navigation ],
