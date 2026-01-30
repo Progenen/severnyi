@@ -14084,7 +14084,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 1e3,
+                    speed: 700,
                     modules: [ EffectFade, Pagination, Navigation, Controller ],
                     pagination: {
                         el: sliderSection.querySelector(".slider-controls__pagination"),
@@ -14104,7 +14104,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 1e3,
+                    speed: 300,
                     modules: [ EffectFade, Controller ]
                 });
                 textSlider.controller.control = imgSlider;
@@ -14118,7 +14118,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 1e3,
+                    speed: 300,
                     modules: [ Controller, EffectFade ]
                 });
                 const fullscreenSliderContent = new Swiper(slider.querySelector(".fullscreen-slider__content"), {
@@ -14127,7 +14127,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 1e3,
+                    speed: 300,
                     modules: [ EffectFade, Navigation, Pagination, Controller ],
                     pagination: {
                         el: slider.querySelector(".slider-controls__pagination"),
@@ -14168,7 +14168,7 @@
                     fadeEffect: {
                         crossFade: true
                     },
-                    speed: 1e3,
+                    speed: 300,
                     modules: [ EffectFade, Pagination, Navigation ],
                     pagination: {
                         el: sliderSection.querySelector(".slider-controls__pagination"),

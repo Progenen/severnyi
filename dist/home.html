@@ -22,7 +22,7 @@
 	<meta name="msapplication-TileColor" content="#272727">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#C2AB81">
-	<link rel="stylesheet" href="css/style.min.css?_v=20260129183512">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260130124346">
 	<script>
 		var baseUrl = "./js/";
 	</script>
@@ -396,12 +396,9 @@
 									</div>
 									<div class="text-map__map-point-logo">
 										<div class="text-map__map-point-logo__icon">
-											<div class="text-map__map-point-logo__icon-wave"></div>
-											<div class="text-map__map-point-logo__icon-inner">
-												<svg>
-													<use xlink:href='img/icons/icons.svg#icon-star'></use>
-												</svg>
-											</div>
+											<svg>
+												<use xlink:href='img/icons/icons.svg#icon-star'></use>
+											</svg>
 										</div>
 										<div class="text-map__map-point-logo__logo">
 											<svg xmlns="http://www.w3.org/2000/svg" width="94" height="19" viewBox="0 0 94 19" fill="none">
@@ -946,35 +943,9 @@
 				<div class="image-slider-section__container">
 					<div class="image-slider-section__row">
 						<div class="image-slider-section__left">
-							<div class="image-slider-section__slider">
-								<div class="image-slider-section__slider-inner">
-									<div class="swiper-wrapper">
-										<div class="image-slider-section__slider-slide swiper-slide">
-											<picture><source srcset="img/pages/home/image-slider-section/img1.webp" type="image/webp"><img src="img/pages/home/image-slider-section/img1.jpg" alt=""></picture>
-										</div>
-										<div class="image-slider-section__slider-slide swiper-slide">
-											<picture><source srcset="img/pages/home/image-slider-section/img1.webp" type="image/webp"><img src="img/pages/home/image-slider-section/img1.jpg" alt=""></picture>
-										</div>
-										<div class="image-slider-section__slider-slide swiper-slide">
-											<picture><source srcset="img/pages/home/image-slider-section/img1.webp" type="image/webp"><img src="img/pages/home/image-slider-section/img1.jpg" alt=""></picture>
-										</div>
-									</div>
-								</div>
-								<div class="image-slider-section__slider-controls slider-controls">
-									<div class="slider-controls__pagination"></div>
-									<div class="slider-controls__arrows">
-										<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--blue button-icon--l">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</button>
-										<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--blue button-icon--l">
-											<svg>
-												<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-											</svg>
-										</button>
-									</div>
-								</div>
+							<div class="image-slider-section__photo">
+								<picture><source srcset="img/pages/home/image-slider-section/img1.webp" type="image/webp"><img src="img/pages/home/image-slider-section/img1.jpg" alt=""></picture>
+
 							</div>
 						</div>
 						<div class="image-slider-section__right">
@@ -1676,19 +1647,15 @@
 						<div class="fullscreen-slider__count slider-controls__pagination slider-controls__pagination--alt">
 						</div>
 						<div class="fullscreen-slider__arrows slider-controls__arrows">
-							<button class="slider-controls__arrow slider-controls__arrow-prev button button--white button--l">
-								<span class="button__icon">
-									<svg>
-										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-									</svg>
-								</span>
+							<button class="slider-controls__arrow slider-controls__arrow-prev button-icon button-icon--whiteDrk button-icon--l">
+								<svg>
+									<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+								</svg>
 							</button>
-							<button class="slider-controls__arrow slider-controls__arrow-next button button--white button--l">
-								<span class="button__icon">
-									<svg>
-										<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
-									</svg>
-								</span>
+							<button class="slider-controls__arrow slider-controls__arrow-next button-icon button-icon--whiteDrk button-icon--l">
+								<svg>
+									<use xlink:href='img/icons/icons.svg#icon-arrow-right'></use>
+								</svg>
 							</button>
 						</div>
 					</div>
@@ -1699,7 +1666,8 @@
 					<div class="form-map__row">
 						<div class="form-map__left">
 							<div class="form-map__map">
-								<div class="map" id="map" data-key="9c9066f4-2079-4b71-b871-46dbea21ece3" data-center="[55.858806, 49.087469]" data-zoom="16" data-icon="Ссылка на иконку" data-marks='[  {    "coordinates": [55.858806, 49.087469],    "title": "ЖК Северный",    "category": "residential",    "hint": "ЖК Северный"  },  {    "coordinates": [55.860367, 49.085579],     "title": "Лицей № 26",    "category": "school",    "hint": "Лицей № 26"  },  {    "coordinates": [55.860140, 49.088188],    "title": "Детский сад № 72",    "category": "kindergarten",    "hint": "Детский сад № 72"  },  {    "coordinates": [55.858658, 49.089447],    "title": "Сквер на ул. Лукина",    "category": "park",    "hint": "Сквер на ул. Лукина"  },  {    "coordinates": [55.857950, 49.085215],    "title": "Остановка «Побежимова»",    "category": "transport",    "hint": "Остановка «Побежимова»"  },  {    "coordinates": [55.854488, 49.085571],    "title": "Метро ст. «Авиастроительная»",    "category": "metro",    "hint": "Метро ст. «Авиастроительная»"  },  {    "coordinates": [55.856873, 49.094103],    "title": "Спортивный комплекс «Триумф»",    "category": "sport",    "hint": "Спортивный комплекс «Триумф»"  },  {    "coordinates": [55.854349, 49.083764],    "title": "Казанский молодежный центр им. А. Гайдара",    "category": "culture",    "hint": "Казанский молодежный центр им. А. Гайдара"  },  {    "coordinates": [55.854289, 49.087203],    "title": "Культурно-досуговый комплекс им. В.И. Ленина",    "category": "culture",    "hint": "Культурно-досуговый комплекс им. В.И. Ленина"  },  {    "coordinates": [55.853385, 49.090253],    "title": "Парк «Крылья Советов»",    "category": "park",    "hint": "Парк «Крылья Советов»"  },  {    "coordinates": [55.850836, 49.085358],    "title": "Футбольный клуб Рубин",    "category": "sport",    "hint": "Футбольный клуб Рубин"  },  {    "coordinates": [55.847879, 49.084736],    "title": "Вкусно и Точка",    "category": "food",    "hint": "Вкусно и Точка"  },  {    "coordinates": [55.846070, 49.082724],    "title": "Гипер Лента",    "category": "shop",    "hint": "Гипер Лента"  },  {    "coordinates": [55.852066, 49.079755],    "title": "Гимназия 36",    "category": "school",    "hint": "Гимназия 36"  },  {    "coordinates": [55.857993, 49.078309],    "title": "Городская больница 12",    "category": "hospital",    "hint": "Городская больница 12"  },  {    "coordinates": [55.860680, 49.078697],    "title": "Детский сад 152",    "category": "kindergarten",    "hint": "Детский сад 152"  },  {    "coordinates": [55.862177, 49.079633],    "title": "Школа 117",    "category": "school",    "hint": "Школа 117"  },  {    "coordinates": [55.859384, 49.081167],    "title": "Педагогический колледж",    "category": "education",    "hint": "Педагогический колледж"  },  {    "coordinates": [55.862921, 49.086788],    "title": "Городская больница 11",    "category": "hospital",    "hint": "Городская больница 11"  },  {    "coordinates": [55.863221, 49.085170],    "title": "Бахетле",    "category": "shop",    "hint": "Бахетле"  },  {    "coordinates": [55.856866, 49.101401],    "title": "Сквер имени Тихомирова",    "category": "park",    "hint": "Сквер имени Тихомирова"  },  {    "coordinates": [55.856026, 49.100282],    "title": "КМПО",    "category": "transport",    "hint": "КМПО"  },  {    "coordinates": [55.851195, 49.040037],    "title": "Вертолетный завод",    "category": "transport",    "hint": "Вертолетный завод"  }]'></div>
+								<div class="map" id="map" data-key="9c9066f4-2079-4b71-b871-46dbea21ece3" data-center="[55.858806, 49.087469]" data-zoom="16" data-icon="Ссылка на иконку" data-marks='[  {    "coordinates": [55.858806, 49.087469],    "title": "ЖК Северный",    "category": "residential",    "hint": "ЖК Северный"  },  {    "coordinates": [55.860367, 49.085579],     "title": "Лицей № 26",    "category": "school",    "hint": "Лицей № 26"  },  {    "coordinates": [55.860140, 49.088188],    "title": "Детский сад № 72",    "category": "kindergarten",    "hint": "Детский сад № 72"  },  {    "coordinates": [55.858658, 49.089447],    "title": "Сквер на ул. Лукина",    "category": "park",    "hint": "Сквер на ул. Лукина"  },  {    "coordinates": [55.857950, 49.085215],    "title": "Остановка «Побежимова»",    "category": "transport",    "hint": "Остановка «Побежимова»"  },  {    "coordinates": [55.854488, 49.085571],    "title": "Метро ст. «Авиастроительная»",    "category": "metro",    "hint": "Метро ст. «Авиастроительная»"  },  {    "coordinates": [55.856873, 49.094103],    "title": "Спортивный комплекс «Триумф»",    "category": "sport",    "hint": "Спортивный комплекс «Триумф»"  },  {    "coordinates": [55.854349, 49.083764],    "title": "Казанский молодежный центр им. А. Гайдара",    "category": "culture",    "hint": "Казанский молодежный центр им. А. Гайдара"  },  {    "coordinates": [55.854289, 49.087203],    "title": "Культурно-досуговый комплекс им. В.И. Ленина",    "category": "culture",    "hint": "Культурно-досуговый комплекс им. В.И. Ленина"  },  {    "coordinates": [55.853385, 49.090253],    "title": "Парк «Крылья Советов»",    "category": "park",    "hint": "Парк «Крылья Советов»"  },  {    "coordinates": [55.850836, 49.085358],    "title": "Футбольный клуб Рубин",    "category": "sport",    "hint": "Футбольный клуб Рубин"  },  {    "coordinates": [55.847879, 49.084736],    "title": "Вкусно и Точка",    "category": "food",    "hint": "Вкусно и Точка"  },  {    "coordinates": [55.846070, 49.082724],    "title": "Гипер Лента",    "category": "shop",    "hint": "Гипер Лента"  },  {    "coordinates": [55.852066, 49.079755],    "title": "Гимназия 36",    "category": "school",    "hint": "Гимназия 36"  },  {    "coordinates": [55.857993, 49.078309],    "title": "Городская больница 12",    "category": "hospital",    "hint": "Городская больница 12"  },  {    "coordinates": [55.860680, 49.078697],    "title": "Детский сад 152",    "category": "kindergarten",    "hint": "Детский сад 152"  },  {    "coordinates": [55.862177, 49.079633],    "title": "Школа 117",    "category": "school",    "hint": "Школа 117"  },  {    "coordinates": [55.859384, 49.081167],    "title": "Педагогический колледж",    "category": "education",    "hint": "Педагогический колледж"  },  {    "coordinates": [55.862921, 49.086788],    "title": "Городская больница 11",    "category": "hospital",    "hint": "Городская больница 11"  },  {    "coordinates": [55.863221, 49.085170],    "title": "Бахетле",    "category": "shop",    "hint": "Бахетле"  },  {    "coordinates": [55.856866, 49.101401],    "title": "Сквер имени Тихомирова",    "category": "park",    "hint": "Сквер имени Тихомирова"  },  {    "coordinates": [55.856026, 49.100282],    "title": "КМПО",    "category": "transport",    "hint": "КМПО"  },  {    "coordinates": [55.851195, 49.040037],    "title": "Вертолетный завод",    "category": "transport",    "hint": "Вертолетный завод"  }]'>
+								</div>
 							</div>
 						</div>
 						<div class="form-map__right">
@@ -1716,11 +1684,20 @@
 									<label>Ваш email</label>
 									<input type="email" name="phone" placeholder="example@mail.ru" required>
 								</div>
-								<div class="checkbox">
-									<input type="checkbox" id="politics1" class="checkbox__input">
-									<label class="checkbox__label" for="politics1"></label>
-									<div class="checkbox__text">
-										Я согласен с <a href="./agremeent.html">политикой конфиденциальности</a>
+								<div class="form-map__form-checkboxes">
+									<div class="checkbox">
+										<input type="checkbox" id="politics1" class="checkbox__input">
+										<label class="checkbox__label" for="politics1"></label>
+										<div class="checkbox__text">
+											Я согласен с <a href="./politics.html">политикой конфиденциальности</a>
+										</div>
+									</div>
+									<div class="checkbox">
+										<input type="checkbox" id="personal2" class="checkbox__input">
+										<label class="checkbox__label" for="personal2"></label>
+										<div class="checkbox__text">
+											Я согласен на <a href="./agremeent.html">обработку персональных данных</a>
+										</div>
 									</div>
 								</div>
 								<button class="button button--ohra button--xl">
@@ -1912,7 +1889,7 @@
 		</div>
 
 	</div>
-	<script src="js/app.min.js?_v=20260129183512"></script>
+	<script src="js/app.min.js?_v=20260130124346"></script>
 </body>
 
 </html>

@@ -183,13 +183,13 @@
 	&--blue {
 		.button__text {
 			color: cl(whte);
-			background-color: cl(drkBlu, .2);
+			background-color: cl(drkBlu, 0.2);
 		}
 
 		&:hover {
 			.button__text {
 				color: cl(whte);
-				background-color: cl(drkBlu, .5);
+				background-color: cl(drkBlu, 0.5);
 			}
 		}
 	}
@@ -269,6 +269,16 @@
 
 	&--white {
 		background-color: cl(milk, 0.1);
+		color: cl(whte);
+
+		&:hover {
+			background-color: cl(milk);
+			color: cl(drkBlu);
+		}
+	}
+
+	&--whiteDrk {
+		background-color: cl(drkBlu, 0.1);
 		color: cl(whte);
 
 		&:hover {

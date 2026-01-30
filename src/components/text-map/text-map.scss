@@ -198,61 +198,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: pulse 1.5s ease-in-out infinite;
 
-            &::after,
-            &::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                z-index: 0;
-                pointer-events: none;
-            }
-
-            &::after {
-                width: percent(40, 52);
-                height: percent(40, 52);
-                background-color: cl(whte, 0.6);
-                animation: pulse-wave 4s ease-out infinite;
-            }
-
-            &::before {
-                width: percent(40, 52);
-                height: percent(40, 52);
-                background-color: cl(whte, 0.5);
-                animation: pulse-wave 4s ease-out infinite 2s;
-            }
-
-            &-inner {
-                width: percent(40, 52);
-                height: percent(40, 52);
-                background-color: cl(whte);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                z-index: 2;
-            }
-
-            &-wave {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: percent(40, 52);
-                height: percent(40, 52);
-                border-radius: 50%;
-                background-color: cl(whte, 0.6);
-                animation: pulse-wave 4s ease-out infinite 1.33s;
-                z-index: 1;
-            }
 
             svg {
-                width: percent(20, 40);
-                height: percent(20, 40);
-                color: cl(grn);
+                width: percent(30, 40);
+                height: percent(30, 40);
+                color: cl(ohra);
             }
         }
 
@@ -452,31 +404,13 @@
     }
 }
 
-// Animations pulse
 @keyframes pulse {
-    0%,
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
+    0%, 100% {
+        transform: scale(1);
+        opacity: .85;
     }
     50% {
-        transform: translate(-50%, -50%) scale(1.3);
-        opacity: 0.3;
-    }
-}
-
-// Анимация для центрального круга (легкая пульсация)
-@keyframes pulse-wave {
-    0% {
-        transform: translate(-50%, -50%) scale(1); // 40px
-        opacity: 0.8;
-    }
-    70% {
-        transform: translate(-50%, -50%) scale(1.5); // 54px (52 + 2)
-        opacity: 0;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
+        transform: scale(1.1);
+        opacity: 1;
     }
 }

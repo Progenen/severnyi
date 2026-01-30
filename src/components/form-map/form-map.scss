@@ -39,6 +39,12 @@
         gap: rem(32);
     }
 
+    &__form-checkboxes {
+        display: flex;
+        flex-direction: column;
+        gap: rem(16);
+    }
+
     @media (max-width:$pc){
         &__right {
             padding-top: rem(64);
@@ -87,6 +93,10 @@
 
         &__form {
             gap: rem(24);
+        }
+
+        &__form-checkboxes {
+            gap: rem(12);
         }
     }
 }
