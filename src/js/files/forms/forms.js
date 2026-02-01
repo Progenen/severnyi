@@ -162,91 +162,100 @@ export let formValidate = {
 };
 /* Модуль формы "количество" */
 export function formSubmit() {
-  document.addEventListener("submit", function (e) {
+  document.addEventListener("submit", (e) => {
     const form = e.target;
-    formSubmitAction(form, e);
+    if (form.tagName === "FORM") {
+      formSubmitAction(form, e);
+    }
   });
-  document.addEventListener("reset", function (e) {
+
+  document.addEventListener("reset", (e) => {
     const form = e.target;
-    formValidate.formClean(form);
+    if (form.tagName === "FORM") {
+      formValidate.formClean(form);
+    }
   });
 
   async function formSubmitAction(form, e) {
-    const error = !form.hasAttribute("data-no-validate") ? formValidate.getErrors(form) : 0;
-    if (error === 0) {
-      const ajax = form.hasAttribute("data-ajax");
-      if (ajax) {
-        e.preventDefault();
-        const formAction = form.getAttribute("action") ? form.getAttribute("action").trim() : "#";
-        const formMethod = form.getAttribute("method") ? form.getAttribute("method").trim() : "GET";
-        const formData = new FormData(form);
-        console.log(formMethod);
-        form.classList.add("_sending");
-        if (formMethod === "GET") {
-          api.load({
-            url: formAction,
-            method: formMethod,
-            format: "text",
-            cb: (response) => {
-              formSent(form, response);
-            },
-          });
-        } else {
-          api.upload({
-            url: formAction,
-            method: formMethod,
-            body: formData,
-            cb: (response) => {
-              formSent(form, response);
-            },
-          });
-        }
-      }
-    } else {
+    const error = form.hasAttribute("data-no-validate")
+      ? 0
+      : formValidate.getErrors(form);
+
+    if (error !== 0) {
       e.preventDefault();
-      if (form.querySelector("._form-error") && form.hasAttribute("data-goto-error")) {
-        const formGoToErrorClass = form.dataset.gotoError ? form.dataset.gotoError : "._form-error";
+      return;
+    }
+
+    if (!form.hasAttribute("data-ajax")) return;
+
+    e.preventDefault();
+
+    const action = form.getAttribute("action")?.trim() || "#";
+    const method = (form.getAttribute("method") || "POST").toUpperCase();
+    const formData = new FormData(form);
+
+    form.classList.add("_sending");
+
+    try {
+      let response;
+
+      if (method === "GET") {
+        response = await api.load({
+          url: action,
+          format: "text",
+        });
+      } else {
+        response = await api.upload({
+          url: action,
+          method,
+          body: formData,
+          format: "text",
+        });
       }
+
+      formSent(form, response);
+    } catch (err) {
+      console.error("[Form submit error]", err);
+    } finally {
+      form.classList.remove("_sending");
     }
   }
-  function formSent(form, responseResult = ``) {
+
+  function formSent(form, responseResult = "") {
     document.dispatchEvent(
       new CustomEvent("formSent", {
-        detail: {
-          form: form,
-        },
+        detail: { form },
       })
     );
 
-    setTimeout(() => {
-      if (flsModules.popup) {
-        const popupSelector = form.dataset.popupMessage;
-        const activeModal = document.querySelector(".popup_show");
-        if (activeModal) {
-          flsModules.popup.close(activeModal, 100);
-        }
-        const popup = document.querySelector(popupSelector);
-        if (popup) {
-          flsModules.popup.open(popupSelector);
-        } else {
-          const parser = new DOMParser();
-          const response = parser.parseFromString(responseResult, "text/html");
-          const el = response.body.querySelector(popupSelector);
-          document.body.appendChild(el);
-          setTimeout(() => {
-            flsModules.popup.open(popupSelector);
-          }, 110);
-        }
-      }
-    }, 0);
-    // Очищуємо форму
+    // if (flsModules.popup) {
+    //   const popupSelector = form.dataset.popupMessage;
+
+    //   setTimeout(() => {
+    //     const activeModal = document.querySelector(".popup_show");
+    //     if (activeModal) {
+    //       flsModules.popup.close(activeModal, 100);
+    //     }
+
+    //     const popup = document.querySelector(popupSelector);
+    //     if (popup) {
+    //       flsModules.popup.open(popupSelector);
+    //     } else if (popupSelector && responseResult) {
+    //       const parser = new DOMParser();
+    //       const doc = parser.parseFromString(responseResult, "text/html");
+    //       const el = doc.querySelector(popupSelector);
+    //       if (el) {
+    //         document.body.appendChild(el);
+    //         setTimeout(() => flsModules.popup.open(popupSelector), 110);
+    //       }
+    //     }
+    //   }, 0);
+    // }
+
     formValidate.formClean(form);
-    // Повідомляємо до консолі
-  }
-  function formLogging(message) {
-    FLS(`[Формы]: ${message}`);
   }
 }
+
 /* Модуль формы "количество" */
 export function formQuantity() {
   document.addEventListener("click", function (e) {

@@ -66,7 +66,7 @@
     "gulp-zip": "6.0.0",
     "html-webpack-plugin": "latest",
     "husky": "^8.0.0",
-    "inputmask": "latest",
+    "inputmask": "^5.0.9",
     "js-datepicker": "latest",
     "lightgallery": "latest",
     "lint-staged": "13.2.3",
@@ -96,6 +96,7 @@
   "dependencies": {
     "gsap": "^3.14.2",
     "gulp-cheerio": "^1.0.0",
+    "imask": "^7.6.1",
     "isotope-layout": "^3.0.6"
   }
 }

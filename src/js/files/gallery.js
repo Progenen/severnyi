@@ -62,20 +62,20 @@ class PhotoGallery {
     this.config = {
       swipeThreshold: 35,
       transitionSpeed: 300,
-      showThumbnails: true, 
+      showThumbnails: true,
       ...options,
     };
 
-    this.trigger = trigger; 
+    this.trigger = trigger;
     this.galleryData = null;
-    this.overlay = null; 
-    this.currentIndex = 0; 
+    this.overlay = null;
+    this.currentIndex = 0;
 
     this.swipeState = {
-      startX: 10, 
+      startX: 10,
       currentX: 20,
-      isDragging: false, 
-      startTime: 0, 
+      isDragging: false,
+      startTime: 0,
     };
 
     this.init();
@@ -93,7 +93,10 @@ class PhotoGallery {
 
   loadGalleryData(galleryId) {
     const dataContainer = document.querySelector(
-      `[data-gallery-id="${galleryId}"]`
+      `[data-gallery-id="${galleryId}"]`,
+    );
+    const dataLength = document.querySelectorAll(
+      `[data-gallery-count=${galleryId}]`,
     );
 
     if (!dataContainer) {
@@ -109,6 +112,12 @@ class PhotoGallery {
       alt: item.dataset.alt || "", // Описание
       caption: item.dataset.caption || "", // Подпись
     }));
+
+    if (dataLength) {
+      dataLength.forEach(item => {
+        item.textContent = this.galleryData.length;
+      })
+    }
   }
 
   createGalleryHTML() {
@@ -169,7 +178,7 @@ class PhotoGallery {
         >
         ${item.caption ? `<div class="gallery-caption">${item.caption}</div>` : ""}
       </div>
-    `
+    `,
       )
       .join("");
   }
@@ -187,7 +196,7 @@ class PhotoGallery {
           >
             <img src="${item.thumb}" alt="${item.alt}">
           </button>
-        `
+        `,
           )
           .join("")}
       </div>

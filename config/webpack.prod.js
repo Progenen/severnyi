@@ -43,6 +43,12 @@ const config = {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
+        terserOptions: {
+          compress: {
+            drop_console: false, // Оставляем console.log
+            passes: 2,
+          },
+        },
       }),
     ],
     splitChunks: {
@@ -51,6 +57,11 @@ const config = {
       minChunks: 2,
       automaticNameDelimiter: "-",
     },
+  },
+  performance: {
+    hints: "warning",
+    maxEntrypointSize: 400000, // 400kb для production
+    maxAssetSize: 400000, // 400kb для production
   },
   output: {
     path: `${paths.build}`,

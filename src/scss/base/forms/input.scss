@@ -1,5 +1,17 @@
 //<INPUT>
 // Сніппет (HTML): inp
+
+// Анимация для детекта автозаполнения
+@keyframes onAutoFillStart {
+    from { /*dummy*/ }
+    to { /*dummy*/ }
+}
+
+@keyframes onAutoFillCancel {
+    from { /*dummy*/ }
+    to { /*dummy*/ }
+}
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -7,6 +19,17 @@ textarea {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    
+    // Детект автозаполнения через animation
+    &:-webkit-autofill {
+        animation-name: onAutoFillStart;
+        animation-duration: 0.001s;
+    }
+    
+    &:not(:-webkit-autofill) {
+        animation-name: onAutoFillCancel;
+        animation-duration: 0.001s;
+    }
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -13,7 +13,7 @@
         max-width: rem(380);
     }
 
-    &--alt &__content-slide p{
+    &--alt &__content-slide p {
         max-width: rem(320);
     }
 
@@ -24,8 +24,20 @@
         top: 0;
         left: 0;
 
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: cl(blck);
+            opacity: 0.15;
+        }
+
         &-slide {
-            img, picture {
+            img,
+            picture {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
@@ -81,7 +93,6 @@
     @media (max-width: $pc) {
         padding: rem(64) 0;
         height: rem(680);
-
 
         &__content-slide-title {
             margin-bottom: rem(16);

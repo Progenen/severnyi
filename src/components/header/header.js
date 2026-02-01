@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let menuTl = null;
   let lastScroll = 0;
   let headerShow = false;
+  const headerAlt = header.classList.contains("header--alt") ? true : false;
 
   const MOBILE_BREAKPOINT = 1199;
   const UI_BUTTONS_BREAKPOINT = 639;
@@ -186,12 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (scrollY < header.clientHeight) {
         header.classList.remove("header--fixed");
         header.classList.remove("header--fixed-show");
-        header.classList.remove("header--alt");
+        headerAlt || header.classList.remove("header--alt");
         headerShow = false;
         return;
       } else {
         header.classList.add("header--fixed");
-        header.classList.add("header--alt");
+        headerAlt || header.classList.add("header--alt");
       }
 
       if (!headerShow && lastScroll < scrollY) {
@@ -218,9 +219,9 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimer = setTimeout(handleResize, 100);
   }
 
-  headerFloat();
   burger.addEventListener("click", toggleMenu);
   window.addEventListener("resize", debouncedResize);
 
   handleResize();
+  headerFloat();
 });

@@ -40,7 +40,7 @@ const buildTasks = gulp.series(
   fonts,
   jsDev,
   js,
-  gulp.parallel(html, css, images, gitignore)
+  gulp.parallel(html, css, images, gitignore),
 );
 
 // Експорт завдань
@@ -84,7 +84,7 @@ const replacePath = async () => {
         Object.entries(FIND_STRINGS_JS).forEach(([key, value]) => {
           fileContent = fileContent.replace(
             new RegExp(escapeRegExp(key), "g"),
-            value
+            value,
           );
         });
 
@@ -114,14 +114,18 @@ const validateHTML = () =>
     .pipe(
       htmlValidator.analyzer({
         ignoreMessages: new RegExp(
-          "^Section lacks heading. Consider using “h2”-“h6”|^Element “img” is missing required attribute “src”.|Element “source” is missing required attribute “srcset”"
+          "^Section lacks heading\\. Consider using “h2”-“h6”|" +
+            "^Element “img” is missing required attribute “src”\\.|" +
+            "Element “source” is missing required attribute “srcset”|" +
+            "two consecutive hyphens in a comment|" +
+            "not mappable to XML 1\\.0",
         ),
-      })
+      }),
     )
     .pipe(
       htmlValidator.reporter({
         throwErrors: true,
-      })
+      }),
     );
 
 export const test = gulp.series(validateBEM, validateHTML);

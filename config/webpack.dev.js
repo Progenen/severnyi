@@ -56,6 +56,12 @@ const config = {
   optimization: {
     minimize: false,
   },
+  performance: {
+    hints: false, // Отключаем предупреждения для dev-сборки
+    // Или можно установить более высокие лимиты:
+    // maxEntrypointSize: 4000000, // 4MB для dev
+    // maxAssetSize: 4000000, // 4MB для dev
+  },
   entry: [`${paths.src}/js/app.js`],
   output: {
     path: `${paths.build}`,

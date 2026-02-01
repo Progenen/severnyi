@@ -2,21 +2,19 @@
 Документация слайдера: https://swiperjs.com/
 */
 
+// Импортируем только ядро Swiper
 import Swiper from "swiper";
-import {
-  A11y,
-  EffectFade,
-  Navigation,
-  Pagination,
-  Controller,
-} from "swiper/modules";
+// Импортируем только используемые модули
+import { Navigation, Pagination, Controller, EffectFade, A11y } from "swiper/modules";
 
 import "../../scss/base/swiper.scss";
+
+// Регистрируем модули глобально один раз
+Swiper.use([Navigation, Pagination, Controller, EffectFade, A11y]);
 
 export const createSlider = (el, options) => {
   let mergedOptions;
   const defaultOptions = {
-    modules: [A11y],
     slidesPerView: "auto",
     speed: 800,
     a11y: true,
@@ -24,11 +22,6 @@ export const createSlider = (el, options) => {
 
   if (options && typeof options === "object") {
     mergedOptions = { ...defaultOptions, ...options };
-    if (options.modules) {
-      mergedOptions.modules = [
-        ...new Set([...defaultOptions.modules, ...options.modules]),
-      ];
-    }
   }
   sliders.push([el, mergedOptions || defaultOptions]);
 };
@@ -131,33 +124,33 @@ window.addEventListener("load", function (e) {
     });
   }
 
-  // Apartment planes sliders
-  const apartmentPlaneSliders = document.querySelectorAll(
-    ".apartment-planes__slider",
-  );
+  // // Apartment planes sliders
+  // const apartmentPlaneSliders = document.querySelectorAll(
+  //   ".apartment-planes__slider",
+  // );
 
-  apartmentPlaneSliders.forEach((sliderContainer) => {
-    const sliderInner = sliderContainer.querySelector(
-      ".apartment-planes__slider-inner",
-    );
-    const prevBtn = sliderContainer.querySelector(
-      ".slider-controls__arrow-prev",
-    );
-    const nextBtn = sliderContainer.querySelector(
-      ".slider-controls__arrow-next",
-    );
+  // apartmentPlaneSliders.forEach((sliderContainer) => {
+  //   const sliderInner = sliderContainer.querySelector(
+  //     ".apartment-planes__slider-inner",
+  //   );
+  //   const prevBtn = sliderContainer.querySelector(
+  //     ".slider-controls__arrow-prev",
+  //   );
+  //   const nextBtn = sliderContainer.querySelector(
+  //     ".slider-controls__arrow-next",
+  //   );
 
-    createSlider(sliderInner, {
-      modules: [Navigation],
-      slidesPerView: 1,
-      spaceBetween: 0,
-      speed: 600,
-      navigation: {
-        nextEl: nextBtn,
-        prevEl: prevBtn,
-      },
-    });
-  });
+  //   createSlider(sliderInner, {
+  //     modules: [Navigation],
+  //     slidesPerView: 1,
+  //     spaceBetween: 0,
+  //     speed: 600,
+  //     navigation: {
+  //       nextEl: nextBtn,
+  //       prevEl: prevBtn,
+  //     },
+  //   });
+  // });
 
   // Image slider section (только изображения)
   const imageSliderSections = document.querySelectorAll(

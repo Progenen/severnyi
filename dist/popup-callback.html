@@ -25,18 +25,18 @@
 							Оставьте заявку и наши специалисты свяжутся с вами и предоставят всю необходимую информацию
 						</div>
 					</div>
-					<form action="#" class="modal-call__form">
+					<form class="modal-call__form" action="./files/sendmail/sendmail.php" method="POST" data-ajax>
 						<div class="input input--sm">
 							<label>Как к вам обращаться?</label>
 							<input type="text" name="name" placeholder="Иванов Иван" required>
 						</div>
 						<div class="input input--sm">
 							<label>Телефон</label>
-							<input type="tel" name="phone" placeholder="+7 (" data-inputmask="'mask': '+7 (999) 999 99-99'" required>
+							<input type="tel" name="phone" placeholder="+7 (" required>
 						</div>
 						<div class="input input--sm">
 							<label>Ваш email</label>
-							<input type="email" name="phone" placeholder="example@mail.ru" required>
+							<input type="email" name="email" placeholder="example@mail.ru" required>
 						</div>
 						<div class="modal-call__form-checkboxes">
 							<div class="checkbox">

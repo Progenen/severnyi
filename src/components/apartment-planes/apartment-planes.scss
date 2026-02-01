@@ -1,15 +1,12 @@
-// Блок: планировки квартир (БЭМ)
 .apartment-planes {
     padding-top: rem(100);
     padding-bottom: rem(100);
 
-    // Элемент: строка контейнера
     &__row {
         display: flex;
         justify-content: space-between;
     }
 
-    // Элементы: левая и правая части
     &__left {
         width: percent(600, 1224);
     }
@@ -18,23 +15,23 @@
         width: percent(496, 1224);
     }
 
-    // Элемент: контент
     &__content {
         margin-top: rem(40);
     }
 
-    // Элемент: слайдер планировок
-    &__slider {
+    &__sliders {
         width: 100%;
         position: relative;
+        background-color: #fffdf5;
         aspect-ratio: 1 / 1;
-        padding: rem(32);
-        display: flex;
+        width: 100%;
+    }
+
+    &__slider {
+        display: none;
         justify-content: flex-end;
         align-items: flex-end;
-        display: none;
-
-        // Модификатор: активный слайдер
+        width: 100%;
         &--active {
             display: flex;
         }
@@ -49,13 +46,13 @@
         }
 
         &-slide {
-            background-color: #fffdf5;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: rem(20);
 
-            img, picture {
+            img,
+            picture {
                 object-fit: contain;
                 width: 100%;
                 height: 100%;
@@ -64,10 +61,13 @@
 
         &-controls {
             justify-content: flex-end;
+            position: absolute;
+            bottom: 0;
+            right: rem(32);
+            bottom: rem(32);
         }
     }
 
-    // Элемент: переключатели табов
     &__switchs {
         display: flex;
         justify-content: space-around;
@@ -94,7 +94,6 @@
                 border-left: 1px solid cl(drkBlu);
             }
 
-            // Модификатор: активный таб
             &--active,
             &:hover {
                 color: cl(whte);
@@ -103,14 +102,12 @@
         }
     }
 
-    // Элемент: информация о квартире
     &__info {
         margin-top: rem(40);
 
         &-item {
             display: none;
 
-            // Модификатор: активный блок информации
             &--active {
                 display: block;
             }
@@ -148,7 +145,6 @@
         }
     }
 
-    // Адаптивные стили
     @media (max-width: $pc) {
         padding-top: rem(64);
         padding-bottom: rem(64);
@@ -167,7 +163,7 @@
         }
 
         &__switchs {
-            justify-content: flex-start ;
+            justify-content: flex-start;
         }
 
         &__switchs-item {

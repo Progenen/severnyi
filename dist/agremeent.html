@@ -22,10 +22,101 @@
 	<meta name="msapplication-TileColor" content="#272727">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#C2AB81">
-	<link rel="stylesheet" href="css/style.min.css?_v=20260130145858">
+	<link rel="stylesheet" href="css/style.min.css?_v=20260202024507">
 	<script>
 		var baseUrl = "./js/";
 	</script>
+
+	<style>
+		.lock body {
+			overflow: hidden;
+			touch-action: none;
+			overscroll-behavior: none;
+		}
+
+		.loading body {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		.loaded body {
+			transition: opacity 0.5s ease 0s;
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.fls-preloader {
+			pointer-events: none;
+			z-index: -1;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.fls-preloader__body {
+			padding: 0.93rem;
+			max-width: 31.25rem;
+			display: flex;
+			align-items: center;
+			gap: 40px;
+			flex-direction: column;
+		}
+
+		.fls-preloader__logo svg {
+			width: 64px;
+			height: 64px;
+			color: #D6A177;
+			animation: pulse 1.5s ease-in-out infinite;
+		}
+
+		.fls-preloader__line {
+			border-radius: 20px;
+			width: 100px;
+			height: 4px;
+			background-color: #D0D0CE;
+		}
+
+		.fls-preloader__line span {
+			border-radius: 20px;
+			display: block;
+			transition: width 0.2s ease;
+			height: 4px;
+			background-color: #D6A177;
+		}
+
+		.fls-preloader {
+			transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+				transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+			opacity: 1;
+			transform: translateY(0);
+			will-change: opacity, transform;
+		}
+
+		.loaded .fls-preloader {
+			opacity: 0;
+			transform: translateY(-20px);
+			pointer-events: none;
+		}
+
+		@keyframes pulse {
+
+			0%,
+			100% {
+				transform: scale(1);
+				opacity: .85;
+			}
+
+			50% {
+				transform: scale(1.1);
+				opacity: 1;
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -53,8 +144,8 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
-										Генплан
+									<a href="./gallery.html">
+										Галерея
 									</a>
 								</li>
 								<li>
@@ -294,18 +385,18 @@
 									Оставьте заявку и наши специалисты свяжутся с вами и предоставят всю необходимую информацию
 								</div>
 							</div>
-							<form action="#" class="modal-call__form">
+							<form class="modal-call__form" action="./files/sendmail/sendmail.php" method="POST" data-ajax>
 								<div class="input input--sm">
 									<label>Как к вам обращаться?</label>
 									<input type="text" name="name" placeholder="Иванов Иван" required>
 								</div>
 								<div class="input input--sm">
 									<label>Телефон</label>
-									<input type="tel" name="phone" placeholder="+7 (" data-inputmask="'mask': '+7 (999) 999 99-99'" required>
+									<input type="tel" name="phone" placeholder="+7 (" required>
 								</div>
 								<div class="input input--sm">
 									<label>Ваш email</label>
-									<input type="email" name="phone" placeholder="example@mail.ru" required>
+									<input type="email" name="email" placeholder="example@mail.ru" required>
 								</div>
 								<div class="modal-call__form-checkboxes">
 									<div class="checkbox">
@@ -357,7 +448,95 @@
 		</div>
 
 	</div>
-	<script src="js/app.min.js?_v=20260130145858"></script>
+	<div id="fls-preloader">
+		<script>
+			function preloader() {
+				const preloaderImages = document.querySelector("[data-preloader]") ?
+					document.querySelectorAll("[data-preloader] img") :
+					document.querySelectorAll("img");
+
+				const preloaderContainer = document.querySelector("#fls-preloader");
+
+				if (!preloaderImages.length) {
+					preloaderContainer?.remove();
+					return;
+				}
+
+				const preloaderTemplate = `
+        <div class="fls-preloader">
+          <div class="fls-preloader__body">
+            <div class="fls-preloader__logo">
+              <svg>
+                <use xlink:href="img/icons/icons.svg#icon-star"></use>
+              </svg>
+            </div>
+            <div class="fls-preloader__line"><span></span></div>
+          </div>
+        </div>`;
+
+				document.documentElement.insertAdjacentHTML("beforeend", preloaderTemplate);
+
+				const preloader = document.querySelector(".fls-preloader");
+				const progressBar = document.querySelector(".fls-preloader__line span");
+				const html = document.documentElement;
+
+				let loadedCount = 0;
+				let displayedProgress = 0;
+				const total = preloaderImages.length;
+
+				html.classList.add("loading", "lock");
+
+				function updateProgress(target) {
+					if (displayedProgress >= target) return;
+
+					displayedProgress++;
+					progressBar.style.width = displayedProgress + "%";
+
+					if (displayedProgress >= 100) {
+						html.classList.add("loaded");
+						html.classList.remove("lock", "loading");
+
+						setTimeout(() => {
+							preloader.remove();
+							preloaderContainer.remove();
+						}, 900);
+					}
+				}
+
+				function imageLoaded() {
+					loadedCount++;
+					const progress = Math.round((loadedCount / total) * 100);
+
+					const interval = setInterval(() => {
+						if (displayedProgress >= progress) {
+							clearInterval(interval);
+							return;
+						}
+						updateProgress(displayedProgress + 1);
+					}, 12);
+				}
+
+				preloaderImages.forEach(img => {
+					const clone = new Image();
+					clone.onload = imageLoaded;
+					clone.onerror = imageLoaded;
+					clone.src = img.dataset.src || img.src;
+				});
+
+				setTimeout(() => {
+					if (displayedProgress < 100) {
+						const forceInterval = setInterval(() => {
+							updateProgress(displayedProgress + 1);
+							if (displayedProgress >= 100) clearInterval(forceInterval);
+						}, 20);
+					}
+				}, 12000);
+			}
+
+			preloader();
+		</script>
+	</div>
+	<script src="js/app.min.js?_v=20260202024507"></script>
 </body>
 
 </html>

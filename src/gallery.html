@@ -6,11 +6,12 @@
   <div class="wrapper">
     @@include('components/header/header.html',{ "class":"header--alt" })
     <main class="page page-line">
-        @@include("pages/gallery/gallery-section/index.html")
+      @@include("pages/gallery/gallery-section/index.html")
     </main>
     @@include('components/footer/footer.html',{})
     @@include('html/_popup.htm',{})
   </div>
+  @@include('html/_preloader.htm',{})
   @@include('html/_js.htm',{})
 </body>
 

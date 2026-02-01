@@ -443,6 +443,18 @@ body.lock {
   color: var(--color-drkBlu);
 }
 
+@-webkit-keyframes onAutoFillStart {
+}
+
+@keyframes onAutoFillStart {
+}
+
+@-webkit-keyframes onAutoFillCancel {
+}
+
+@keyframes onAutoFillCancel {
+}
+
 input[type=text],
 input[type=email],
 input[type=tel],
@@ -450,6 +462,26 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+input[type=text]:-webkit-autofill,
+input[type=email]:-webkit-autofill,
+input[type=tel]:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-animation-name: onAutoFillStart;
+          animation-name: onAutoFillStart;
+  -webkit-animation-duration: .001s;
+          animation-duration: .001s;
+}
+
+input[type=text]:not(:-webkit-autofill),
+input[type=email]:not(:-webkit-autofill),
+input[type=tel]:not(:-webkit-autofill),
+textarea:not(:-webkit-autofill) {
+  -webkit-animation-name: onAutoFillCancel;
+          animation-name: onAutoFillCancel;
+  -webkit-animation-duration: .001s;
+          animation-duration: .001s;
 }
 
 input::-webkit-outer-spin-button,
@@ -1624,6 +1656,17 @@ p+p {
   left: 0;
 }
 
+.fullscreen-slider__background::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--color-blck);
+  opacity: .15;
+}
+
 .fullscreen-slider__background-slide img,
 .fullscreen-slider__background-slide picture {
   width: 100%;
@@ -2055,21 +2098,23 @@ p+p {
   margin-top: 2.5rem;
 }
 
-.apartment-planes__slider {
+.apartment-planes__sliders {
   width: 100%;
   position: relative;
+  background-color: #fffdf5;
   aspect-ratio: 1/1;
-  padding: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  width: 100%;
+}
+
+.apartment-planes__slider {
+  display: none;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  display: none;
+  width: 100%;
 }
 
 .apartment-planes__slider--active {
@@ -2088,7 +2133,6 @@ p+p {
 }
 
 .apartment-planes__slider-slide {
-  background-color: #fffdf5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2113,6 +2157,10 @@ p+p {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
+  bottom: 2rem;
 }
 
 .apartment-planes__switchs {
@@ -5285,8 +5333,8 @@ p+p {
   }
 
   .offer__bg video {
-    -o-object-position: 34% top;
-       object-position: 34% top;
+    -o-object-position: 68% top;
+       object-position: 68% top;
   }
 
   .offer__container {
