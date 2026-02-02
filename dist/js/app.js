@@ -9159,7 +9159,7 @@
         const window = ssr_window_esm_getWindow();
         return window.getComputedStyle(el, null).getPropertyValue(prop);
     }
-    function elementIndex(el) {
+    function utils_elementIndex(el) {
         let child = el;
         let i;
         if (child) {
@@ -11560,8 +11560,8 @@
         getSlideIndex(slideEl) {
             const {slidesEl, params} = this;
             const slides = utils_elementChildren(slidesEl, `.${params.slideClass}, swiper-slide`);
-            const firstSlideIndex = elementIndex(slides[0]);
-            return elementIndex(slideEl) - firstSlideIndex;
+            const firstSlideIndex = utils_elementIndex(slides[0]);
+            return utils_elementIndex(slideEl) - firstSlideIndex;
         }
         getSlideIndexByData(index) {
             return this.getSlideIndex(this.slides.find(slideEl => slideEl.getAttribute("data-swiper-slide-index") * 1 === index));
@@ -12080,7 +12080,7 @@
             const bulletEl = e.target.closest(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass));
             if (!bulletEl) return;
             e.preventDefault();
-            const index = elementIndex(bulletEl) * swiper.params.slidesPerGroup;
+            const index = utils_elementIndex(bulletEl) * swiper.params.slidesPerGroup;
             if (swiper.params.loop) {
                 if (swiper.realIndex === index) return;
                 const moveDirection = getMoveDirection(swiper.realIndex, index, swiper.slides.length);
@@ -12130,7 +12130,7 @@
                     bulletEl.classList.remove(...classesToRemove);
                 });
                 if (el.length > 1) bullets.forEach(bullet => {
-                    const bulletIndex = elementIndex(bullet);
+                    const bulletIndex = utils_elementIndex(bullet);
                     if (bulletIndex === current) bullet.classList.add(...params.bulletActiveClass.split(" ")); else if (swiper.isElement) bullet.setAttribute("part", "bullet");
                     if (params.dynamicBullets) {
                         if (bulletIndex >= firstIndex && bulletIndex <= lastIndex) bullet.classList.add(...`${params.bulletActiveClass}-main`.split(" "));
@@ -12485,292 +12485,6 @@
             setTransition
         });
     }
-    function A11y({swiper, extendParams, on}) {
-        extendParams({
-            a11y: {
-                enabled: true,
-                notificationClass: "swiper-notification",
-                prevSlideMessage: "Previous slide",
-                nextSlideMessage: "Next slide",
-                firstSlideMessage: "This is the first slide",
-                lastSlideMessage: "This is the last slide",
-                paginationBulletMessage: "Go to slide {{index}}",
-                slideLabelMessage: "{{index}} / {{slidesLength}}",
-                containerMessage: null,
-                containerRoleDescriptionMessage: null,
-                containerRole: null,
-                itemRoleDescriptionMessage: null,
-                slideRole: "group",
-                id: null,
-                scrollOnFocus: true,
-                wrapperLiveRegion: true
-            }
-        });
-        swiper.a11y = {
-            clicked: false
-        };
-        let liveRegion = null;
-        let preventFocusHandler;
-        let focusTargetSlideEl;
-        let visibilityChangedTimestamp = (new Date).getTime();
-        function notify(message) {
-            const notification = liveRegion;
-            if (notification.length === 0) return;
-            utils_setInnerHTML(notification, message);
-        }
-        function getRandomNumber(size = 16) {
-            const randomChar = () => Math.round(16 * Math.random()).toString(16);
-            return "x".repeat(size).replace(/x/g, randomChar);
-        }
-        function makeElFocusable(el) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("tabIndex", "0");
-            });
-        }
-        function makeElNotFocusable(el) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("tabIndex", "-1");
-            });
-        }
-        function addElRole(el, role) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("role", role);
-            });
-        }
-        function addElRoleDescription(el, description) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-roledescription", description);
-            });
-        }
-        function addElControls(el, controls) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-controls", controls);
-            });
-        }
-        function addElLabel(el, label) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-label", label);
-            });
-        }
-        function addElId(el, id) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("id", id);
-            });
-        }
-        function addElLive(el, live) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-live", live);
-            });
-        }
-        function disableEl(el) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-disabled", true);
-            });
-        }
-        function enableEl(el) {
-            el = utils_makeElementsArray(el);
-            el.forEach(subEl => {
-                subEl.setAttribute("aria-disabled", false);
-            });
-        }
-        function onEnterOrSpaceKey(e) {
-            if (e.keyCode !== 13 && e.keyCode !== 32) return;
-            const params = swiper.params.a11y;
-            const targetEl = e.target;
-            if (swiper.pagination && swiper.pagination.el && (targetEl === swiper.pagination.el || swiper.pagination.el.contains(e.target))) if (!e.target.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass))) return;
-            if (swiper.navigation && swiper.navigation.prevEl && swiper.navigation.nextEl) {
-                const prevEls = utils_makeElementsArray(swiper.navigation.prevEl);
-                const nextEls = utils_makeElementsArray(swiper.navigation.nextEl);
-                if (nextEls.includes(targetEl)) {
-                    if (!(swiper.isEnd && !swiper.params.loop)) swiper.slideNext();
-                    if (swiper.isEnd) notify(params.lastSlideMessage); else notify(params.nextSlideMessage);
-                }
-                if (prevEls.includes(targetEl)) {
-                    if (!(swiper.isBeginning && !swiper.params.loop)) swiper.slidePrev();
-                    if (swiper.isBeginning) notify(params.firstSlideMessage); else notify(params.prevSlideMessage);
-                }
-            }
-            if (swiper.pagination && targetEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass))) targetEl.click();
-        }
-        function updateNavigation() {
-            if (swiper.params.loop || swiper.params.rewind || !swiper.navigation) return;
-            const {nextEl, prevEl} = swiper.navigation;
-            if (prevEl) if (swiper.isBeginning) {
-                disableEl(prevEl);
-                makeElNotFocusable(prevEl);
-            } else {
-                enableEl(prevEl);
-                makeElFocusable(prevEl);
-            }
-            if (nextEl) if (swiper.isEnd) {
-                disableEl(nextEl);
-                makeElNotFocusable(nextEl);
-            } else {
-                enableEl(nextEl);
-                makeElFocusable(nextEl);
-            }
-        }
-        function hasPagination() {
-            return swiper.pagination && swiper.pagination.bullets && swiper.pagination.bullets.length;
-        }
-        function hasClickablePagination() {
-            return hasPagination() && swiper.params.pagination.clickable;
-        }
-        function updatePagination() {
-            const params = swiper.params.a11y;
-            if (!hasPagination()) return;
-            swiper.pagination.bullets.forEach(bulletEl => {
-                if (swiper.params.pagination.clickable) {
-                    makeElFocusable(bulletEl);
-                    if (!swiper.params.pagination.renderBullet) {
-                        addElRole(bulletEl, "button");
-                        addElLabel(bulletEl, params.paginationBulletMessage.replace(/\{\{index\}\}/, elementIndex(bulletEl) + 1));
-                    }
-                }
-                if (bulletEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletActiveClass))) bulletEl.setAttribute("aria-current", "true"); else bulletEl.removeAttribute("aria-current");
-            });
-        }
-        const initNavEl = (el, wrapperId, message) => {
-            makeElFocusable(el);
-            if (el.tagName !== "BUTTON") {
-                addElRole(el, "button");
-                el.addEventListener("keydown", onEnterOrSpaceKey);
-            }
-            addElLabel(el, message);
-            addElControls(el, wrapperId);
-        };
-        const handlePointerDown = e => {
-            if (focusTargetSlideEl && focusTargetSlideEl !== e.target && !focusTargetSlideEl.contains(e.target)) preventFocusHandler = true;
-            swiper.a11y.clicked = true;
-        };
-        const handlePointerUp = () => {
-            preventFocusHandler = false;
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    if (!swiper.destroyed) swiper.a11y.clicked = false;
-                });
-            });
-        };
-        const onVisibilityChange = e => {
-            visibilityChangedTimestamp = (new Date).getTime();
-        };
-        const handleFocus = e => {
-            if (swiper.a11y.clicked || !swiper.params.a11y.scrollOnFocus) return;
-            if ((new Date).getTime() - visibilityChangedTimestamp < 100) return;
-            const slideEl = e.target.closest(`.${swiper.params.slideClass}, swiper-slide`);
-            if (!slideEl || !swiper.slides.includes(slideEl)) return;
-            focusTargetSlideEl = slideEl;
-            const isActive = swiper.slides.indexOf(slideEl) === swiper.activeIndex;
-            const isVisible = swiper.params.watchSlidesProgress && swiper.visibleSlides && swiper.visibleSlides.includes(slideEl);
-            if (isActive || isVisible) return;
-            if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
-            if (swiper.isHorizontal()) swiper.el.scrollLeft = 0; else swiper.el.scrollTop = 0;
-            requestAnimationFrame(() => {
-                if (preventFocusHandler) return;
-                if (swiper.params.loop) swiper.slideToLoop(swiper.getSlideIndexWhenGrid(parseInt(slideEl.getAttribute("data-swiper-slide-index"))), 0); else swiper.slideTo(swiper.getSlideIndexWhenGrid(swiper.slides.indexOf(slideEl)), 0);
-                preventFocusHandler = false;
-            });
-        };
-        const initSlides = () => {
-            const params = swiper.params.a11y;
-            if (params.itemRoleDescriptionMessage) addElRoleDescription(swiper.slides, params.itemRoleDescriptionMessage);
-            if (params.slideRole) addElRole(swiper.slides, params.slideRole);
-            const slidesLength = swiper.slides.length;
-            if (params.slideLabelMessage) swiper.slides.forEach((slideEl, index) => {
-                const slideIndex = swiper.params.loop ? parseInt(slideEl.getAttribute("data-swiper-slide-index"), 10) : index;
-                const ariaLabelMessage = params.slideLabelMessage.replace(/\{\{index\}\}/, slideIndex + 1).replace(/\{\{slidesLength\}\}/, slidesLength);
-                addElLabel(slideEl, ariaLabelMessage);
-            });
-        };
-        const init = () => {
-            const params = swiper.params.a11y;
-            swiper.el.append(liveRegion);
-            const containerEl = swiper.el;
-            if (params.containerRoleDescriptionMessage) addElRoleDescription(containerEl, params.containerRoleDescriptionMessage);
-            if (params.containerMessage) addElLabel(containerEl, params.containerMessage);
-            if (params.containerRole) addElRole(containerEl, params.containerRole);
-            const wrapperEl = swiper.wrapperEl;
-            const wrapperId = params.id || wrapperEl.getAttribute("id") || `swiper-wrapper-${getRandomNumber(16)}`;
-            addElId(wrapperEl, wrapperId);
-            if (params.wrapperLiveRegion) {
-                const live = swiper.params.autoplay && swiper.params.autoplay.enabled ? "off" : "polite";
-                addElLive(wrapperEl, live);
-            }
-            initSlides();
-            let {nextEl, prevEl} = swiper.navigation ? swiper.navigation : {};
-            nextEl = utils_makeElementsArray(nextEl);
-            prevEl = utils_makeElementsArray(prevEl);
-            if (nextEl) nextEl.forEach(el => initNavEl(el, wrapperId, params.nextSlideMessage));
-            if (prevEl) prevEl.forEach(el => initNavEl(el, wrapperId, params.prevSlideMessage));
-            if (hasClickablePagination()) {
-                const paginationEl = utils_makeElementsArray(swiper.pagination.el);
-                paginationEl.forEach(el => {
-                    el.addEventListener("keydown", onEnterOrSpaceKey);
-                });
-            }
-            const document = ssr_window_esm_getDocument();
-            document.addEventListener("visibilitychange", onVisibilityChange);
-            swiper.el.addEventListener("focus", handleFocus, true);
-            swiper.el.addEventListener("focus", handleFocus, true);
-            swiper.el.addEventListener("pointerdown", handlePointerDown, true);
-            swiper.el.addEventListener("pointerup", handlePointerUp, true);
-        };
-        function destroy() {
-            if (liveRegion) liveRegion.remove();
-            let {nextEl, prevEl} = swiper.navigation ? swiper.navigation : {};
-            nextEl = utils_makeElementsArray(nextEl);
-            prevEl = utils_makeElementsArray(prevEl);
-            if (nextEl) nextEl.forEach(el => el.removeEventListener("keydown", onEnterOrSpaceKey));
-            if (prevEl) prevEl.forEach(el => el.removeEventListener("keydown", onEnterOrSpaceKey));
-            if (hasClickablePagination()) {
-                const paginationEl = utils_makeElementsArray(swiper.pagination.el);
-                paginationEl.forEach(el => {
-                    el.removeEventListener("keydown", onEnterOrSpaceKey);
-                });
-            }
-            const document = ssr_window_esm_getDocument();
-            document.removeEventListener("visibilitychange", onVisibilityChange);
-            if (swiper.el && typeof swiper.el !== "string") {
-                swiper.el.removeEventListener("focus", handleFocus, true);
-                swiper.el.removeEventListener("pointerdown", handlePointerDown, true);
-                swiper.el.removeEventListener("pointerup", handlePointerUp, true);
-            }
-        }
-        on("beforeInit", () => {
-            liveRegion = utils_createElement("span", swiper.params.a11y.notificationClass);
-            liveRegion.setAttribute("aria-live", "assertive");
-            liveRegion.setAttribute("aria-atomic", "true");
-        });
-        on("afterInit", () => {
-            if (!swiper.params.a11y.enabled) return;
-            init();
-        });
-        on("slidesLengthChange snapGridLengthChange slidesGridLengthChange", () => {
-            if (!swiper.params.a11y.enabled) return;
-            initSlides();
-        });
-        on("fromEdge toEdge afterInit lock unlock", () => {
-            if (!swiper.params.a11y.enabled) return;
-            updateNavigation();
-        });
-        on("paginationUpdate", () => {
-            if (!swiper.params.a11y.enabled) return;
-            updatePagination();
-        });
-        on("destroy", () => {
-            if (!swiper.params.a11y.enabled) return;
-            destroy();
-        });
-    }
     function effect_init_effectInit(params) {
         const {effect, swiper, on, setTranslate, setTransition, overwriteParams, perspective, recreateShadows, getEffectParams} = params;
         on("beforeInit", () => {
@@ -12902,20 +12616,29 @@
             })
         });
     }
-    Swiper.use([ Navigation, Pagination, Controller, EffectFade, A11y ]);
-    const sliders = [];
-    function initSliders() {
-        console.log(sliders);
-        sliders.forEach(element => {
-            new Swiper(element[0], element[1]);
-        });
-    }
     const formatFractionCurrent = number => number.toString().padStart(2, "0");
     const formatFractionTotal = number => number.toString().padStart(2, "0");
-    window.addEventListener("load", function(e) {
+    const debounce = (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    };
+    function initTextImageSliders() {
         const textImageSliders = document.querySelectorAll(".text-image-slider");
         textImageSliders.forEach(sliderSection => {
-            const textSlider = new Swiper(sliderSection.querySelector(".text-image-slider__text"), {
+            const textSliderEl = sliderSection.querySelector(".text-image-slider__text");
+            const imgSliderEl = sliderSection.querySelector(".text-image-slider__photos");
+            const paginationEl = sliderSection.querySelector(".slider-controls__pagination");
+            const nextEl = sliderSection.querySelector(".slider-controls__arrow-next");
+            const prevEl = sliderSection.querySelector(".slider-controls__arrow-prev");
+            if (!textSliderEl || !imgSliderEl) return;
+            const textSlider = new Swiper(textSliderEl, {
                 slidesPerView: 1,
                 effect: "fade",
                 fadeEffect: {
@@ -12923,42 +12646,53 @@
                 },
                 speed: 300,
                 modules: [ EffectFade, Pagination, Navigation, Controller ],
-                pagination: {
-                    el: sliderSection.querySelector(".slider-controls__pagination"),
+                pagination: paginationEl ? {
+                    el: paginationEl,
                     clickable: true,
                     type: "fraction",
                     formatFractionCurrent,
                     formatFractionTotal
-                },
-                navigation: {
-                    nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
-                    prevEl: sliderSection.querySelector(".slider-controls__arrow-prev")
-                }
+                } : false,
+                navigation: nextEl && prevEl ? {
+                    nextEl,
+                    prevEl
+                } : false
             });
-            const imgSlider = new Swiper(sliderSection.querySelector(".text-image-slider__photos"), {
+            const imgSlider = new Swiper(imgSliderEl, {
                 slidesPerView: 1,
                 effect: "fade",
                 fadeEffect: {
                     crossFade: true
                 },
                 speed: 300,
-                modules: [ EffectFade, Controller ]
+                modules: [ EffectFade, Controller ],
+                allowTouchMove: false
             });
             textSlider.controller.control = imgSlider;
             imgSlider.controller.control = textSlider;
         });
+    }
+    function initFullscreenSliders() {
         const fullscreenSliders = document.querySelectorAll(".fullscreen-slider");
-        if (fullscreenSliders) fullscreenSliders.forEach(slider => {
-            const fullscreenSliderBg = new Swiper(slider.querySelector(".fullscreen-slider__background"), {
+        if (fullscreenSliders.length === 0) return;
+        fullscreenSliders.forEach(slider => {
+            const bgSliderEl = slider.querySelector(".fullscreen-slider__background");
+            const contentSliderEl = slider.querySelector(".fullscreen-slider__content");
+            const paginationEl = slider.querySelector(".slider-controls__pagination");
+            const nextEl = slider.querySelector(".slider-controls__arrow-next");
+            const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+            if (!bgSliderEl || !contentSliderEl) return;
+            const fullscreenSliderBg = new Swiper(bgSliderEl, {
                 slidesPerView: 1,
                 effect: "fade",
                 fadeEffect: {
                     crossFade: false
                 },
                 speed: 300,
-                modules: [ Controller, EffectFade ]
+                modules: [ Controller, EffectFade ],
+                allowTouchMove: false
             });
-            const fullscreenSliderContent = new Swiper(slider.querySelector(".fullscreen-slider__content"), {
+            const fullscreenSliderContent = new Swiper(contentSliderEl, {
                 slidesPerView: 1,
                 effect: "fade",
                 fadeEffect: {
@@ -12966,24 +12700,32 @@
                 },
                 speed: 300,
                 modules: [ EffectFade, Navigation, Pagination, Controller ],
-                pagination: {
-                    el: slider.querySelector(".slider-controls__pagination"),
+                pagination: paginationEl ? {
+                    el: paginationEl,
                     clickable: true,
                     type: "fraction",
                     formatFractionCurrent,
                     formatFractionTotal
-                },
-                navigation: {
-                    nextEl: slider.querySelector(".slider-controls__arrow-next"),
-                    prevEl: slider.querySelector(".slider-controls__arrow-prev")
-                }
+                } : false,
+                navigation: nextEl && prevEl ? {
+                    nextEl,
+                    prevEl
+                } : false
             });
             fullscreenSliderContent.controller.control = fullscreenSliderBg;
             fullscreenSliderBg.controller.control = fullscreenSliderContent;
         });
+    }
+    function initImageSliderSections() {
         const imageSliderSections = document.querySelectorAll(".image-slider-section");
+        if (imageSliderSections.length === 0) return;
         imageSliderSections.forEach(sliderSection => {
-            new Swiper(sliderSection.querySelector(".image-slider-section__slider-inner"), {
+            const sliderEl = sliderSection.querySelector(".image-slider-section__slider-inner");
+            const paginationEl = sliderSection.querySelector(".slider-controls__pagination");
+            const nextEl = sliderSection.querySelector(".slider-controls__arrow-next");
+            const prevEl = sliderSection.querySelector(".slider-controls__arrow-prev");
+            if (!sliderEl) return;
+            new Swiper(sliderEl, {
                 slidesPerView: 1,
                 effect: "fade",
                 fadeEffect: {
@@ -12991,55 +12733,69 @@
                 },
                 speed: 300,
                 modules: [ EffectFade, Pagination, Navigation ],
-                pagination: {
-                    el: sliderSection.querySelector(".slider-controls__pagination"),
+                pagination: paginationEl ? {
+                    el: paginationEl,
                     clickable: true,
                     type: "fraction",
                     formatFractionCurrent,
                     formatFractionTotal
-                },
-                navigation: {
-                    nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
-                    prevEl: sliderSection.querySelector(".slider-controls__arrow-prev")
-                }
+                } : false,
+                navigation: nextEl && prevEl ? {
+                    nextEl,
+                    prevEl
+                } : false
             });
         });
-        const promoSlider = document.querySelectorAll(".promo-slider__slider");
-        if (promoSlider[0]) promoSlider.forEach(slider => {
-            new Swiper(slider.querySelector(".promo-slider__slider-carousel"), {
+    }
+    function initPromoSliders() {
+        const promoSliders = document.querySelectorAll(".promo-slider__slider");
+        if (promoSliders.length === 0) return;
+        promoSliders.forEach(slider => {
+            const carouselEl = slider.querySelector(".promo-slider__slider-carousel");
+            const nextEl = slider.querySelector(".slider-controls__arrow-next");
+            const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+            if (!carouselEl) return;
+            new Swiper(carouselEl, {
                 slidesPerView: 1,
                 slidesPerGroup: 1,
                 spaceBetween: 16,
                 modules: [ Navigation ],
-                navigation: {
-                    nextEl: slider.querySelector(".slider-controls__arrow-next"),
-                    prevEl: slider.querySelector(".slider-controls__arrow-prev")
-                },
+                navigation: nextEl && prevEl ? {
+                    nextEl,
+                    prevEl
+                } : false,
                 breakpoints: {
-                    1199: {
-                        slidesPerView: 4,
-                        spaceBetween: 24
+                    639: {
+                        slidesPerView: 2
                     },
                     939: {
                         slidesPerView: 3
                     },
-                    639: {
-                        slidesPerView: 2
+                    1199: {
+                        slidesPerView: 4,
+                        spaceBetween: 24
                     }
                 }
             });
         });
+    }
+    function initStepsGallerySliders() {
         const stepsGallery = document.querySelectorAll(".steps-gallery__slider");
-        if (stepsGallery[0]) stepsGallery.forEach(slider => {
-            new Swiper(slider.querySelector(".steps-gallery__slider-carousel"), {
+        if (stepsGallery.length === 0) return;
+        stepsGallery.forEach(slider => {
+            const carouselEl = slider.querySelector(".steps-gallery__slider-carousel");
+            const nextEl = slider.querySelector(".slider-controls__arrow-next");
+            const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+            if (!carouselEl) return;
+            new Swiper(carouselEl, {
                 slidesPerView: "auto",
                 slidesPerGroup: 1,
                 spaceBetween: 12,
                 modules: [ Navigation ],
-                navigation: {
-                    nextEl: slider.querySelector(".slider-controls__arrow-next"),
-                    prevEl: slider.querySelector(".slider-controls__arrow-prev")
-                },
+                navigation: nextEl && prevEl ? {
+                    nextEl,
+                    prevEl
+                } : false,
                 breakpoints: {
                     639: {
                         spaceBetween: 24
@@ -13047,19 +12803,26 @@
                 }
             });
         });
-        const gallerySectionSlider = document.querySelectorAll(".gallery-section__slider");
-        if (gallerySectionSlider[0]) gallerySectionSlider.forEach(slider => {
+    }
+    function initGallerySectionSliders() {
+        const gallerySectionSliders = document.querySelectorAll(".gallery-section__slider");
+        if (gallerySectionSliders.length === 0) return;
+        gallerySectionSliders.forEach(slider => {
+            const carouselEl = slider.querySelector(".gallery-section__slider-carousel");
+            const nextEl = slider.querySelector(".slider-controls__arrow-next");
+            const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+            if (!carouselEl) return;
             let swiperInstance = null;
             const initSwiper = () => {
-                if (window.innerWidth >= 639 && !swiperInstance) swiperInstance = new Swiper(slider.querySelector(".gallery-section__slider-carousel"), {
+                if (window.innerWidth >= 639 && !swiperInstance) swiperInstance = new Swiper(carouselEl, {
                     slidesPerView: "auto",
                     slidesPerGroup: 1,
                     spaceBetween: 12,
                     modules: [ Navigation ],
-                    navigation: {
-                        nextEl: slider.querySelector(".slider-controls__arrow-next"),
-                        prevEl: slider.querySelector(".slider-controls__arrow-prev")
-                    },
+                    navigation: nextEl && prevEl ? {
+                        nextEl,
+                        prevEl
+                    } : false,
                     breakpoints: {
                         939: {
                             spaceBetween: 24
@@ -13071,11 +12834,19 @@
                 }
             };
             initSwiper();
-            window.addEventListener("resize", initSwiper);
+            window.addEventListener("resize", debounce(initSwiper, 250));
         });
-        initSliders();
-    });
-    window.initSliders = initSliders;
+    }
+    function initAllSliders() {
+        initTextImageSliders();
+        initFullscreenSliders();
+        initImageSliderSections();
+        initPromoSliders();
+        initStepsGallerySliders();
+        initGallerySectionSliders();
+    }
+    window.addEventListener("load", initAllSliders);
+    window.initSliders = initAllSliders;
     let addWindowScrollEvent = false;
     window.addEventListener("hashchange", () => {
         const anchor = window.location.hash;

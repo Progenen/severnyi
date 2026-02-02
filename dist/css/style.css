@@ -2143,6 +2143,7 @@ p+p {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 1.25rem;
+  height: 100%;
 }
 
 .apartment-planes__slider-slide img,

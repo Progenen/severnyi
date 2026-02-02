@@ -1,280 +1,270 @@
 /*
 Документация слайдера: https://swiperjs.com/
 */
-
-// Импортируем только ядро Swiper
 import Swiper from "swiper";
-// Импортируем только используемые модули
 import { Navigation, Pagination, Controller, EffectFade, A11y } from "swiper/modules";
-
 import "../../scss/base/swiper.scss";
-
-// Регистрируем модули глобально один раз
-Swiper.use([Navigation, Pagination, Controller, EffectFade, A11y]);
-
-export const createSlider = (el, options) => {
-  let mergedOptions;
-  const defaultOptions = {
-    slidesPerView: "auto",
-    speed: 800,
-    a11y: true,
-  };
-
-  if (options && typeof options === "object") {
-    mergedOptions = { ...defaultOptions, ...options };
-  }
-  sliders.push([el, mergedOptions || defaultOptions]);
-};
-
-const sliders = [];
-
-function initSliders() {
-  console.log(sliders);
-  sliders.forEach((element) => {
-    new Swiper(element[0], element[1]);
-  });
-}
 
 const formatFractionCurrent = (number) => number.toString().padStart(2, "0");
 const formatFractionTotal = (number) => number.toString().padStart(2, "0");
 
-window.addEventListener("load", function (e) {
-  // Инициализация всех text-image-slider на странице
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+function initTextImageSliders() {
   const textImageSliders = document.querySelectorAll(".text-image-slider");
 
   textImageSliders.forEach((sliderSection) => {
-    const textSlider = new Swiper(
-      sliderSection.querySelector(".text-image-slider__text"),
-      {
-        slidesPerView: 1,
-        effect: "fade",
-        fadeEffect: { crossFade: true },
-        speed: 300, // Уменьши скорость
-        modules: [EffectFade, Pagination, Navigation, Controller],
-        pagination: {
-          el: sliderSection.querySelector(".slider-controls__pagination"),
-          clickable: true,
-          type: "fraction",
-          formatFractionCurrent: formatFractionCurrent,
-          formatFractionTotal: formatFractionTotal,
-        },
-        navigation: {
-          nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
-          prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
-        },
-      },
-    );
+    const textSliderEl = sliderSection.querySelector(".text-image-slider__text");
+    const imgSliderEl = sliderSection.querySelector(".text-image-slider__photos");
+    const paginationEl = sliderSection.querySelector(".slider-controls__pagination");
+    const nextEl = sliderSection.querySelector(".slider-controls__arrow-next");
+    const prevEl = sliderSection.querySelector(".slider-controls__arrow-prev");
 
-    const imgSlider = new Swiper(
-      sliderSection.querySelector(".text-image-slider__photos"),
-      {
-        slidesPerView: 1,
-        effect: "fade",
-        fadeEffect: { crossFade: true },
-        speed: 300,
-        modules: [EffectFade, Controller],
-      },
-    );
+    if (!textSliderEl || !imgSliderEl) return;
 
-    // Связываем слайдеры
+    const textSlider = new Swiper(textSliderEl, {
+      slidesPerView: 1,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      speed: 300,
+      modules: [EffectFade, Pagination, Navigation, Controller],
+      pagination: paginationEl ? {
+        el: paginationEl,
+        clickable: true,
+        type: "fraction",
+        formatFractionCurrent: formatFractionCurrent,
+        formatFractionTotal: formatFractionTotal,
+      } : false,
+      navigation: (nextEl && prevEl) ? {
+        nextEl: nextEl,
+        prevEl: prevEl,
+      } : false,
+    });
+
+    const imgSlider = new Swiper(imgSliderEl, {
+      slidesPerView: 1,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      speed: 300,
+      modules: [EffectFade, Controller],
+      allowTouchMove: false,
+    });
+
     textSlider.controller.control = imgSlider;
     imgSlider.controller.control = textSlider;
   });
+}
 
-  // Fullscreen slider
+function initFullscreenSliders() {
   const fullscreenSliders = document.querySelectorAll(".fullscreen-slider");
 
-  if (fullscreenSliders) {
-    fullscreenSliders.forEach((slider) => {
-      const fullscreenSliderBg = new Swiper(
-        slider.querySelector(".fullscreen-slider__background"),
-        {
-          slidesPerView: 1,
-          effect: "fade",
-          fadeEffect: { crossFade: false },
-          speed: 300,
-          modules: [Controller, EffectFade],
-        },
-      );
+  if (fullscreenSliders.length === 0) return;
 
-      const fullscreenSliderContent = new Swiper(
-        slider.querySelector(".fullscreen-slider__content"),
-        {
-          slidesPerView: 1,
-          effect: "fade",
-          fadeEffect: { crossFade: false },
-          speed: 300,
-          modules: [EffectFade, Navigation, Pagination, Controller],
-          pagination: {
-            el: slider.querySelector(".slider-controls__pagination"),
-            clickable: true,
-            type: "fraction",
-            formatFractionCurrent: formatFractionCurrent,
-            formatFractionTotal: formatFractionTotal,
-          },
-          navigation: {
-            nextEl: slider.querySelector(".slider-controls__arrow-next"),
-            prevEl: slider.querySelector(".slider-controls__arrow-prev"),
-          },
-        },
-      );
+  fullscreenSliders.forEach((slider) => {
+    const bgSliderEl = slider.querySelector(".fullscreen-slider__background");
+    const contentSliderEl = slider.querySelector(".fullscreen-slider__content");
+    const paginationEl = slider.querySelector(".slider-controls__pagination");
+    const nextEl = slider.querySelector(".slider-controls__arrow-next");
+    const prevEl = slider.querySelector(".slider-controls__arrow-prev");
 
-      fullscreenSliderContent.controller.control = fullscreenSliderBg;
-      fullscreenSliderBg.controller.control = fullscreenSliderContent;
+    if (!bgSliderEl || !contentSliderEl) return;
+
+    const fullscreenSliderBg = new Swiper(bgSliderEl, {
+      slidesPerView: 1,
+      effect: "fade",
+      fadeEffect: { crossFade: false },
+      speed: 300,
+      modules: [Controller, EffectFade],
+      allowTouchMove: false,
     });
-  }
 
-  // // Apartment planes sliders
-  // const apartmentPlaneSliders = document.querySelectorAll(
-  //   ".apartment-planes__slider",
-  // );
+    const fullscreenSliderContent = new Swiper(contentSliderEl, {
+      slidesPerView: 1,
+      effect: "fade",
+      fadeEffect: { crossFade: false },
+      speed: 300,
+      modules: [EffectFade, Navigation, Pagination, Controller],
+      pagination: paginationEl ? {
+        el: paginationEl,
+        clickable: true,
+        type: "fraction",
+        formatFractionCurrent: formatFractionCurrent,
+        formatFractionTotal: formatFractionTotal,
+      } : false,
+      navigation: (nextEl && prevEl) ? {
+        nextEl: nextEl,
+        prevEl: prevEl,
+      } : false,
+    });
 
-  // apartmentPlaneSliders.forEach((sliderContainer) => {
-  //   const sliderInner = sliderContainer.querySelector(
-  //     ".apartment-planes__slider-inner",
-  //   );
-  //   const prevBtn = sliderContainer.querySelector(
-  //     ".slider-controls__arrow-prev",
-  //   );
-  //   const nextBtn = sliderContainer.querySelector(
-  //     ".slider-controls__arrow-next",
-  //   );
+    fullscreenSliderContent.controller.control = fullscreenSliderBg;
+    fullscreenSliderBg.controller.control = fullscreenSliderContent;
+  });
+}
 
-  //   createSlider(sliderInner, {
-  //     modules: [Navigation],
-  //     slidesPerView: 1,
-  //     spaceBetween: 0,
-  //     speed: 600,
-  //     navigation: {
-  //       nextEl: nextBtn,
-  //       prevEl: prevBtn,
-  //     },
-  //   });
-  // });
+function initImageSliderSections() {
+  const imageSliderSections = document.querySelectorAll(".image-slider-section");
 
-  // Image slider section (только изображения)
-  const imageSliderSections = document.querySelectorAll(
-    ".image-slider-section",
-  );
+  if (imageSliderSections.length === 0) return;
 
   imageSliderSections.forEach((sliderSection) => {
-    new Swiper(
-      sliderSection.querySelector(".image-slider-section__slider-inner"),
-      {
-        slidesPerView: 1,
-        effect: "fade",
-        fadeEffect: { crossFade: false },
-        speed: 300,
-        modules: [EffectFade, Pagination, Navigation],
-        pagination: {
-          el: sliderSection.querySelector(".slider-controls__pagination"),
-          clickable: true,
-          type: "fraction",
-          formatFractionCurrent: formatFractionCurrent,
-          formatFractionTotal: formatFractionTotal,
+    const sliderEl = sliderSection.querySelector(".image-slider-section__slider-inner");
+    const paginationEl = sliderSection.querySelector(".slider-controls__pagination");
+    const nextEl = sliderSection.querySelector(".slider-controls__arrow-next");
+    const prevEl = sliderSection.querySelector(".slider-controls__arrow-prev");
+
+    if (!sliderEl) return;
+
+    new Swiper(sliderEl, {
+      slidesPerView: 1,
+      effect: "fade",
+      fadeEffect: { crossFade: false },
+      speed: 300,
+      modules: [EffectFade, Pagination, Navigation],
+      pagination: paginationEl ? {
+        el: paginationEl,
+        clickable: true,
+        type: "fraction",
+        formatFractionCurrent: formatFractionCurrent,
+        formatFractionTotal: formatFractionTotal,
+      } : false,
+      navigation: (nextEl && prevEl) ? {
+        nextEl: nextEl,
+        prevEl: prevEl,
+      } : false,
+    });
+  });
+}
+
+function initPromoSliders() {
+  const promoSliders = document.querySelectorAll(".promo-slider__slider");
+
+  if (promoSliders.length === 0) return;
+
+  promoSliders.forEach((slider) => {
+    const carouselEl = slider.querySelector(".promo-slider__slider-carousel");
+    const nextEl = slider.querySelector(".slider-controls__arrow-next");
+    const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+
+    if (!carouselEl) return;
+
+    new Swiper(carouselEl, {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      spaceBetween: 16,
+      modules: [Navigation],
+      navigation: (nextEl && prevEl) ? {
+        nextEl: nextEl,
+        prevEl: prevEl,
+      } : false,
+      breakpoints: {
+        639: {
+          slidesPerView: 2,
         },
-        navigation: {
-          nextEl: sliderSection.querySelector(".slider-controls__arrow-next"),
-          prevEl: sliderSection.querySelector(".slider-controls__arrow-prev"),
+        939: {
+          slidesPerView: 3,
+        },
+        1199: {
+          slidesPerView: 4,
+          spaceBetween: 24,
         },
       },
-    );
-  });
-
-  const promoSlider = document.querySelectorAll(".promo-slider__slider");
-
-  if (promoSlider[0]) {
-    promoSlider.forEach((slider) => {
-      new Swiper(slider.querySelector(".promo-slider__slider-carousel"), {
-        slidesPerView: 1,
-        slidesPerGroup: 1,
-        spaceBetween: 16,
-        modules: [Navigation],
-        navigation: {
-          nextEl: slider.querySelector(".slider-controls__arrow-next"),
-          prevEl: slider.querySelector(".slider-controls__arrow-prev"),
-        },
-
-        breakpoints: {
-          1199: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-          },
-
-          939: {
-            slidesPerView: 3,
-          },
-
-          639: {
-            slidesPerView: 2,
-          },
-        },
-      });
     });
-  }
+  });
+}
 
+function initStepsGallerySliders() {
   const stepsGallery = document.querySelectorAll(".steps-gallery__slider");
 
-  if (stepsGallery[0]) {
-    stepsGallery.forEach((slider) => {
-      new Swiper(slider.querySelector(".steps-gallery__slider-carousel"), {
-        slidesPerView: "auto",
-        slidesPerGroup: 1,
-        spaceBetween: 12,
-        modules: [Navigation],
-        navigation: {
-          nextEl: slider.querySelector(".slider-controls__arrow-next"),
-          prevEl: slider.querySelector(".slider-controls__arrow-prev"),
-        },
+  if (stepsGallery.length === 0) return;
 
-        breakpoints: {
-          639: {
-            spaceBetween: 24,
-          },
+  stepsGallery.forEach((slider) => {
+    const carouselEl = slider.querySelector(".steps-gallery__slider-carousel");
+    const nextEl = slider.querySelector(".slider-controls__arrow-next");
+    const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+
+    if (!carouselEl) return;
+
+    new Swiper(carouselEl, {
+      slidesPerView: "auto",
+      slidesPerGroup: 1,
+      spaceBetween: 12,
+      modules: [Navigation],
+      navigation: (nextEl && prevEl) ? {
+        nextEl: nextEl,
+        prevEl: prevEl,
+      } : false,
+      breakpoints: {
+        639: {
+          spaceBetween: 24,
         },
-      });
+      },
     });
-  }
+  });
+}
 
-  const gallerySectionSlider = document.querySelectorAll(
-    ".gallery-section__slider",
-  );
+function initGallerySectionSliders() {
+  const gallerySectionSliders = document.querySelectorAll(".gallery-section__slider");
 
-  if (gallerySectionSlider[0]) {
-    gallerySectionSlider.forEach((slider) => {
-      let swiperInstance = null;
+  if (gallerySectionSliders.length === 0) return;
 
-      const initSwiper = () => {
-        if (window.innerWidth >= 639 && !swiperInstance) {
-          swiperInstance = new Swiper(
-            slider.querySelector(".gallery-section__slider-carousel"),
-            {
-              slidesPerView: "auto",
-              slidesPerGroup: 1,
-              spaceBetween: 12,
-              modules: [Navigation],
-              navigation: {
-                nextEl: slider.querySelector(".slider-controls__arrow-next"),
-                prevEl: slider.querySelector(".slider-controls__arrow-prev"),
-              },
-              breakpoints: {
-                939: {
-                  spaceBetween: 24,
-                },
-              },
+  gallerySectionSliders.forEach((slider) => {
+    const carouselEl = slider.querySelector(".gallery-section__slider-carousel");
+    const nextEl = slider.querySelector(".slider-controls__arrow-next");
+    const prevEl = slider.querySelector(".slider-controls__arrow-prev");
+
+    if (!carouselEl) return;
+
+    let swiperInstance = null;
+
+    const initSwiper = () => {
+      if (window.innerWidth >= 639 && !swiperInstance) {
+        swiperInstance = new Swiper(carouselEl, {
+          slidesPerView: "auto",
+          slidesPerGroup: 1,
+          spaceBetween: 12,
+          modules: [Navigation],
+          navigation: (nextEl && prevEl) ? {
+            nextEl: nextEl,
+            prevEl: prevEl,
+          } : false,
+          breakpoints: {
+            939: {
+              spaceBetween: 24,
             },
-          );
-        } else if (window.innerWidth < 639 && swiperInstance) {
-          swiperInstance.destroy(true, true);
-          swiperInstance = null;
-        }
-      };
+          },
+        });
+      } else if (window.innerWidth < 639 && swiperInstance) {
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
+      }
+    };
 
-      initSwiper();
-      window.addEventListener("resize", initSwiper);
-    });
-  }
-  initSliders();
-});
+    initSwiper();
+    
+    window.addEventListener("resize", debounce(initSwiper, 250));
+  });
+}
 
-window.initSliders = initSliders;
+function initAllSliders() {
+  initTextImageSliders();
+  initFullscreenSliders();
+  initImageSliderSections();
+  initPromoSliders();
+  initStepsGallerySliders();
+  initGallerySectionSliders();
+}
+
+window.addEventListener("load", initAllSliders);
+
+window.initSliders = initAllSliders;
