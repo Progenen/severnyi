@@ -264,3 +264,26 @@ p + p {
         }
     }
 }
+
+.safari-safe-top {
+  position: fixed;
+  top: rem(-2);
+  left: 0;
+  right: 0;
+  min-height: rem(8);
+  height: env(safe-area-inset-top);
+  background-color: cl(blck);
+  z-index: 9999;
+  pointer-events: none;
+}
+.safari-safe-bottom {
+  position: fixed;
+  bottom: rem(-2);
+  left: 0;
+  right: 0;
+  min-height: rem(8);
+  height: env(safe-area-inset-top);
+  background-color: cl(blck);
+  z-index: 9999;
+  pointer-events: none;
+}

@@ -121,7 +121,7 @@ export let _slideUp = (target, duration = 500, showmore = 0) => {
           detail: {
             target: target,
           },
-        })
+        }),
       );
     }, duration);
   }
@@ -165,7 +165,7 @@ export let _slideDown = (target, duration = 500, showmore = 0) => {
           detail: {
             target: target,
           },
-        })
+        }),
       );
     }, duration);
   }
@@ -255,7 +255,7 @@ export function spollers() {
     const spollersRegular = Array.from(spollersArray).filter(
       function (item, index, self) {
         return !item.dataset.spollers.split(",")[0];
-      }
+      },
     );
     if (spollersRegular.length) {
       initSpollers(spollersRegular);
@@ -319,7 +319,7 @@ export function spollers() {
           const spollersBlock = spollerTitle.closest("[data-spollers]");
           const oneSpoller = spollersBlock.hasAttribute("data-one-spoller");
           const scrollSpoller = spollerBlock.hasAttribute(
-            "data-spoller-scroll"
+            "data-spoller-scroll",
           );
           const spollerSpeed = spollersBlock.dataset.spollersSpeed
             ? parseInt(spollersBlock.dataset.spollersSpeed)
@@ -347,7 +347,7 @@ export function spollers() {
                 ? +scrollSpollerValue
                 : 0;
               const scrollSpollerNoHeader = spollerBlock.hasAttribute(
-                "data-spoller-scroll-noheader"
+                "data-spoller-scroll-noheader",
               )
                 ? document.querySelector(".header").offsetHeight
                 : 0;
@@ -467,10 +467,10 @@ export function tabs(context = document) {
       let tabsContent = tabsMediaItem.querySelector("[data-tabs-body]");
       let tabsContentItems = tabsMediaItem.querySelectorAll("[data-tabs-item]");
       tabsTitleItems = Array.from(tabsTitleItems).filter(
-        (item) => item.closest("[data-tabs]") === tabsMediaItem
+        (item) => item.closest("[data-tabs]") === tabsMediaItem,
       );
       tabsContentItems = Array.from(tabsContentItems).filter(
-        (item) => item.closest("[data-tabs]") === tabsMediaItem
+        (item) => item.closest("[data-tabs]") === tabsMediaItem,
       );
       tabsContentItems.forEach((tabsContentItem, index) => {
         if (matchMedia.matches) {
@@ -495,7 +495,7 @@ export function tabs(context = document) {
 
     if (tabsActiveHashBlock) {
       const tabsActiveTitle = tabsBlock.querySelector(
-        "[data-tabs-titles]>._tab-active"
+        "[data-tabs-titles]>._tab-active",
       );
       tabsActiveTitle ? tabsActiveTitle.classList.remove("_tab-active") : null;
     }
@@ -529,10 +529,10 @@ export function tabs(context = document) {
     if (tabsContent.length > 0) {
       const isHash = tabsBlock.hasAttribute("data-tabs-hash");
       tabsContent = Array.from(tabsContent).filter(
-        (item) => item.closest("[data-tabs]") === tabsBlock
+        (item) => item.closest("[data-tabs]") === tabsBlock,
       );
       tabsTitles = Array.from(tabsTitles).filter(
-        (item) => item.closest("[data-tabs]") === tabsBlock
+        (item) => item.closest("[data-tabs]") === tabsBlock,
       );
       tabsContent.forEach((tabsContentItem, index) => {
         if (tabsTitles[index].classList.contains("_tab-active")) {
@@ -564,11 +564,11 @@ export function tabs(context = document) {
         !tabsBlock.querySelector("._slide")
       ) {
         let tabActiveTitle = tabsBlock.querySelectorAll(
-          "[data-tabs-title]._tab-active"
+          "[data-tabs-title]._tab-active",
         );
         tabActiveTitle.length
           ? (tabActiveTitle = Array.from(tabActiveTitle).filter(
-              (item) => item.closest("[data-tabs]") === tabsBlock
+              (item) => item.closest("[data-tabs]") === tabsBlock,
             ))
           : null;
 
@@ -618,7 +618,7 @@ export function showMore() {
       showMoreBlocksRegular = Array.from(showMoreBlocks).filter(
         function (item, index, self) {
           return !item.dataset.showmoreMedia;
-        }
+        },
       );
       // Инициализация обычных объектов
       showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
@@ -651,16 +651,16 @@ export function showMore() {
     function initItem(showMoreBlock, matchMedia = false) {
       showMoreBlock = matchMedia ? showMoreBlock.item : showMoreBlock;
       let showMoreContent = showMoreBlock.querySelectorAll(
-        "[data-showmore-content]"
+        "[data-showmore-content]",
       );
       let showMoreButton = showMoreBlock.querySelectorAll(
-        "[data-showmore-button]"
+        "[data-showmore-button]",
       );
       showMoreContent = Array.from(showMoreContent).filter(
-        (item) => item.closest("[data-showmore]") === showMoreBlock
+        (item) => item.closest("[data-showmore]") === showMoreBlock,
       )[0];
       showMoreButton = Array.from(showMoreButton).filter(
-        (item) => item.closest("[data-showmore]") === showMoreBlock
+        (item) => item.closest("[data-showmore]") === showMoreBlock,
       )[0];
       const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
       if (matchMedia.matches || !matchMedia) {
@@ -670,7 +670,7 @@ export function showMore() {
             0,
             showMoreBlock.classList.contains("_showmore-active")
               ? getOriginalHeight(showMoreContent)
-              : hiddenHeight
+              : hiddenHeight,
           );
           showMoreButton.hidden = false;
         } else {
@@ -701,7 +701,7 @@ export function showMore() {
             ? parseFloat(getComputedStyle(showMoreItem).marginTop)
             : 0;
           const marginBottom = parseFloat(
-            getComputedStyle(showMoreItem).marginBottom
+            getComputedStyle(showMoreItem).marginBottom,
           )
             ? parseFloat(getComputedStyle(showMoreItem).marginBottom)
             : 0;
@@ -740,7 +740,7 @@ export function showMore() {
           const showMoreButton = targetEvent.closest("[data-showmore-button]");
           const showMoreBlock = showMoreButton.closest("[data-showmore]");
           const showMoreContent = showMoreBlock.querySelector(
-            "[data-showmore-content]"
+            "[data-showmore-content]",
           );
           const showMoreSpeed = showMoreBlock.dataset.showmoreButton
             ? showMoreBlock.dataset.showmoreButton
@@ -879,12 +879,12 @@ export function customCursor(isShadowTrue) {
     cursor.style.opacity = 0;
     cursor.insertAdjacentHTML(
       "beforeend",
-      `<span class="fls-cursor__pointer"></span>`
+      `<span class="fls-cursor__pointer"></span>`,
     );
     isShadowTrue
       ? cursor.insertAdjacentHTML(
           "beforeend",
-          `<span class="fls-cursor__shadow"></span>`
+          `<span class="fls-cursor__shadow"></span>`,
         )
       : null;
     wrapper.append(cursor);
@@ -1080,19 +1080,23 @@ export const throttle = (delay, fn) => {
 
 // Инициализация табов для секции plane
 export function initPlaneTabs() {
-  const planeSection = document.querySelector('.plane');
+  const planeSection = document.querySelector(".plane");
   if (!planeSection) return;
 
-  const switches = planeSection.querySelectorAll('.plane__switchs-item');
-  const slidersContainers = planeSection.querySelectorAll('.plane__slider');
-  const infoItems = planeSection.querySelectorAll('.plane__info-item');
+  const switches = planeSection.querySelectorAll(".plane__switchs-item");
+  const slidersContainers = planeSection.querySelectorAll(".plane__slider");
+  const infoItems = planeSection.querySelectorAll(".plane__info-item");
 
   switches.forEach((switchBtn, index) => {
-    switchBtn.addEventListener('click', () => {
+    switchBtn.addEventListener("click", () => {
       // Получаем текущие активные элементы
-      const currentSlider = planeSection.querySelector('.plane__slider--active');
-      const currentInfo = planeSection.querySelector('.plane__info-item--active');
-      
+      const currentSlider = planeSection.querySelector(
+        ".plane__slider--active",
+      );
+      const currentInfo = planeSection.querySelector(
+        ".plane__info-item--active",
+      );
+
       // Целевые элементы
       const targetSlider = slidersContainers[index];
       const targetInfo = infoItems[index];
@@ -1101,13 +1105,79 @@ export function initPlaneTabs() {
       if (currentSlider === targetSlider) return;
 
       // Убираем активный класс со всех элементов
-      switches.forEach(btn => btn.classList.remove('plane__switchs-item--active'));
-      
+      switches.forEach((btn) =>
+        btn.classList.remove("plane__switchs-item--active"),
+      );
+
       // Добавляем активный класс к кнопке
-      switchBtn.classList.add('plane__switchs-item--active');
+      switchBtn.classList.add("plane__switchs-item--active");
 
       // Вызываем анимацию переключения
-      animatePlaneTabSwitch(currentSlider, targetSlider, currentInfo, targetInfo);
+      animatePlaneTabSwitch(
+        currentSlider,
+        targetSlider,
+        currentInfo,
+        targetInfo,
+      );
     });
   });
+}
+
+/**
+ * Модуль safari-safe-area: динамическое создание/удаление верхнего и нижнего
+ * safe-area элементов для Safari. Top — всегда при Safari. Bottom — только при открытом меню-бургере.
+ * Для попапов/модалок отключено.
+ */
+
+const CLASS_TOP = "safari-safe-top";
+const CLASS_BOTTOM = "safari-safe-bottom";
+
+/** Проверка, что браузер — Safari (desktop или iOS). Исключает Chrome, Edge, Firefox и др. */
+function isSafari() {
+  const ua = navigator.userAgent;
+  if (/Chrome|CriOS|FxiOS|Edg|OPR|Chromium/.test(ua)) return false;
+  return /Safari/.test(ua) || navigator.vendor === "Apple Computer, Inc.";
+}
+
+/** Нужно ли bottom: только открыто меню-бургер (.menu.open) */
+function isNeeded() {
+  return !!document.querySelector(".menu")?.classList?.contains("open");
+}
+
+/**
+ * Синхронизирует наличие элементов в DOM.
+ * Top — всегда в Safari (в начало body), создаётся при загрузке и при вызове.
+ * Bottom — только при открытом меню, в конец body. Вызывается из menu.js при открытии/закрытии бургера.
+ */
+export function safariSafeBottomUpdate() {
+  const elTop = document.querySelector(`.${CLASS_TOP}`);
+  const elBottom = document.querySelector(`.${CLASS_BOTTOM}`);
+  if (!isSafari()) {
+    if (elTop) elTop.remove();
+    if (elBottom) elBottom.remove();
+    return;
+  }
+  // Top: всегда при Safari, не удаляем
+  if (!elTop) {
+    const div = document.createElement("div");
+    div.className = CLASS_TOP;
+    document.body.prepend(div);
+  }
+  // Bottom: только при открытом меню
+  if (isNeeded()) {
+    if (!elBottom) {
+      const div = document.createElement("div");
+      div.className = CLASS_BOTTOM;
+      document.body.appendChild(div);
+    }
+  } else {
+    if (elBottom) elBottom.remove();
+  }
+}
+
+// Top должен быть с самого начала: при загрузке в Safari
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", safariSafeBottomUpdate);
+} else {
+  safariSafeBottomUpdate();
 }

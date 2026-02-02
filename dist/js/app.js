@@ -5703,6 +5703,38 @@
             });
         });
     }
+    const CLASS_TOP = "safari-safe-top";
+    const CLASS_BOTTOM = "safari-safe-bottom";
+    function isSafari() {
+        const ua = navigator.userAgent;
+        if (/Chrome|CriOS|FxiOS|Edg|OPR|Chromium/.test(ua)) return false;
+        return /Safari/.test(ua) || navigator.vendor === "Apple Computer, Inc.";
+    }
+    function isNeeded() {
+        return !!document.querySelector(".menu")?.classList?.contains("open");
+    }
+    function safariSafeBottomUpdate() {
+        const elTop = document.querySelector(`.${CLASS_TOP}`);
+        const elBottom = document.querySelector(`.${CLASS_BOTTOM}`);
+        if (!isSafari()) {
+            if (elTop) elTop.remove();
+            if (elBottom) elBottom.remove();
+            return;
+        }
+        if (!elTop) {
+            const div = document.createElement("div");
+            div.className = CLASS_TOP;
+            document.body.prepend(div);
+        }
+        if (isNeeded()) {
+            if (!elBottom) {
+                const div = document.createElement("div");
+                div.className = CLASS_BOTTOM;
+                document.body.appendChild(div);
+            }
+        } else if (elBottom) elBottom.remove();
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", safariSafeBottomUpdate); else safariSafeBottomUpdate();
     const Method = {
         GET: "GET",
         POST: "POST",
