@@ -28,4 +28,11 @@
             gap: rem(12);
         }
     }
+
+    @media (max-width:$mobileMini){
+        &__slider-slide .gallery-card {
+            width: 100%;
+            height: rem(280);
+        }
+    }
 }

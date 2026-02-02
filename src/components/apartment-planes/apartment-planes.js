@@ -52,12 +52,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tabIndex = (tabIndex - 1 + tabButtons.length) % tabButtons.length;
       tabsUpdate();
     });
+    
     tabButtons.forEach((button) => {
       button.addEventListener("click", () => {
         tabIndex = Number(button.getAttribute("data-tab-plane"));
         tabsUpdate();
       });
     });
+
+
   }
 
   apartmentTabs();

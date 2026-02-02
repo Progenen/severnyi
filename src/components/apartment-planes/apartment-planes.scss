@@ -246,4 +246,13 @@
             margin-top: rem(20);
         }
     }
+
+    @media (max-width:$mobileMini){
+        &__switchs-item {
+            font-size: rem(14);
+            padding-left: rem(20);
+            padding-right: rem(20);
+        }
+    
+    }
 }
