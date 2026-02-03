@@ -14051,16 +14051,23 @@
         }
         function openMenu() {
             if (menuTl) {
-                menuTl.play();
                 document.body.classList.add("lock", "menu-open");
                 isOpen = true;
+                menuTl.play();
             }
         }
         function closeMenu() {
             if (!isOpen) return;
-            if (menuTl) menuTl.reverse();
-            document.body.classList.remove("lock", "menu-open");
-            isOpen = false;
+            if (menuTl) {
+                menuTl.reverse();
+                menuTl.eventCallback("onReverseComplete", () => {
+                    document.body.classList.remove("lock", "menu-open");
+                    isOpen = false;
+                });
+            } else {
+                document.body.classList.remove("lock", "menu-open");
+                isOpen = false;
+            }
         }
         function updatePadding() {
             const headerHeight = header.clientHeight;

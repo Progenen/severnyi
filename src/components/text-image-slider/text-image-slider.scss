@@ -232,5 +232,17 @@
             margin-top: rem(68);
         }
         
+        &__photo {
+            img,picture {
+                object-position: bottom right;
+            }
+        }
+
+        &__photos-slide {
+            img, picture {
+                object-position: bottom right;
+
+            }
+        }
     }
 }

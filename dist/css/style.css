@@ -148,6 +148,7 @@ body.lock {
       touch-action: none;
   -ms-scroll-chaining: none;
       overscroll-behavior: none;
+  touch-action: none;
 }
 
 .wrapper {
@@ -3899,9 +3900,9 @@ p+p {
     color: var(--color-whte);
     overflow: auto;
     padding-bottom: 1.25rem;
-    -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-            transform: translateY(-100%);
+    -webkit-transform: translateY(-150%);
+        -ms-transform: translateY(-150%);
+            transform: translateY(-150%);
     pointer-events: none;
     -webkit-transition: opacity .2s ease;
     transition: opacity .2s ease;
@@ -5252,6 +5253,18 @@ p+p {
 
   .text-image-slider__controls {
     margin-top: 4.25rem;
+  }
+
+  .text-image-slider__photo img,
+  .text-image-slider__photo picture {
+    -o-object-position: bottom right;
+       object-position: bottom right;
+  }
+
+  .text-image-slider__photos-slide img,
+  .text-image-slider__photos-slide picture {
+    -o-object-position: bottom right;
+       object-position: bottom right;
   }
 
   .text-image-section__left {
