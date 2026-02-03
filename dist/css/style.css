@@ -3894,7 +3894,7 @@ p+p {
     height: 100vh;
     top: 0;
     left: 0;
-    background: rgba(93,98,91,.1);
+    background: rgba(93,98,91,.3);
     backdrop-filter: blur(6px);
     color: var(--color-whte);
     overflow: auto;
